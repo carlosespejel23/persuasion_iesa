@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('fecha_de_nacimiento');
             $table->enum('acepto_contrato',['Si', 'No']);
             $table->string('email')->unique();
-            $table->string('contrasena', 10);
+            $table->string('contrasena');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
