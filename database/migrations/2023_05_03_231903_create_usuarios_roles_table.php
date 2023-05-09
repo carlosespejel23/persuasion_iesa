@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('roles_id');
             $table->foreign('roles_id', 'fk_usuariorol_rol')->references('id')->on('roles')->onDelete('cascade')->onUpdate('restrict');
             $table->unsignedBigInteger('usuarios_id');
-            $table->foreign('usuarios_id', 'fk_usuariorol_usuario')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('restrict');
+            $table->foreign('usuarios_id', 'fk_usuariorol_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
         });
     }
 

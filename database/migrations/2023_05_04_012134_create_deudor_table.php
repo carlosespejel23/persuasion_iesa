@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('deudores', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id', 'fk_usuario_deudor')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('restrict');
+            $table->foreign('usuario_id', 'fk_usuario_deudor')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
             $table->string('nombre', 50);
             $table->string('apellidoPaterno', 50);
             $table->string('apellidoMaterno', 50);
