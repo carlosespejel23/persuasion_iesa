@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Rol;
+use App\Models\User;
 use App\Models\Usuario;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
@@ -55,15 +56,15 @@ class Instalador extends Command
     }
 
     private function crearUsuario(){
-        return Usuario::create([
+        return User::create([
             'nombre' => 'Nombre Usuario',
             'apellidoPaterno' => 'Apellido Paterno Usuario',
             'apellidoMaterno' => 'Apellido Materno Usuario',
             'telefono' => '0000000000',
             'fecha_de_nacimiento' => '2021-01-01',
-            'acepto_contrato' => 'Si',
+            'acepto_contrato' => 1,
             'email' => 'example@email.com',
-            'contrasena' => Hash::make('123456789'),
+            'password' => Hash::make('123456789'),
         ]);
     }
 }

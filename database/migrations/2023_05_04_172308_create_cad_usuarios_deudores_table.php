@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('comentarioAD_id');
             $table->foreign('comentarioAD_id', 'fk_cad_comentarioAD')->references('id')->on('comentarios_actualizar_deudas')->onDelete('cascade')->onUpdate('restrict');
             $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id', 'fk_cad_usuario')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('restrict');
+            $table->foreign('usuario_id', 'fk_cad_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
             $table->unsignedBigInteger('deudor_id');
             $table->foreign('deudor_id', 'fk_cad_deudor')->references('id')->on('deudores')->onDelete('cascade')->onUpdate('restrict');
         });

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cdp_deudor_usuario', function (Blueprint $table) {
             $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id', 'fk_cdp_usuario')->references('id')->on('usuarios')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('usuario_id', 'fk_cdp_usuario')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
             $table->unsignedBigInteger('deudor_id');
             $table->foreign('deudor_id', 'fk_cdp_deudor')->references('id')->on('deudores')->onDelete('cascade')->onUpdate('restrict');
             $table->unsignedBigInteger('comentarioDP_id');

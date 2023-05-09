@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('deudor_id');
             $table->foreign('deudor_id', 'fk_pdu_deudor')->references('id')->on('deudores')->onDelete('cascade')->onUpdate('restrict');
             $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id', 'fk_pdu_usuario')->references('id')->on('usuarios')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('usuario_id', 'fk_pdu_usuario')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
         });
     }
 
