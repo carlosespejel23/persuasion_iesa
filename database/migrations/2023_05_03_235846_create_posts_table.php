@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('descripcion', 255);
             $table->text('contenido');
             $table->boolean('estado')->default(1);
+            $table->boolean('post_anonimo')->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,10 @@ defineProps<{
 const user = usePage().props.auth.user;
 
 const form = useForm({
-    name: user.name,
+    nombre: user.nombre,
+    apellidoPaterno: user.apellidoPaterno,
+    apellidoMaterno: user.apellidoMaterno,
+    telefono: user.telefono,
     email: user.email,
 });
 </script>
@@ -30,19 +33,67 @@ const form = useForm({
 
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="nombre" value="Nombre" />
 
                 <TextInput
-                    id="name"
+                    id="nombre"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.name"
+                    v-model="form.nombre"
                     required
                     autofocus
-                    autocomplete="name"
+                    autocomplete="nombre"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.nombre" />
+            </div>
+
+            <div>
+                <InputLabel for="apellidoPaterno" value="Apellido Paterno" />
+
+                <TextInput
+                    id="apellidoPaterno"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.apellidoPaterno"
+                    required
+                    autofocus
+                    autocomplete="apellidoPaterno"
+                />
+
+                <InputError class="mt-2" :message="form.errors.apellidoPaterno" />
+            </div>
+
+            <div>
+                <InputLabel for="apellidoMaterno" value="Apellido Materno" />
+
+                <TextInput
+                    id="apellidoMaterno"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.apellidoMaterno"
+                    required
+                    autofocus
+                    autocomplete="apellidoMaterno"
+                />
+
+                <InputError class="mt-2" :message="form.errors.apellidoMaterno" />
+            </div>
+
+            <div>
+                <InputLabel for="telefono" value="Telefono" />
+
+                <TextInput
+                    id="telefono"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.telefono"
+                    required
+                    autofocus
+                    autocomplete="telefono"
+                />
+
+                <InputError class="mt-2" :message="form.errors.telefono" />
             </div>
 
             <div>
