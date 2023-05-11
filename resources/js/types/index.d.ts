@@ -1,6 +1,9 @@
 export interface User {
     id: number;
-    name: string;
+    nombre: string;
+    apellidoPaterno: string,
+    apellidoMaterno: string,
+    telefono: string,
     email: string;
     email_verified_at: string;
 }
