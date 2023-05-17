@@ -6,6 +6,7 @@ import InputLabel from '@/components/InputLabel.vue';
 import PrimaryButton from '@/components/PrimaryButton.vue';
 import TextInput from '@/components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import 'boxicons';
 
 defineProps<{
     canResetPassword?: boolean;
@@ -32,22 +33,19 @@ const submit = () => {
         background-size: cover;
         height: calc(3.2 * 10em);
     }
-
-    .ml-4{
-        background: #E26519;
-    }
 </style>
 
 <template>
 
     <head>
         <link href="https://cdn.jsdelivr.net/npm/vuesax/dist/vuesax.css" rel="stylesheet">
+        <link rel="stylesheet" href="boxicons.min.css">
     </head>
 
     
 
     <div class="p-10 bg-gray-200 h-[100vh] flex items-center justify-center">
-        <div class="bg-white shadow-lg overflow-hidden rounded-xl w-[60%] h-[32em] z-50">
+        <div class="bg-white shadow-lg overflow-hidden rounded-xl w-[60%] h-[30em] z-50">
             <div class="flex space-between items-start">
                 <div class="lg:w-[50%] xs:w-full sm:w-full px-8 py-10">
                     <div>
@@ -89,7 +87,9 @@ const submit = () => {
                                     required
                                     autofocus
                                     autocomplete="username"
+                                    icon="user"
                                 />
+                                <i class='bx bx-user'></i>
                                 <InputError class="mt-2" :message="form.errors.email" />
                             </div>
 
@@ -125,7 +125,7 @@ const submit = () => {
                                 >
                                     ¿Olvidaste tu Contraseña?
                                 </Link>
-                                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" style="background: #E26519;">
                                         Entrar
                                 </PrimaryButton>
                             </div>
