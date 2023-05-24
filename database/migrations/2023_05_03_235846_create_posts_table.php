@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('usuarios_id');
-            $table->foreign('usuarios_id', 'fk_post_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
-            $table->string('slug', 150)->unique();
-            $table->string('descripcion', 255);
+            $table->foreign('usuarios_id', 'fk_post_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('slug')->unique();
             $table->text('contenido');
             $table->boolean('estado')->default(1);
-            $table->boolean('post_anonimo')->nullable();
+            $table->boolean('post_anonimo');
             $table->timestamps();
         });
     }

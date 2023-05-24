@@ -55,11 +55,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $rol = $this->crearRolUsuario();
+        /*$rol = $this->crearRolUsuario();
         $usuario = $user;
 
         //Relacionarlo
-        $usuario->roles()->attach($rol);
+        $usuario->roles()->attach($rol);*/
 
         event(new Registered($user));
 
@@ -68,11 +68,11 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
-    private function crearRolUsuario(){
+    /*private function crearRolUsuario(){
         $rol = 'Usuario';
         return Rol::create([
             'nombre' => $rol,
             'slug' => Str::slug($rol, '_')
         ]);
-    }
+    }*/
 }
