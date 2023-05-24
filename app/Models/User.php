@@ -48,7 +48,7 @@ class User extends Authenticatable
     ];
 
     protected $guarded = [];
-    public function roles(){
+    /*public function roles(){
         return $this->belongsToMany(Rol::class, 'usuarios_roles', 'usuarios_id', 'roles_id');
-    }
+    }*/
 }

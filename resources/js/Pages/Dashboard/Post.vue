@@ -9,7 +9,11 @@ const item = ref<Noticia[]>([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get('/dashboard/showAll');
+    const noticias = item.value; // Arreglo de noticias
+    const index = 0; // Índice del elemento del arreglo que deseas utilizar
+    const id = noticias[index].id; // Extraer el valor "id" del elemento del arreglo
+
+    const response = await axios.get(`/dashboard/show/${id}`);
     item.value = response.data;
   } catch (error) {
     console.error(error);
@@ -17,23 +21,14 @@ onMounted(async () => {
 });
 </script>
 
+<!--Aqui esta una noticia y sus comentarios-->
 <template>
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Seccion de Noticias</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Comentarios</h2>
         </template>
-
-        <!--Aqui le pones el boton a la vista de crear noticia con la ruta: route('dashboard.create'), ahorita nomas esta como link-->
-        <div class="flex items-center mt-4">
-            <Link
-                :href="route('dashboard.create')"
-                class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-            >
-                Crear Noticia
-            </Link>
-        </div>
 
         <!--Aqui va el componente de la noticia, nomas los acomodas en una tarjeta-->
         <div class="py-3" v-for="(noticia, id) in item">
@@ -46,11 +41,6 @@ onMounted(async () => {
                     <!--Aqui solo das formato a la fecha-->
                     <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">{{ noticia.created_at }}</div>
                     <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">{{ noticia.contenido }}</div>
-                    <!--Aqui le pones un boton o algo que quiera para que vea los comentarios, este solo es para direcionar la pagina-->
-                    <!--El contenido de la etiqueta es un ejemplo, a mi no me sirve routerlink-->
-                    <router-link :to="{ path: '/dashboard/show/', params: { noticia: noticia.id }, component: '@/Pages/Dashboard/Post.vue'}" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                        Comentarios
-                    </router-link>
                 </div>
             </div>
         </div>
