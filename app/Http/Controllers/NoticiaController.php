@@ -81,7 +81,7 @@ class NoticiaController extends Controller
         ->get();
 
         return Inertia::render('Dashboard/Post', [
-            'noticias' => response()->json($noticias)
+            'noticias' => $noticias
         ]);
     }
 
