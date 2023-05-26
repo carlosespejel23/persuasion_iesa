@@ -15,6 +15,10 @@ onMounted(async () => {
     console.error(error);
   }
 });
+
+const redirectToPost = (id: number) => {
+  window.location.href = `/dashboard/show/${id}`;
+};
 </script>
 
 <template>
@@ -48,9 +52,9 @@ onMounted(async () => {
                     <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">{{ noticia.contenido }}</div>
                     <!--Aqui le pones un boton o algo que quiera para que vea los comentarios, este solo es para direcionar la pagina-->
                     <!--El contenido de la etiqueta es un ejemplo, a mi no me sirve routerlink-->
-                    <router-link :to="{ path: '/dashboard/show/', params: { noticia: noticia.id }, component: '@/Pages/Dashboard/Post.vue'}" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                    <a @click="redirectToPost(noticia.id)" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                         Comentarios
-                    </router-link>
+                    </a>
                 </div>
             </div>
         </div>
