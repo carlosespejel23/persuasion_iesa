@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidarComentario;
 use App\Http\Requests\ValidarPost;
+use App\Models\Comentario;
 use App\Models\Noticia;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -20,10 +23,6 @@ class NoticiaController extends Controller
     }
     public function create(){
         return Inertia::render('Dashboard/Create');
-    }
-
-    public function edit(Noticia $noticia){
-
     }
 
     public function save(ValidarPost $request){
@@ -57,39 +56,34 @@ class NoticiaController extends Controller
         return response()->json($noticias);
     }
 
-    //Muestra una sola noticia con sus respectivos elementos y comentarios
-    public function show($noticia){
-        $noticias = DB::table('posts')
-        ->join('users', function($join) use ($noticia) {
-            $join->on('posts.usuarios_id', '=', 'users.id')
-                ->where('posts.id', '=', $noticia);
-                //->andWhere('jobs.summary', 'LIKE', $noticia);
+    //Muestra comentarios de una sola noticia
+    public function showComment($noticia){
+        $comentarios = DB::table('comentarios')
+        ->join('users', function(JoinClause $join) use ($noticia) {
+            $join->on('comentarios.usuarios_id', '=', 'users.id')
+            ->where('comentarios.posts_id', '=', $noticia);
         })
         ->select(
-            'posts.id', 
-            'posts.usuarios_id', 
-            'posts.slug', 
-            'users.nombre', 
-            'users.apellidoPaterno', 
-            'users.apellidoMaterno', 
-            'posts.contenido', 
-            'posts.estado', 
-            'posts.post_anonimo', 
-            'posts.created_at', 
-            'posts.updated_at'
+            'comentarios.id',
+            'comentarios.usuarios_id',
+            'comentarios.posts_id',
+            'comentarios.contenido',
+            'comentarios.estado',
+            'comentarios.created_at',
+            'comentarios.updated_at',
+            'users.nombre',
+            'users.apellidoPaterno',
+            'users.apellidoMaterno'
         )
+        ->orderBy('comentarios.created_at', 'desc')
         ->get();
 
-        return Inertia::render('Dashboard/Post', [
-            'noticias' => $noticias
-        ]);
+        return response()->json($comentarios);
     }
+    
+    public function saveComment(ValidarComentario $request, $noticia){
+        $comentario = Comentario::create($request->validated());
 
-    public function update(Request $request, Noticia $noticia){
-
-    }
-
-    public function destroy(Noticia $noticia){
-
+        return Redirect::route('dashboard.show', ['noticia' => $request->posts_id]);
     }
 }

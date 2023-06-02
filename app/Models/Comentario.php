@@ -4,18 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Qirolab\Laravel\Reactions\Traits\Reactable;
-use Qirolab\Laravel\Reactions\Contracts\ReactableInterface;
 
-class Noticia extends Model implements ReactableInterface
+class Comentario extends Model
 {
-    use HasFactory, Reactable;
-    protected $table = 'posts';
+    use HasFactory;
+    protected $table = 'comentarios';
     protected $guarded = [];
     protected $fillable = [
         'usuarios_id',
+        'posts_id',
         'contenido',
-        'post_anonimo',
         'estado',
     ];
 }
