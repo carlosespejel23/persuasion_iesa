@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReactionsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NoticiaController;
 use Illuminate\Foundation\Application;
@@ -35,12 +36,13 @@ Route::middleware('auth')->group(function () {
 
     //Sección Noticias
     Route::get('/dashboard/create', [NoticiaController::class, 'create'])->name('dashboard.create');
-    Route::get('/dashboard/edit/{noticia}', [NoticiaController::class, 'edit'])->name('dashboard.edit');
     Route::post('/dashboard/create', [NoticiaController::class, 'save'])->name('dashboard.save');
     Route::get('/dashboard/showAll', [NoticiaController::class, 'showAll'])->name('dashboard.showAll');
-    Route::get('/dashboard/show/{noticia}', [NoticiaController::class, 'show'])->name('dashboard.show');
-    Route::put('/dashboard/edit/{noticia}', [NoticiaController::class, 'update'])->name('dashboard.update');
-    Route::delete('/dashboard/{noticia}/destroy', [NoticiaController::class, 'destroy'])->name('dashboard.destroy');
+    Route::get('/dashboard/show/{noticia}', [NoticiaController::class, 'showComment'])->name('dashboard.showComment');
+    Route::post('/dashboard/show/{noticia}', [NoticiaController::class, 'saveComment'])->name('dashboard.saveComment');
+
+    //Arreglar la ruta de las reacciones
+    //Route::post('/dashboard', [PostVoteController::class, 'store']);
 });
 
 require __DIR__.'/auth.php';

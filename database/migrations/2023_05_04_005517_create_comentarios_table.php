@@ -17,10 +17,8 @@ return new class extends Migration
             $table->foreign('usuarios_id', 'fk_comentario_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
             $table->unsignedBigInteger('posts_id');
             $table->foreign('posts_id', 'fk_comentario_post')->references('id')->on('posts')->onDelete('cascade')->onUpdate('restrict');
-            $table->unsignedBigInteger('comentarios_id');
-            $table->foreign('comentarios_id', 'fk_comentario_comentario')->references('id')->on('comentarios')->onDelete('cascade')->onUpdate('restrict');
             $table->text('contenido');
-            $table->boolean('estado')->default(0);
+            $table->boolean('estado')->default(1);
             $table->timestamps();
         });
     }
