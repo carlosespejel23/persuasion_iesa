@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ReactionsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\DeudorController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,6 +43,13 @@ Route::middleware('auth')->group(function () {
 
     //Arreglar la ruta de las reacciones
     //Route::post('/dashboard', [PostVoteController::class, 'store']);
+
+    //Sección Deudores
+    Route::get('/deudores', [DeudorController::class, 'index'])->name('deudores');
+    Route::get('/deudores/show', [DeudorController::class, 'show'])->name('deudores.show');
+    Route::get('/deudores/create', [DeudorController::class, 'create'])->name('deudores.create');
+    Route::post('/deudores/create', [DeudorController::class, 'save'])->name('deudores.save');
+    Route::delete('/deudores/{id}', [DeudorController::class, 'destroy'])->name('deudores.destroy');
 });
 
 require __DIR__.'/auth.php';

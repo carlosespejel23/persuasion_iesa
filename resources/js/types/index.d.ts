@@ -36,10 +36,23 @@ export interface Comentarios {
     updated_at: string;
 }
 
+export interface Deudor {
+    id: number;
+    usuario_id: number;
+    nombre: string
+    apellidoPaterno: string,
+    apellidoMaterno: string,
+    email: string;
+    telefono: string,
+    created_at: string;
+    updated_at: string;
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User;
         noticia: Noticia;
         comentarios: Comentarios;
+        deudor: Deudor;
     };
 };

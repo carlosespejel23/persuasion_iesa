@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Noticia extends Model
+class Deudor extends Model
 {
     use HasFactory;
-    protected $table = 'posts';
+    protected $table = 'deudores';
     protected $guarded = [];
     protected $fillable = [
-        'usuarios_id',
-        'contenido',
-        'post_anonimo',
-        'estado',
+        'usuario_id',
+        'nombre',
+        'apellidoPaterno',
+        'apellidoMaterno',
+        'email',
+        'telefono',
     ];
 }
