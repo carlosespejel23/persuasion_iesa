@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\DeudorController;
+use App\Http\Controllers\ComentarioActualizarDeudaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -50,6 +51,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/deudores/create', [DeudorController::class, 'create'])->name('deudores.create');
     Route::post('/deudores/create', [DeudorController::class, 'save'])->name('deudores.save');
     Route::delete('/deudores/{id}', [DeudorController::class, 'destroy'])->name('deudores.destroy');
+
+    //Sección Deudas
+    Route::get('/deudas', [ComentarioActualizarDeudaController::class, 'index'])->name('deudas');
+
 });
 
 require __DIR__.'/auth.php';
