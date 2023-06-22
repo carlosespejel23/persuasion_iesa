@@ -5,8 +5,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import Checkbox from '@/Components/Checkbox.vue';
 import { usePage } from '@inertiajs/vue3';
+import { defineProps, ref } from 'vue';
 
 defineProps<{
     mustVerifyEmail?: Boolean;
@@ -22,11 +22,12 @@ const form = useForm({
     apellidoMaterno: '',
     email: '',
     telefono: '',
+    monto_a_pagar: '',
 });
 
 const submit = () => {
     form.post(route('deudores.save'), {
-        onFinish: () => form.reset('nombre', 'apellidoPaterno', 'apellidoMaterno', 'email', 'telefono'),
+        onFinish: () => form.reset('nombre', 'apellidoPaterno', 'apellidoMaterno', 'email', 'telefono', 'monto_a_pagar'),
     });
 };
 </script>
@@ -113,6 +114,23 @@ const submit = () => {
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <!--Aqui le pones el input para que vea que registra dinero, ahora solo lo manda por en text input-->
+            <div>
+                <InputLabel for="monto_a_pagar" value="Monto a pagar" />
+
+                <TextInput
+                    id="monto_a_pagar"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.monto_a_pagar"
+                    required
+                    autofocus
+                    autocomplete="monto_a_pagar"
+                />
+
+                <InputError class="mt-2" :message="form.errors.monto_a_pagar" />
             </div>
 
             <!--Este hidden para mandar el usuario autenticado-->

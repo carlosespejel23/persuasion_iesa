@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ComentarioActualizarDeuda extends Model
+class EmojiConfig extends Model
 {
     use HasFactory;
-    protected $table = 'comentarios_actualizar_deudas';
+    protected $table = 'emojis_configs';
     protected $guarded = [];
     protected $fillable = [
         'usuario_id',
-        'deudor_id',
-        'comentario',
+        'enojo',
+        'like',
+        'comentar',
+        'compartir',
     ];
 }

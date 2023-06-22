@@ -48,16 +48,4 @@ class User extends Authenticatable
     ];
 
     protected $guarded = [];
-    /*public function roles(){
-        return $this->belongsToMany(Rol::class, 'usuarios_roles', 'usuarios_id', 'roles_id');
-    }*/
-
-    //Relacion de tablas "deudores" y "comentarios_actualizar_deudas" a la tabla "cad_usuarios_deudores" en la seccion DEUDAS
-    public function deudores(){
-        return $this->belongsToMany(Deudor::class, 'cad_usuarios_deudores', 'comentarioAD_id', 'usuario_id', 'deudor_id');
-    }
-
-    public function comentarios_actualizar_deudas(){
-        return $this->belongsToMany(ComentarioActualizarDeuda::class, 'cad_usuarios_deudores', 'comentarioAD_id', 'usuario_id', 'deudor_id');
-    }
 }

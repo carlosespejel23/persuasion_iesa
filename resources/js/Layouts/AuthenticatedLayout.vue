@@ -6,8 +6,12 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
+
+/*const user = usePage().props.auth.user;
+const id = user.id;*/
 </script>
 
 <template>
@@ -37,6 +41,15 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                                 <NavLink :href="route('deudas')" :active="route().current('deudas')">
                                     Deudas
+                                </NavLink>
+                                <NavLink :href="route('pagos')" :active="route().current('pagos')">
+                                    Pagos
+                                </NavLink>
+                                <NavLink :href="`/configuracion/${$page.props.auth.user.id}`" :active="route().current('configuracion.edit')">
+                                    Configuración
+                                </NavLink>
+                                <NavLink :href="route('personas')" :active="route().current('personas')">
+                                    Personas
                                 </NavLink>
                             </div>
                         </div>

@@ -15,55 +15,27 @@ class Instalador extends Command
      *
      * @var string
      */
-    protected $signature = 'persuasion:install_user';
+    protected $signature = 'laravel:frase';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Commando para iniciar con una cuenta de usuario ficticio';
+    protected $description = 'Commando de prueba';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        if(!$this->verificar()){
-            $this->info('Usuario creado correctamente');
-
-            $rol = $this->crearRolUsuario();
-            $usuario = $this->crearUsuario();
-
-            //Relacionarlo
-            $usuario->roles()->attach($rol);
-        }else{
-            $this->error('Ya existe un usuario');
-        }
-    }
-
-    private function verificar(){
-        return Rol::find(1);
-    }
-
-    private function crearRolUsuario(){
-        $rol = 'Usuario';
-        return Rol::create([
-            'nombre' => $rol,
-            'slug' => Str::slug($rol, '_')
-        ]);
-    }
-
-    private function crearUsuario(){
-        return User::create([
-            'nombre' => 'Nombre Usuario',
-            'apellidoPaterno' => 'Apellido Paterno Usuario',
-            'apellidoMaterno' => 'Apellido Materno Usuario',
-            'telefono' => '0000000000',
-            'fecha_de_nacimiento' => '2021-01-01',
-            'acepto_contrato' => 1,
-            'email' => 'example@email.com',
-            'password' => Hash::make('123456789'),
-        ]);
+        $this->info('
+            “A partir de hoy voy a construir mi mejor versión, 
+            cuidando mi esencia, mi cuerpo y salud mental. 
+            Estoy consciente que el caminar es difícil, 
+            pero eso no me aleja de mi propósito.
+            Con esfuerzo y disciplina regresaré a él. 
+            Porque tengo una misión de vida.”
+        ');
     }
 }

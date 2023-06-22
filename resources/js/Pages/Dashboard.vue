@@ -121,7 +121,7 @@ function resetReactionsSummary(new_reaction: string, old_reaction: string) {
                     </a>
 
                     <!--Aqui van las reacciones, esta es la prueba FrontEnd-->
-                    <div class="mt-3 d-flex">
+                    <!--<div class="mt-3 d-flex">
                       <div
                         class="px-1"
                         v-for="(count, reaction) in reactions_summary"
@@ -166,7 +166,7 @@ function resetReactionsSummary(new_reaction: string, old_reaction: string) {
                       v-if="props.reacted"
                       :reacted="props.reacted"
                       @toggleReaction="toggleReaction"
-                    ></ReactionsComponent>
+                    ></ReactionsComponent> -->
 
                 </div>
             </div>

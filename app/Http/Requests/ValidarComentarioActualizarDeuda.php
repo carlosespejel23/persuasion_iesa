@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidarDeudor extends FormRequest
+class ValidarComentarioActualizarDeuda extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,8 @@ class ValidarDeudor extends FormRequest
     {
         return [
             'usuario_id' => ['integer', $this->route('id')],
-            'nombre' => ['string', 'max:255'],
-            'apellidoPaterno' => ['string', 'max:255'],
-            'apellidoMaterno' => ['string', 'max:255'],
-            'email' => ['email', 'max:255'],
-            'telefono' => ['string', 'max:255'],
-            'monto_a_pagar' => ['numeric', 'between:0,9999999.99'],
+            'deudor_id' => ['integer'],
+            'comentario' => ['string', 'max:255'],
         ];
     }
 }

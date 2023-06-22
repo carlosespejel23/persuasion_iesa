@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('apellidoMaterno', 50);
             $table->string('email')->unique();
             $table->string('telefono', 10);
+            $table->decimal('monto_a_pagar', $precision = 10, $scale = 2);
+            $table->decimal('monto_pagado', $precision = 10, $scale = 2)->default('0.00');
             $table->timestamps();
         });
     }

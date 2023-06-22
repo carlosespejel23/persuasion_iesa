@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Deudor, ComentarioActualizarDeuda } from '@/types';
+import { Deudor } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref, onMounted, defineProps } from 'vue';
@@ -17,9 +17,9 @@ onMounted(async () => {
   }
 });
 
-//Esto es para comentarios
+//Esto es para ir a la actualizacion del pago
 const redirectToPost = (id: number) => {
-  window.location.href = `/deudas/create/${id}`;
+  window.location.href = `/pagos/${id}`;
 };
 </script>
 
@@ -28,20 +28,20 @@ const redirectToPost = (id: number) => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Seccion de Deudas</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Seccion de Pagos</h2>
         </template>
-        
+
         <!--Aqui va el componente de la noticia, nomas los acomodas en una tarjeta-->
         <div class="py-3" v-for="(deudor, id) in item">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <!--Esta es la informacion del deudor-->
-                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">Acreedor: {{ deudor.nombre }} {{ deudor.apellidoPaterno }} {{ deudor.apellidoMaterno }}</div>
-                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">Fecha: {{ deudor.created_at }}</div>
+                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">{{ deudor.nombre }} {{ deudor.apellidoPaterno }} {{ deudor.apellidoMaterno }}</div>
 
                     <a @click="redirectToPost(deudor.id)" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                        Comentarios
+                        Actualizar Deuda
                     </a>
+
                 </div>
             </div>
         </div>
