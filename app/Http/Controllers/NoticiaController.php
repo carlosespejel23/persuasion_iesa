@@ -16,16 +16,24 @@ class NoticiaController extends Controller
 {
     public function index(){
         $noticias = Noticia::all();
+        $comentarios = Comentario::all();
+
+        if ($noticias->isEmpty() && $comentarios->isEmpty()) {
+            $noticias = null;
+            $comentarios = null;
+        }
 
         return Inertia::render('Dashboard', [
-            'noticias' => $noticias
+            'noticias' => $noticias,
+            'comentarios' => $comentarios
         ]);
     }
-    public function create(){
+
+    public function createPost(){
         return Inertia::render('Dashboard/Create');
     }
 
-    public function save(ValidarPost $request){
+    public function savePost(ValidarPost $request){
         $noticia = Noticia::create($request->validated());
 
         return Redirect::route('dashboard');
@@ -80,10 +88,20 @@ class NoticiaController extends Controller
 
         return response()->json($comentarios);
     }
-    
-    public function saveComment(ValidarComentario $request, $noticia){
+
+    public function createComment($noticia)
+    {
+        $noticias = Noticia::find($noticia);
+
+        return Inertia::render('Dashboard/Post', [
+            'noticia' => $noticias
+        ]);
+    }
+
+    public function saveComment(ValidarComentario $request)
+    {
         $comentario = Comentario::create($request->validated());
 
-        return Redirect::route('dashboard.show', ['noticia' => $request->posts_id]);
+        return Redirect::route('dashboard'); //aqui se pueden direccionar ventanas modales
     }
 }

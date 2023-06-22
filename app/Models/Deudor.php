@@ -17,5 +17,7 @@ class Deudor extends Model
         'apellidoMaterno',
         'email',
         'telefono',
+        'monto_a_pagar',
+        'monto_pagado',
     ];
 }

@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->get('/dashboard/showAll', [NoticiaController::class, 'showAll']);
 Route::middleware('auth:sanctum')->get('/dashboard/show/{noticia}', [NoticiaController::class, 'show']);
 Route::middleware('auth:sanctum')->get('/deudores', [DeudorController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/deudas/{id}', [ComentarioActualizarDeudaController::class, 'showComment']);

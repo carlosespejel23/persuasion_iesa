@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidarDeudor extends FormRequest
+class ValidarEmojiConfig extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,10 @@ class ValidarDeudor extends FormRequest
     {
         return [
             'usuario_id' => ['integer', $this->route('id')],
-            'nombre' => ['string', 'max:255'],
-            'apellidoPaterno' => ['string', 'max:255'],
-            'apellidoMaterno' => ['string', 'max:255'],
-            'email' => ['email', 'max:255'],
-            'telefono' => ['string', 'max:255'],
-            'monto_a_pagar' => ['numeric', 'between:0,9999999.99'],
+            'enojo' => ['string', 'max:50'],
+            'like' => ['string', 'max:50'],
+            'comentar' => ['string', 'max:50'],
+            'compartir' => ['string', 'max:50'],
         ];
     }
 }

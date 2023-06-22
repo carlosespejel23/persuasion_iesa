@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('comentarios_deudas_pagos', function (Blueprint $table) {
             $table->id();
-            $table->text('contenido');
-            $table->dateTime('fecha_comentario', $precision = 0);
-            $table->enum('apartado', ['deudas', 'pagos']);
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id', 'fk_cdp_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('deudor_id');
+            $table->foreign('deudor_id', 'fk_cdp_deudor')->references('id')->on('deudores')->onDelete('cascade')->onUpdate('cascade');
+            $table->text('comentario');
             $table->timestamps();
         });
     }
