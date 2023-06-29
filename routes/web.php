@@ -6,6 +6,7 @@ use App\Http\Controllers\DeudorController;
 use App\Http\Controllers\ComentarioActualizarDeudaController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\EmojiConfigController;
+use App\Http\Controllers\NoticiaUserController;
 use App\Http\Controllers\PersonasController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -71,12 +72,28 @@ Route::middleware('auth')->group(function () {
     Route::post('/pagos/create', [PagoController::class, 'save'])->name('pagos.save');
 
     //Sección Configuración
-    Route::get('/configuracion/{id}', [EmojiConfigController::class, 'edit'])->name('configuracion.edit');
-    Route::patch('/configuracion/{id}', [EmojiConfigController::class, 'update'])->name('configuracion.update');
+    Route::get('/configuracion', [EmojiConfigController::class, 'edit'])->name('configuracion.edit');
+    Route::patch('/configuracion', [EmojiConfigController::class, 'update'])->name('configuracion.update');
 
     //Sección Personas
     Route::get('/personas', [PersonasController::class, 'index'])->name('personas');
     Route::get('/personas/show', [PersonasController::class, 'show'])->name('personas.show');
+
+    //Perfiles de Personas
+    Route::get('/personas/show/user/{id}', [PersonasController::class, 'showProfile'])->name('personas.showProfile');
+    Route::get('/personas/showUser/{id}', [PersonasController::class, 'showUser'])->name('personas.showUser');
+    Route::get('/personas/showPost/{id}', [PersonasController::class, 'showPost'])->name('personas.showPost');
+    Route::get('/personas/showComment/{id}', [PersonasController::class, 'showComment'])->name('personas.showComment');
+    Route::get('/personas/createComment/{id}', [PersonasController::class, 'createComment'])->name('personas.createComment');
+    Route::post('/personas/createComment', [PersonasController::class, 'saveComment'])->name('personas.saveComment');
+    Route::get('/personas/show/deudas/{id}', [PersonasController::class, 'deudas'])->name('personas.deudas');
+    Route::get('/personas/showDeuda/{id}', [PersonasController::class, 'showDeuda'])->name('personas.showDeuda');
+    Route::get('/personas/showComment/Deuda/{id}', [PersonasController::class, 'showCommentDeudas'])->name('personas.showCommentDeudas');
+    Route::get('/personas/showCommentDeuda/{id}', [PersonasController::class, 'showCommentDeuda'])->name('personas.showCommentDeuda');
+
+    //Sección noticias del usuario autenticado
+    Route::get('/noticias', [NoticiaUserController::class, 'index'])->name('noticias');
+    Route::get('/noticias/showPost', [NoticiaUserController::class,'showPost']);
 });
 
 require __DIR__.'/auth.php';

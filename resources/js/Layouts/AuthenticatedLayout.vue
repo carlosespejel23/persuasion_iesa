@@ -45,7 +45,7 @@ const id = user.id;*/
                                 <NavLink :href="route('pagos')" :active="route().current('pagos')">
                                     Pagos
                                 </NavLink>
-                                <NavLink :href="`/configuracion/${$page.props.auth.user.id}`" :active="route().current('configuracion.edit')">
+                                <NavLink :href="`/configuracion`" :active="route().current('configuracion.edit')">
                                     Configuración
                                 </NavLink>
                                 <NavLink :href="route('personas')" :active="route().current('personas')">
@@ -84,6 +84,7 @@ const id = user.id;*/
 
                                     <template #content>
                                         <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
+                                        <DropdownLink :href="route('noticias')"> Mis Noticias </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </DropdownLink>

@@ -29,17 +29,30 @@ class ComentarioActualizarDeudaController extends Controller
 
     public function create($id)
     {
-        $deudor = Deudor::find($id);
+        $userId = auth()->user()->getAuthIdentifier();
+        $deudorUsers = Deudor::where('usuario_id', $userId)
+                            ->where('id', $id)
+                            ->get();
 
-        return Inertia::render('Deudas/CreateComment', [
-            'deudor' => $deudor
-        ]);
+        if ($deudorUsers->isNotEmpty()) {
+            $deudor = $deudorUsers->first();
+            return Inertia::render('Deudas/CreateComment', [
+                'deudor' => $deudor
+            ]);
+        } else {
+            return Redirect::route('deudas');
+        }
     }
 
     public function showComment($id)
     {
         $userId = auth()->user()->getAuthIdentifier();
-        $comentarios = DB::table('comentarios_actualizar_deudas')
+        $deudorUsers = Deudor::where('usuario_id', $userId)
+                            ->where('id', $id)
+                            ->get();
+
+        if ($deudorUsers->isNotEmpty()) {
+            $comentarios = DB::table('comentarios_actualizar_deudas')
             ->join('deudores', function ($join) use ($id) {
                 $join->on('comentarios_actualizar_deudas.deudor_id', '=', 'deudores.id')
                     ->where('deudores.id', '=', $id);
@@ -56,7 +69,10 @@ class ComentarioActualizarDeudaController extends Controller
             ->orderBy('comentarios_actualizar_deudas.created_at', 'desc')
             ->get();
 
-        return response()->json($comentarios);
+            return response()->json($comentarios);
+        } else {
+            return response()->json(null);
+        }
     }
 
     public function save(ValidarComentarioActualizarDeuda $request)
