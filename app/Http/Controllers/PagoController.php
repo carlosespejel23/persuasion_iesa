@@ -31,37 +31,68 @@ class PagoController extends Controller
 
     public function edit($id)
     {
-        $deudor = Deudor::find($id);
+        $userId = auth()->user()->getAuthIdentifier();
+        $deudorUsers = Deudor::where('usuario_id', $userId)
+                            ->where('id', $id)
+                            ->get();
 
-        return Inertia::render('Pagos/Update', [
-            'deudor' => $deudor
-        ]);
+        if ($deudorUsers->isNotEmpty()) {
+            $deudor = $deudorUsers->first();
+            return Inertia::render('Pagos/Update', [
+                'deudor' => $deudor
+            ]);
+        } else {
+            return Redirect::route('pagos');
+        }
     }
 
     public function update(PagoDeudaRequest $request, $id): RedirectResponse
     {
-        $deudor = Deudor::find($id);
-        
-        $deudor->fill($request->validated());
-        $deudor->save();
+        $userId = auth()->user()->getAuthIdentifier();
+        $deudorUsers = Deudor::where('usuario_id', $userId)
+                            ->where('id', $id)
+                            ->get();
 
-        return Redirect::route('pagos.edit', ['id' => $id]);
+        if ($deudorUsers->isNotEmpty()) {
+            $deudor = $deudorUsers->first();
+        
+            $deudor->fill($request->validated());
+            $deudor->save();
+
+            return Redirect::route('pagos.edit', ['id' => $id]);
+        } else {
+            return Redirect::route('pagos.edit', ['id' => $id]);
+        }
     }
 
     //Comentarios
     public function create($id)
     {
-        $deudor = Deudor::find($id);
+        $userId = auth()->user()->getAuthIdentifier();
+        $deudorUsers = Deudor::where('usuario_id', $userId)
+                            ->where('id', $id)
+                            ->get();
 
-        return Inertia::render('Pagos/CreateComment', [
-            'deudor' => $deudor
-        ]);
+        if ($deudorUsers->isNotEmpty()) {
+            $deudor = $deudorUsers->first();
+
+            return Inertia::render('Pagos/CreateComment', [
+                'deudor' => $deudor
+            ]);
+        } else {
+            return Redirect::route('pagos'); //Aqui puede agregar una ventana modal
+        }
     }
 
     public function showComment($id)
     {
         $userId = auth()->user()->getAuthIdentifier();
-        $comentarios = DB::table('comentarios_deudas_pagos')
+        $deudorUsers = Deudor::where('usuario_id', $userId)
+                            ->where('id', $id)
+                            ->get();
+
+        if ($deudorUsers->isNotEmpty()) {
+            $comentarios = DB::table('comentarios_deudas_pagos')
             ->join('deudores', function ($join) use ($id) {
                 $join->on('comentarios_deudas_pagos.deudor_id', '=', 'deudores.id')
                     ->where('deudores.id', '=', $id);
@@ -78,7 +109,10 @@ class PagoController extends Controller
             ->orderBy('comentarios_deudas_pagos.created_at', 'desc')
             ->get();
 
-        return response()->json($comentarios);
+            return response()->json($comentarios);
+        } else {
+            return response()->json(null);
+        }
     }
 
     public function save(ValidarComentarioDeudaPago $request)

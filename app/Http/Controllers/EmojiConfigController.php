@@ -12,18 +12,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class EmojiConfigController extends Controller
 {
-    /*public function index()
+    public function edit()
     {
-        $user = Auth::user();
-        $id = $user->id;
-
-        return Inertia::render('Config/Config', [
-            'authUserId' => $id
-        ]);
-    }*/
-
-    public function edit($id)
-    {
+        $id = auth()->user()->getAuthIdentifier();
         $emoji_config = EmojiConfig::find($id);
 
         return Inertia::render('Config/Config', [
@@ -32,8 +23,9 @@ class EmojiConfigController extends Controller
         ]);
     }
 
-    public function update(ValidarEmojiConfig $request, $id): RedirectResponse
+    public function update(ValidarEmojiConfig $request): RedirectResponse
     {
+        $id = auth()->user()->getAuthIdentifier();
         $emoji_config = EmojiConfig::find($id);
         
         $emoji_config->fill($request->validated());
@@ -41,11 +33,4 @@ class EmojiConfigController extends Controller
 
         return Redirect::route('configuracion.edit', ['id' => $id]);
     }
-
-    /*public function save(ValidarComentarioDeudaPago $request)
-    {
-        $comentario = ComentarioDeudaPago::create($request->validated());
-
-        return Redirect::route('pagos'); //aqui se pueden direccionar ventanas modales
-    }*/
 }
