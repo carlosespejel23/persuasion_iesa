@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Rol;
-use Illuminate\Support\Str;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -15,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -52,14 +51,9 @@ class RegisteredUserController extends Controller
             'fecha_de_nacimiento' => $request->fecha_de_nacimiento,
             'acepto_contrato' => $request->acepto_contrato,
             'email' => $request->email,
+            'profile_image' => Storage::url('profiles/default.jpg'),
             'password' => Hash::make($request->password),
         ]);
-
-        /*$rol = $this->crearRolUsuario();
-        $usuario = $user;
-
-        //Relacionarlo
-        $usuario->roles()->attach($rol);*/
 
         event(new Registered($user));
 
@@ -67,12 +61,4 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
-
-    /*private function crearRolUsuario(){
-        $rol = 'Usuario';
-        return Rol::create([
-            'nombre' => $rol,
-            'slug' => Str::slug($rol, '_')
-        ]);
-    }*/
 }

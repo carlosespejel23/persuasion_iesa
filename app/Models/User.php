@@ -25,6 +25,7 @@ class User extends Authenticatable
         'fecha_de_nacimiento',
         'acepto_contrato',
         'email',
+        'profile_image',
         'password',
     ];
 
@@ -46,6 +47,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    protected $guarded = [];
 }
