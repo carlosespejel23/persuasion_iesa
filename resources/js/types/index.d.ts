@@ -6,6 +6,7 @@ export interface User {
     apellidoMaterno: string,
     telefono: string,
     email: string;
+    profile_image: string;
     email_verified_at: string;
     created_at: string;
 }

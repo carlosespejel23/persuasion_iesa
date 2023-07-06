@@ -12,6 +12,7 @@ defineProps<{
 
 const user = usePage().props.auth.user;
 
+//Formulario de Datos
 const form = useForm({
     nombre: user.nombre,
     apellidoPaterno: user.apellidoPaterno,
@@ -32,6 +33,7 @@ const form = useForm({
         </header>
 
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
+
             <div>
                 <InputLabel for="nombre" value="Nombre" />
 
