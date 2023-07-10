@@ -8,6 +8,7 @@ use App\Http\Controllers\PagoController;
 use App\Http\Controllers\EmojiConfigController;
 use App\Http\Controllers\NoticiaUserController;
 use App\Http\Controllers\PersonasController;
+use App\Http\Controllers\NoticiaCompartidaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,9 +31,15 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');;
 
+//Panel de noticias principal
 Route::get('/dashboard', [NoticiaController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+//Noticia compartida
+Route::get('/noticia/{slug}', [NoticiaCompartidaController::class, 'index'])->name('noticia.share');
+Route::get('/noticia/cj-json-post/share/{slug}', [NoticiaCompartidaController::class, 'showPost']);
+Route::get('/noticia/cj-json-post-comment/share/{slug}', [NoticiaCompartidaController::class, 'showComment']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
