@@ -5,6 +5,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref, onMounted, defineProps } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import ReactionsComponent from '@/components/ReactionsComponent.vue';
 
 //Esto es para extraer las noticias
 const noticias = ref<Noticia[]>([]);
@@ -90,6 +91,8 @@ const user = ref<User | null>(page.props.user as User || null);
                         Comentarios
                     </a>
 
+                    <ReactionsComponent :post-id="noticia.id"></ReactionsComponent>
+                    
                 </div>
             </div>
         </div>

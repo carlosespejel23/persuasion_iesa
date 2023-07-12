@@ -1,100 +1,103 @@
 <template>
-    <div class="mt-3 d-flex">
-      <div
-        class="px-1"
-        v-for="(count, reaction) in reactions_summary"
-        :key="reaction"
-        v-show="count"
-      >
-        <img style="width: 20px" :src="image(reaction)" />
-        <span class="px-1">{{ count }}</span>
-      </div>
-    </div>
-  
-    <div class="border-top position-relative">
-      <div
-        class="bg-white border rounded shadow-sm position-absolute"
-        style="bottom: 40px"
-        v-show="show_reaction_types"
-      >
-        <button
-          @click="toggleRaction(type)"
-          class="btn bg-light"
-          v-for="type in types"
-          :key="type"
-        >
-          <img :src="image(type)" />
-        </button>
-      </div>
-  
+  <div>
+    <div>
       <button
-        @click="show_reaction_types = !show_reaction_types"
+        @click="toggleReaction('like')"
         class="btn btn-link"
+        :class="{ active: auth_reaction === 'like' }"
       >
-        <span v-if="auth_reaction">
-          <img :src="image(auth_reaction)" class="w-25" />
-          {{ auth_reaction }}
-        </span>
-        <span v-else>Like</span>
+        <img :src="image('like')" />
+        <span>{{ reactions_summary.like || 0 }}</span>
+      </button>
+
+      <button
+        @click="toggleReaction('dislike')"
+        class="btn btn-link"
+        :class="{ active: auth_reaction === 'dislike' }"
+      >
+        <img :src="image('dislike')" />
+        <span>{{ reactions_summary.dislike || 0 }}</span>
       </button>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    props: ["summary", "reacted"],
-  
-    data() {
-      return {
-        show_reaction_types: false,
-        types: ["like", "dislike"],
-        reactions_summary: { ...this.summary },
-        auth_reaction: this.reacted ? this.reacted.type : null,
-      };
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["postId"],
+
+  data() {
+    return {
+      reactions_summary: {},
+      auth_reaction: null,
+    };
+  },
+
+  mounted() {
+    this.fetchReactionsSummary();
+  },
+
+  methods: {
+    image(type) {
+      return `/reactions_${type}.png`; // Reemplaza la ruta de los emojis según sea necesario
     },
-  
-    methods: {
-      image(type) {
-        return `.../reactions_${type}.png`; //remplazas la ruta de los emojis
-      },
-  
-      toggleRaction(reaction) {
-        let path = window.location.href;
-        let old_reaction = this.auth_reaction;
-  
-        axios.post(`${path}/reaction`, { reaction }).catch(() => {
-          this.saveReaction(old_reaction, reaction);
+
+    fetchReactionsSummary() {
+      let postId = this.postId;
+      // Realiza una llamada al backend para obtener el resumen de reacciones del post
+      axios
+        .get(`/dashboard/${postId}/reactions-summary`)
+        .then((response) => {
+          this.reactions_summary = response.data.reactions_summary;
+          this.auth_reaction = response.data.reacted ? response.data.reacted.type : null;
+        })
+        .catch((error) => {
+          console.error(error);
         });
-  
-        this.show_reaction_types = false;
-        this.saveReaction(reaction, old_reaction);
-      },
-  
-      saveReaction(new_reaction, old_reaction) {
-        this.resetReactionsSummary(new_reaction, old_reaction);
-  
-        if (this.auth_reaction === new_reaction) {
-          this.auth_reaction = null;
+    },
+
+    toggleReaction(reaction) {
+      let postId = this.postId;
+      let oldReaction = this.auth_reaction;
+
+      axios
+        .post(`/dashboard/${postId}/reactions`, { reaction })
+        .then((response) => {
+          this.reactions_summary = response.data.reactions_summary;
+          this.auth_reaction = reaction;
+        })
+        .catch(() => {
+          this.saveReaction(oldReaction, reaction);
+        });
+
+      this.saveReaction(reaction, oldReaction);
+    },
+
+    saveReaction(new_reaction, old_reaction) {
+      this.resetReactionsSummary(new_reaction, old_reaction);
+
+      if (this.auth_reaction === new_reaction) {
+        this.auth_reaction = null;
+        return;
+      }
+
+      this.auth_reaction = new_reaction;
+    },
+
+    resetReactionsSummary(new_reaction, old_reaction) {
+      if (old_reaction) {
+        this.reactions_summary[old_reaction]--;
+      }
+
+      if (new_reaction && new_reaction !== old_reaction) {
+        if (!this.reactions_summary[new_reaction]) {
+          this.reactions_summary[new_reaction] = 1;
           return;
         }
-  
-        this.auth_reaction = new_reaction;
-      },
-  
-      resetReactionsSummary(new_reaction, old_reaction) {
-        if (old_reaction) {
-          this.reactions_summary[old_reaction]--;
-        }
-  
-        if (new_reaction && new_reaction !== old_reaction) {
-          if (!this.reactions_summary[new_reaction]) {
-            this.reactions_summary[new_reaction] = 1;
-            return;
-          }
-  
-          this.reactions_summary[new_reaction]++;
-        }
-      },
+
+        this.reactions_summary[new_reaction]++;
+      }
     },
-  };
-  </script>
+  },
+};
+</script>

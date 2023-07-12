@@ -4,34 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Models\Noticia;
 use Illuminate\Http\Request;
-use Qirolab\Laravel\Reactions\Models\Reaction;
+use Illuminate\Support\Facades\DB;
 
 class PostVoteController extends Controller
 {
-    public function store(Request $request, Noticia $noticia, $postId){
-        $type = $request->get('type');
-        $userId = auth()->user()->getAuthIdentifier();
+    public function store(Request $request, $postId)
+    {
+        $post = Noticia::findOrFail($postId);
+        $user = auth()->user(); // Obtén el usuario autenticado
 
-        //Revisa si ya existe un voto para este post por este usuario
-        $postVote = Reaction::firstOrNew(['user_id' => $userId, 'posts_id' => $postId]);
+        // Guarda o actualiza la reacción del usuario para este post
+        $post->reactions()->updateOrCreate(
+            ['user_id' => $user->id],
+            ['type' => $request->input('reaction')]
+        );
 
-        //Si no existe, crear voto
-        if(!$postVote->exists){
-            $postVote->type = $type;
-            $postVote->save();
-        } else{
-            //Si existe, actualizar el voto
-            Reaction::where(['user_id' => $userId, 'posts_id' => $postId])->update(['type' => $type]);
-        }
+        // Actualiza las estadísticas de reacciones del post
+        $reactionsSummary = $post->reactions()
+            ->select('type', DB::raw('COUNT(*) as count'))
+            ->groupBy('type')
+            ->pluck('count', 'type');
 
-        /*$postVote = new PostVote;
-        $postVote->usuarios_id = $userId;
-        $postVote->posts_id = $postId;
-        $postVote->vote = $vote;
-        $postVote->save();*/
+        return response()->json(['reactions_summary' => $reactionsSummary]);
+    }
 
-        //$noticia->toggleReaction($request->reaction);
+    public function getCount($postId)
+    {
+        $post = Noticia::findOrFail($postId);
 
-        return response()->json($postVote);
+        // Actualiza las estadísticas de reacciones del post
+        $reactionsSummary = $post->reactions()
+            ->select('type', DB::raw('COUNT(*) as count'))
+            ->groupBy('type')
+            ->pluck('count', 'type');
+
+        return response()->json(['reactions_summary' => $reactionsSummary]);
     }
 }
