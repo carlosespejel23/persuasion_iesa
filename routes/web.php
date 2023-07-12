@@ -9,6 +9,7 @@ use App\Http\Controllers\EmojiConfigController;
 use App\Http\Controllers\NoticiaUserController;
 use App\Http\Controllers\PersonasController;
 use App\Http\Controllers\NoticiaCompartidaController;
+use App\Http\Controllers\PostVoteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -56,7 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/show', [NoticiaController::class, 'saveComment'])->name('dashboard.saveComment');
 
     //Arreglar la ruta de las reacciones
-    //Route::post('/dashboard', [PostVoteController::class, 'store']);
+    Route::post('/dashboard/{postId}/reactions', [PostVoteController::class, 'store']);
+    Route::get('/dashboard/{postId}/reactions-summary', [PostVoteController::class, 'getCount']);
 
     //Sección Deudores
     Route::get('/deudores', [DeudorController::class, 'index'])->name('deudores');
