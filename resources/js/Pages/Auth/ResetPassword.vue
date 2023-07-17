@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import TextInputEmail from '@/components/TextInputEmail.vue';
+import TextInputPassword from '@/components/TextInputPassword.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -26,61 +25,79 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Reset Password" />
+    
+    <Head>
+        <title>
+            Restablecer Contraseña | Persuación
+        </title>
+    </Head>
 
+    <!--Barra de navegacion-->
+    <nav class="bg-white px-6 relative shadow-md">
+        <div class="flex flex-row justify-between items-center py-2">
+            <Link href="/"><img src="https://persuacion.000webhostapp.com/logotipo.png" width="100" /></Link>
+        </div>
+    </nav>
+
+    <!--Formulario de Reestablecer Contraseña-->
+    <div class="max-w-lg mx-auto my-10 bg-white p-10 rounded-xl border">
+
+        <h1 class="text-4xl font-medium text-center text-black">Restablecer Contraseña</h1>
+        <p class="text-slate-500 text-center text-black">
+            Ingresa el correo electrónico y la contraseña para seguir con el proceso.
+        </p>
         <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
+            <div class="flex flex-col space-y-5">
 
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
+                <div>
+                    <TextInputEmail
+                        id="email"
+                        type="email"
+                        class="mt-1 block w-full"
+                        v-model="form.email"
+                        required
+                        autofocus
+                        autocomplete="username"
+                    />
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                    <InputError class="mt-2" :message="form.errors.email" />
+                </div>
 
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
+                <div>
+                    <TextInputPassword
+                        id="password"
+                        type="password"
+                        class="mt-1 block w-full"
+                        v-model="form.password"
+                        required
+                        autocomplete="new-password"
+                    />
 
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
+                    <InputError class="mt-2" :message="form.errors.password" />
+                </div>
 
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <div>
+                    <TextInputPassword
+                        id="password_confirmation"
+                        type="password"
+                        class="mt-1 block w-full"
+                        v-model="form.password_confirmation"
+                        required
+                        autocomplete="new-password"
+                    />
 
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
+                    <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                </div>
+               
+                <div class="flex items-center justify-end mt-4">
+                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing" style="background: #0065b5;">
+                        Restablecer
+                    </PrimaryButton>
+                </div>
 
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Reset Password
-                </PrimaryButton>
             </div>
         </form>
-    </GuestLayout>
+    </div>    
+
 </template>
