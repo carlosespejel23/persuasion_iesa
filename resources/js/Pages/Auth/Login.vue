@@ -29,6 +29,12 @@ const submit = () => {
 };
 </script>
 
+<style>
+      .smaller-text {
+        font-size: 15px;
+      }
+</style>
+
 <template>
 
     <Head>
@@ -50,9 +56,9 @@ const submit = () => {
 
                 <div class="hidden group-hover:block md:block absolute md:static bg-white inset-x-0 top-16 py-3 shadow-md md:shadow-none text-gray-600">
                     <div class="flex flex-row justify-center items-center text-center font-semibold text-gray-500">
-                        <Link href="/">
-                            <ButtonNav class="ml-4 bg-white">
-                                <font-awesome-icon icon="circle-arrow-left" />&nbspRegresar
+                        <Link :href="route('home')">
+                            <ButtonNav class="ml-4 bg-white smaller-text">
+                                <font-awesome-icon icon="circle-arrow-left" />&nbsp&nbspRegresar
                             </ButtonNav>
                         </Link>
                     </div>
@@ -135,7 +141,7 @@ const submit = () => {
                                 </Link>
                                 
                                 <!--Button para tener el acceso-->
-                                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" style="background: #0065b5;">
+                                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" style="background: #0065b5">
                                     Entrar&nbsp<font-awesome-icon icon="circle-arrow-right" />
                                 </PrimaryButton>
 							</div>

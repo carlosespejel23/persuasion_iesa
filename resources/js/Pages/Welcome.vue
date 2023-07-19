@@ -2,11 +2,11 @@
 import { Link, Head } from '@inertiajs/vue3';
 import ButtonNav from '@/components/ButtonNav.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faUserPlus, faRightToBracket, faUsers, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserPlus, faHouse, faRightToBracket, faUsers, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 import {faFacebook, faTwitter, faYoutube} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faUser, faUserPlus, faRightToBracket, faUsers, faPhone, faLocationDot, faEnvelope, faFacebook, faTwitter, faYoutube);
+library.add(faUser, faUserPlus, faHouse, faRightToBracket, faUsers, faPhone, faLocationDot, faEnvelope, faFacebook, faTwitter, faYoutube);
 
 defineProps<{
     canLogin?: boolean;
@@ -19,6 +19,9 @@ defineProps<{
 <style>
      #menu-toggle:checked + #menu {
         display: block;
+      }
+      .smaller-text {
+        font-size: 15px;
       }
 </style>
 
@@ -34,11 +37,6 @@ defineProps<{
 
     <!--Barra de navegacion-->
     <nav class="bg-white px-6 relative shadow-md" v-if="canLogin">
-        <Link
-            v-if="$page.props.auth.user"
-            :href="route('dashboard')"
-            class="font-semibold"
-        >Dashboard</Link>
 
         <div class="flex flex-row justify-between items-center py-2">
             <Link href="/"><img src="https://persuacion.000webhostapp.com/logotipo.png" width="100" /></Link>
@@ -51,17 +49,25 @@ defineProps<{
 
                 <div class="hidden group-hover:block md:block absolute md:static bg-white inset-x-0 top-16 py-3 shadow-md md:shadow-none text-gray-600">
                     <div class="flex flex-row justify-center items-center text-center font-semibold text-gray-500">
-                        <Link :href="route('login')">
-                            <ButtonNav class="ml-4 bg-white">
-                                <font-awesome-icon icon="right-to-bracket" />&nbspIniciar Sesión
+                        <Link :href="route('dashboard')" v-if="$page.props.auth.user">
+                            <ButtonNav class="ml-4 bg-white smaller-text">
+                                <font-awesome-icon icon="house" />&nbsp&nbspPanel Principal
                             </ButtonNav>
                         </Link>
 
-                        <Link :href="route('register')" v-if="canRegister">
-                            <ButtonNav class="ml-4 bg-white">
-                                <font-awesome-icon icon="users" />&nbspRegistrarse
-                            </ButtonNav>
-                        </Link>
+                        <template v-else>
+                            <Link :href="route('login')">
+                                <ButtonNav class="ml-4 bg-white smaller-text">
+                                    <font-awesome-icon icon="right-to-bracket" />&nbsp&nbspIniciar Sesión
+                                </ButtonNav>
+                            </Link>
+
+                            <Link :href="route('register')" v-if="canRegister">
+                                <ButtonNav class="ml-4 bg-white smaller-text">
+                                    <font-awesome-icon icon="users" />&nbsp&nbspRegistrarse
+                                </ButtonNav>
+                            </Link>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -74,7 +80,7 @@ defineProps<{
 
 
     <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-900 border-top">
+    <!--<footer class="bg-white dark:bg-gray-900 border-top">
 
         <div class="container px-6 py-12 mx-auto">
 
@@ -125,7 +131,7 @@ defineProps<{
                 </div>
             </div>
         </div>
-    </footer>
+    </footer>-->
 
 </template>
 
