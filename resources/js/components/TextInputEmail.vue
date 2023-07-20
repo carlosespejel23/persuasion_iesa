@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!--<script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { CFormLabel, CInputGroup, CInputGroupText, CFormInput } from '@coreui/vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -41,11 +41,11 @@ defineExpose({ focus: () => input.value?.focus() });
       placeholder="ejemplo@gmail.com"
     />
   </CInputGroup>
-</template>
+</template>-->
 
 
 
-<!--<script setup lang="ts">
+<script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { CFormLabel, CInputGroup, CInputGroupText, CFormInput } from '@coreui/vue';
@@ -86,4 +86,4 @@ defineExpose({ focus: () => input.value?.focus() });
           placeholder="ejemplo@gmail.com"
         />
     </CInputGroup>
-</template>-->
+</template>

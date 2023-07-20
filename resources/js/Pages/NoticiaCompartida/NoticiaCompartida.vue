@@ -126,7 +126,7 @@ const getTelegramLink = (noticia: any) => {
                             <a :href="getFacebookShareLink(noticia)">Compartir en Facebook</a><br>
                             <a :href="getTwitterShareLink(noticia)">Compartir en Twitter</a><br>
                             <a :href="getWhatsAppShareLink(noticia)">Compartir en WhatsApp</a><br>
-                            <a :href="getInstagramStoryLink(noticia)">Compartir en Instagram</a><br>
+                            <!--<a :href="getInstagramStoryLink(noticia)">Compartir en Instagram</a><br>-->
                             <a :href="getGmailLink(noticia)">Compartir por Gmail</a><br>
                             <a :href="getTelegramLink(noticia)">Compartir por Telegram</a><br>
                             </div>

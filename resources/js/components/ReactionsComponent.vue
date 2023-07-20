@@ -7,7 +7,7 @@
         :class="{ active: auth_reaction === 'like' }"
       >
         <img :src="image('like')" />
-        <span>{{ reactions_summary.like || 0 }}</span>
+        <span style="color: white;">{{ reactions_summary.like || 0 }}</span>
       </button>
 
       <button
@@ -16,7 +16,7 @@
         :class="{ active: auth_reaction === 'dislike' }"
       >
         <img :src="image('dislike')" />
-        <span>{{ reactions_summary.dislike || 0 }}</span>
+        <span style="color: white;">{{ reactions_summary.dislike || 0 }}</span>
       </button>
     </div>
   </div>
