@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import Dropdown from '@/components/Dropdown.vue';
 import DropdownLink from '@/components/DropdownLink.vue';
 import NavLink from '@/components/NavLink.vue';
 import ResponsiveNavLink from '@/components/ResponsiveNavLink.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faNewspaper} from '@fortawesome/free-regular-svg-icons';
+import {faNewspaper, faAddressBook, faIdBadge} from '@fortawesome/free-regular-svg-icons';
+import {faUsers, faGear, faHandHoldingDollar, faMoneyBill} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faNewspaper);
+library.add(faNewspaper, faUsers, faGear, faHandHoldingDollar, faAddressBook, faMoneyBill, faIdBadge);
 import { Link } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/inertia-vue3';
 
@@ -20,8 +20,8 @@ const id = user.id;*/
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+        <div class="min-h-screen bg-white dark:bg-gray-900">
+            <nav class="bg-blue-950 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -29,31 +29,29 @@ const id = user.id;*/
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                                    />
+                                    <img src="https://persuacion.000webhostapp.com/logob.png" width="80" />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    <font-awesome-icon icon="newspaper" />&nbspNoticias
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="text-white">
+                                    Noticias&nbsp&nbsp<font-awesome-icon icon="fa-regular fa-newspaper" />
                                 </NavLink>
-                                <NavLink :href="route('deudores')" :active="route().current('deudores')">
-                                    Deudores
+                                <NavLink :href="route('deudores')" :active="route().current('deudores')" class="text-white">
+                                    Deudores&nbsp&nbsp<font-awesome-icon icon="fa-regular fa-id-badge" />
                                 </NavLink>
-                                <NavLink :href="route('deudas')" :active="route().current('deudas')">
-                                    Deudas
+                                <NavLink :href="route('deudas')" :active="route().current('deudas')" class="text-white">
+                                    Deudas&nbsp&nbsp<font-awesome-icon icon="hand-holding-dollar" />
                                 </NavLink>
-                                <NavLink :href="route('pagos')" :active="route().current('pagos')">
-                                    Pagos
+                                <NavLink :href="route('pagos')" :active="route().current('pagos')" class="text-white">
+                                    Pagos&nbsp&nbsp<font-awesome-icon icon="money-bill" />
                                 </NavLink>
-                                <NavLink :href="`/configuracion`" :active="route().current('configuracion.edit')">
-                                    Configuración
+                                <NavLink :href="`/configuracion`" :active="route().current('configuracion.edit')" class="text-white">
+                                    Configuración&nbsp&nbsp<font-awesome-icon icon="gear" />
                                 </NavLink>
-                                <NavLink :href="route('personas')" :active="route().current('personas')">
-                                    Personas
+                                <NavLink :href="route('personas')" :active="route().current('personas')" class="text-white">
+                                    Personas&nbsp&nbsp<font-awesome-icon icon="users" />
                                 </NavLink>
                             </div>
                         </div>
