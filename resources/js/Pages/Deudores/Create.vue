@@ -60,7 +60,7 @@ const submit = () => {
 
                                 <div class="lg:col-span-2">
 
-                                    <center><img src="https://cdn-icons-png.flaticon.com/512/2361/2361562.png" width="100" /></center>
+                                    <center><img src="https://persuacion.000webhostapp.com/deudor.png" width="100" /></center>
                                     <h2 class="font-semibold text-xl text-gray-600 mb-6 text-center">Agregar Nuevo Deudor</h2>
                                     <hr>
                                     <br>

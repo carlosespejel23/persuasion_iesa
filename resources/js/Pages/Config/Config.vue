@@ -11,8 +11,9 @@ import TextInput from '@/Components/TextInput.vue';
 import { usePage } from '@inertiajs/vue3';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {faThumbsUp} from '@fortawesome/free-solid-svg-icons';
+import {faCircleCheck} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faThumbsUp);
+library.add(faThumbsUp, faCircleCheck);
 
 //Actualiza el nombre de los emojis
 const page = usePage();
@@ -35,7 +36,9 @@ const submit = () => {
 <template>
     
     <Head>
-        <title>Configuración | Persuación</title>
+        <title>
+            Configuración | Persuación
+        </title>
     </Head>
 
     <AuthenticatedLayout>
@@ -144,9 +147,9 @@ const submit = () => {
             </div>
 
             <div class="flex items-center gap-4 justify-center mt-4">
-                <PrimaryButton :disabled="form.processing" class="bg-blue-950">Guardar Cambios</PrimaryButton>
+                <PrimaryButton :disabled="form.processing" class="bg-blue-950">Actualizar Cambios</PrimaryButton>
                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Cambios Guardados</p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Cambios Guardados <font-awesome-icon icon="fa-regular fa-circle-check" /></p>
                 </Transition>
             </div>
 

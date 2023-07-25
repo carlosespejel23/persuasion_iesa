@@ -44,15 +44,15 @@ const redirectToPost = (id: number) => {
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-              Seccion de Deudas
+              Sección de Deudas
             </h2>
         </template>
 
         <div class="mx-auto px-10 py-10 sm:px-6 lg:max-w-7xl lg:px-8">
-          <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
+          <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                 <a v-for="(deudor, id) in item" class="group border-2 border-blue-950 p-5 rounded-lg duration-300 hover:scale-105 hover:shadow-xl bg-white">
                     <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
-                        <center><img src="https://cdn-icons-png.flaticon.com/512/2361/2361748.png" width="100" /></center>
+                        <center><img src="https://persuacion.000webhostapp.com/deuda.png" width="100" /></center>
                     </div>
                     <div class="p-2 text-gray-900 dark:text-gray-100 text-center text-2xl" :key="id">Acreedor: {{ deudor.nombre }} {{ deudor.apellidoPaterno }} {{ deudor.apellidoMaterno }}</div>
                     <div class="p-2 text-gray-900 dark:text-gray-100 text-center text-2xl" :key="id">Fecha: {{ deudor.created_at }}</div>
