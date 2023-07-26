@@ -7,10 +7,10 @@ import TextEmail from '@/components/TextEmail.vue';
 import TextPassword from '@/components/TextPassword.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCircleArrowRight, faCircleArrowLeft, faPhone, faLocationDot, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowRight, faCircleArrowLeft, faPhone, faLocationDot, faEnvelope, faBars } from '@fortawesome/free-solid-svg-icons';
 import {faSquareFacebook, faSquareTwitter, faSquareYoutube} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faCircleArrowRight, faCircleArrowLeft, faPhone, faLocationDot, faEnvelope, faSquareFacebook, faSquareTwitter, faSquareYoutube);
+library.add(faBars, faCircleArrowRight, faCircleArrowLeft, faPhone, faLocationDot, faEnvelope, faSquareFacebook, faSquareTwitter, faSquareYoutube);
 
 defineProps<{
     canResetPassword?: boolean;
@@ -38,6 +38,11 @@ const submit = () => {
       .face, .you, .twi{
         font-size: 180%;
       }
+      
+      .fabards{
+        font-size: 150%;
+        color: white;
+      }
 </style>
 
 <template>
@@ -56,13 +61,13 @@ const submit = () => {
             <div class="group flex flex-col items-center">
 
                 <button class="p-2 rounded-lg md:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-10 fill-current" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" /></svg>
+                    <font-awesome-icon icon="fa-solid fa-bars" class="fabards" />
                 </button>
 
                 <div class="hidden group-hover:block md:block absolute md:static bg-blue-950 inset-x-0 top-16 py-3 shadow-md md:shadow-none text-gray-600">
                     <div class="flex flex-row justify-center items-center text-center font-semibold text-gray-500">
                         <Link href="/">
-                            <ButtonNav class="ml-4 bg-white">
+                            <ButtonNav>
                                 <font-awesome-icon icon="circle-arrow-left" />&nbspRegresar
                             </ButtonNav>
                         </Link>

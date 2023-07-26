@@ -26,14 +26,13 @@ defineProps<{
 </style>
 
 <template>
-
     <Head>
         <title>
             Inicio | Persuación  
         </title>
-        <link rel="icon" href="{{ asset('images/favicon.ico') }}">
+        
+        <link rel="icon" href="{{ asset('icons/icono.ico') }}" type="image/x-icon">
     </Head>
-    
 
     <!--Barra de navegacion-->
     <nav class="bg-white px-6 relative shadow-md" v-if="canLogin">

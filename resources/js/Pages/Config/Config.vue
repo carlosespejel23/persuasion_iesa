@@ -55,7 +55,7 @@ const submit = () => {
                 <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
 
                     <center>
-                       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bot%C3%B3n_Me_gusta.svg/1200px-Bot%C3%B3n_Me_gusta.svg.png" width="100" /> 
+                       <img src="https://persuacion.000webhostapp.com/like.png" width="100" /> 
                     </center>
 
                     <div class="space-x-4 p-6 bg-white py-4 text-center">
@@ -78,7 +78,7 @@ const submit = () => {
                 <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
 
                     <center>
-                        <img src="https://i.pinimg.com/236x/1a/55/94/1a55942a043629f29df82ba57103e0bc.jpg" width="100"/>
+                        <img src="https://persuacion.000webhostapp.com/enoja.png" width="100"/>
                     </center>
 
                     <div class="space-x-4 p-6 bg-white py-4 text-center">
@@ -101,7 +101,7 @@ const submit = () => {
                 <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
 
                     <center>
-                        <img src="https://definicion.de/wp-content/uploads/2010/08/comentario-1.png" width="100"/>
+                        <img src="https://persuacion.000webhostapp.com/comentario.png" width="100"/>
                     </center>
 
                     <div class="space-x-4 p-6 bg-white py-4 text-center">
@@ -124,7 +124,7 @@ const submit = () => {
                 <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
 
                     <center>
-                        <img src="https://cdn-icons-png.flaticon.com/512/25/25702.png" width="100"/>
+                        <img src="https://persuacion.000webhostapp.com/compartir.png" width="100"/>
                     </center>
 
                     <div class="space-x-4 p-6 bg-white py-4 text-center">
