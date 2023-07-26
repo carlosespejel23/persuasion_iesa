@@ -3,13 +3,15 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import ModalContrato from '@/components/ModalContrato.vue';
 import ButtonNav from '@/components/ButtonNav.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import Checkbox from '@/Components/Checkbox.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faUserPlus, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserPlus, faCircleArrowLeft, faPhone, faLocationDot, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import {faSquareFacebook, faSquareTwitter, faSquareYoutube} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faUser, faUserPlus, faCircleArrowLeft);
+library.add(faUser, faUserPlus, faCircleArrowLeft, faSquareFacebook, faSquareTwitter, faSquareYoutube, faPhone, faLocationDot, faEnvelope);
 
 const form = useForm({
     nombre: '',
@@ -29,6 +31,16 @@ const submit = () => {
     });
 };
 </script>
+
+<style>
+      .smaller-text {
+        font-size: 15px;
+      }
+
+      .face, .you, .twi{
+        font-size: 180%;
+      }
+</style>
 
 <template>
 
@@ -142,7 +154,7 @@ const submit = () => {
 
                         <!--Input de Telefono-->
                         <div class="mb-4">
-                            <InputLabel for="telefono" value="Telefono" />
+                            <InputLabel for="telefono" value="Teléfono" />
 
                             <TextInput
                                 id="telefono"
@@ -152,6 +164,8 @@ const submit = () => {
                                 required
                                 autofocus
                                 autocomplete="telefono"
+                                maxlength="10" 
+                                pattern="[0-9]+"
                             />
 
                             <InputError class="mt-2" :message="form.errors.telefono" />
@@ -176,7 +190,7 @@ const submit = () => {
 
                         <!--Input de Email-->
                         <div class="mb-4">
-                            <InputLabel for="email" value="Email" />
+                            <InputLabel for="email" value="Correo Electrónico" />
 
                             <TextInput
                                 id="email"
@@ -192,7 +206,7 @@ const submit = () => {
 
                         <!--Input de Password-->
                         <div class="mb-4">
-                            <InputLabel for="password" value="Password" />
+                            <InputLabel for="password" value="Contraseña" />
 
                             <TextInput
                                 id="password"
@@ -208,7 +222,7 @@ const submit = () => {
 
                         <!--Input de Confirm Password-->
                         <div class="mb-4">
-                            <InputLabel for="password_confirmation" value="Confirm Password" />
+                            <InputLabel for="password_confirmation" value="Confirmar Contraseña" />
 
                             <TextInput
                                 id="password_confirmation"
@@ -231,7 +245,7 @@ const submit = () => {
                                 value=1
                                 unchecked-value=0
                             ></Checkbox>
-                            <span>   He leído y Acepto el Contrato <strong style="visibility:hidden;">{{ form.acepto_contrato }}</strong></span>
+                            <span>&nbsp&nbsp<ModalContrato /><strong style="visibility:hidden;">{{ form.acepto_contrato }}</strong></span>
                 
                             <InputError class="mt-2" :message="form.errors.acepto_contrato" />
                         </div>
@@ -244,8 +258,8 @@ const submit = () => {
                             >
                                 ¿Ya tienes Cuenta?
                             </Link>
-                            <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" style="background: #0065b5;">
-                                <font-awesome-icon icon="user-plus" />&nbspRegistrarse
+                            <PrimaryButton class="ml-4 bg-blue-950" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" style="background: #0065b5;">
+                               Registrarse&nbsp<font-awesome-icon icon="user-plus" />
                             </PrimaryButton>
                         </div>   
                     </form>
@@ -278,7 +292,7 @@ const submit = () => {
                     <div class="flex flex-col items-center">
                         <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"><font-awesome-icon icon="phone" /> +52 (222) 888 8526</h6>
                         <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500 text-center"><font-awesome-icon icon="location-dot" /> Cerrada Allende 6, 72710 San Lorenzo Almecatla, Pue.</h6>
-                        <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"><font-awesome-icon icon="envelope" /> iesa@gmail.com</h6>
+                        <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"><font-awesome-icon icon="fa-solid fa-envelope" /> iesa@gmail.com</h6>
                     </div>
                 </div>
 

@@ -125,6 +125,8 @@ const submit = () => {
                                                 required
                                                 autofocus
                                                 autocomplete="telefono"
+                                                maxlength="10" 
+                                                pattern="[0-9]+"
                                             />
 
                                             <InputError class="mt-2" :message="form.errors.telefono" />
@@ -167,7 +169,7 @@ const submit = () => {
                                     </div>
 
                                     <div class="flex items-center justify-end mt-4">
-                                        <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                        <PrimaryButton class="ml-4 bg-blue-950" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                             Agregar Deudor
                                         </PrimaryButton>
                                     </div>

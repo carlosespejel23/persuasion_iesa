@@ -3,12 +3,11 @@ import Checkbox from '@/Components/Checkbox.vue';
 import InputError from '@/Components/InputError.vue';
 import ButtonNav from '@/components/ButtonNav.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextEmail from '@/components/TextEmail.vue';
+import TextPassword from '@/components/TextPassword.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
-import TextInputEmail from '@/components/TextInputEmail.vue';
-import TextInputPassword from '@/components/TextInputPassword.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCircleArrowRight, faCircleArrowLeft, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
+import { faCircleArrowRight, faCircleArrowLeft, faPhone, faLocationDot, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import {faSquareFacebook, faSquareTwitter, faSquareYoutube} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(faCircleArrowRight, faCircleArrowLeft, faPhone, faLocationDot, faEnvelope, faSquareFacebook, faSquareTwitter, faSquareYoutube);
@@ -88,6 +87,7 @@ const submit = () => {
                     style="background-image: url('https://posgradosadistancia.com.ar/wp-content/uploads/2021/04/Objetivos-de-las-Finanzas.jpg')">
                     <!--Aqui va una imagen haciendo referencia a la app-->
                 </div>
+                
 
                 <!--Segunda parte del login que donde se ubican los input-->
                 <div class="w-full lg:w-1/2 border p-2 rounded-lg lg:rounded-l-none">
@@ -105,7 +105,7 @@ const submit = () => {
 
                             <!--Input de Email o Correo Electronico-->
 							<div class="mb-4">
-								<TextInputEmail
+								<TextEmail
                                     id="email"
                                     type="email"
                                     class="mt-1 block w-full"
@@ -118,7 +118,7 @@ const submit = () => {
 
                             <!--Input de Password-->
 							<div class="mb-4">
-                                <TextInputPassword
+                                <TextPassword
                                     id="password"
                                     type="password"
                                     class="mt-1 block w-full"
@@ -126,7 +126,7 @@ const submit = () => {
                                     autocomplete="current-password"
                                 />
                                 <InputError class="mt-2" :message="form.errors.password" />
-							</div>
+                            </div>
 
                             <!--Checkbox de recordar sesión-->
 							<div class="mb-4">
@@ -194,7 +194,7 @@ const submit = () => {
                     <div class="flex flex-col items-center">
                         <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"><font-awesome-icon icon="phone" /> +52 (222) 888 8526</h6>
                         <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500 text-center"><font-awesome-icon icon="location-dot" /> Cerrada Allende 6, 72710 San Lorenzo Almecatla, Pue.</h6>
-                        <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"><font-awesome-icon icon="envelope" /> iesa@gmail.com</h6>
+                        <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"><font-awesome-icon icon="fa-solid fa-envelope" /> iesa@gmail.com</h6>
                     </div>
                 </div>
 
