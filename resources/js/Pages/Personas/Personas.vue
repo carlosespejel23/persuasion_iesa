@@ -27,6 +27,22 @@ const redirectToPost = (id: number) => {
 };
 </script>
 
+<style>
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Template del nombre del usuario */
+.profile-image-containers {
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50%;
+  overflow: hidden;
+}
+</style>
+
 <template>
 
     <Head>
@@ -44,7 +60,11 @@ const redirectToPost = (id: number) => {
           <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
             <a v-for="(user, id) in item" class="group border-2 border-blue-950 p-5 rounded-lg duration-300 hover:scale-105 hover:shadow-xl bg-white">
               <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
-                <center><img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" width="100" /></center>
+                <center>
+                  <div class="profile-image-containers">
+                    <img :src="user?.profile_image" class="profile-image" />
+                  </div>
+                </center>
               </div>
 
               <h1 class="mt-4 text-lg text-black text-center" :key="id">{{ user.nombre }} {{ user.apellidoPaterno }} {{ user.apellidoMaterno }}</h1>
