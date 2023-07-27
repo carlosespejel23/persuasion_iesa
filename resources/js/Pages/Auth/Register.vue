@@ -3,13 +3,15 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import ModalContrato from '@/components/ModalContrato.vue';
 import ButtonNav from '@/components/ButtonNav.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import Checkbox from '@/Components/Checkbox.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faUserPlus, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserPlus, faCircleArrowLeft, faPhone, faLocationDot, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import {faSquareFacebook, faSquareTwitter, faSquareYoutube} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faUser, faUserPlus, faCircleArrowLeft);
+library.add(faUser, faUserPlus, faCircleArrowLeft, faSquareFacebook, faSquareTwitter, faSquareYoutube, faPhone, faLocationDot, faEnvelope);
 
 const form = useForm({
     nombre: '',
@@ -29,6 +31,16 @@ const submit = () => {
     });
 };
 </script>
+
+<style>
+      .smaller-text {
+        font-size: 15px;
+      }
+
+      .face, .you, .twi{
+        font-size: 180%;
+      }
+</style>
 
 <template>
 
@@ -52,7 +64,7 @@ const submit = () => {
                 <div class="hidden group-hover:block md:block absolute md:static bg-blue-950 inset-x-0 top-16 py-3 shadow-md md:shadow-none text-gray-600">
                     <div class="flex flex-row justify-center items-center text-center font-semibold text-gray-500">
                         <Link href="/">
-                            <ButtonNav class="bg-white">
+                            <ButtonNav>
                                 <font-awesome-icon icon="circle-arrow-left" />&nbspRegresar
                             </ButtonNav>
                         </Link>
@@ -63,196 +75,213 @@ const submit = () => {
         </div>
     </nav>
 
-    <!--Aqui empieza el formulario dentro de un container-->
-    <div class="container mx-auto">
+    <!--Aqui empieza el formulario-->
+    <form @submit.prevent="submit" class="px-8 pt-6 mb-4 rounded w-full xl:w-3/4 lg:w-12/12 mx-auto">
 
-        <!--Aqui es para crear contenedor flexible centrado horizontalmente-->
-        <div class="flex justify-center px-6 my-12">
+        <div class="bg-white shadow-md rounded border-2 px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
 
-            <!--Parte donde se adaptara a todas las pantallas-->
-            <div class="w-full xl:w-3/4 lg:w-11/12 flex">
+            <div class="mb-4">
+                <h3 class="pt-4 text-4xl text-center"><b>Registro Nuevo Usuario</b></h3>
+            </div>
 
-                <!--Primera parte del login que es una imagen-->
-                <div class="w-full h-auto bg-gray-400 hidden lg:block lg:w-6/12 bg-cover rounded-l-lg"
-					style="background-image: url('https://persuacion.000webhostapp.com/fondocel.jpg')">
-                    <!--Aqui va la imagen-->
+            <hr>
+            <br>
+
+            <div class="-mx-3 md:flex">
+
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <!--Input de Nombre-->
+                    <div class="mb-4">
+                        <InputLabel for="nombre" value="Nombre" />
+
+                        <TextInput
+                            id="nombre"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.nombre"
+                            required
+                            autofocus
+                            autocomplete="nombre"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.nombre" />
+                    </div>
                 </div>
 
-                <!--Segunda parte del login que donde se ubican los input-->
-                <div class="w-full lg:w-6/12 border p-1 rounded-lg lg:rounded-l-none">
+                <div class="md:w-1/2 px-3">
+                    <!--Input de Apellido Paterno-->
+                    <div class="mb-4">
+                        <InputLabel for="apellidoPaterno" value="Apellido Paterno" />
 
-                    <!--Comienza formulario de registro-->
-                    <form class="px-8 pt-6 mb-4 rounded" @submit.prevent="submit">
+                        <TextInput
+                            id="apellidoPaterno"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.apellidoPaterno"
+                            required
+                            autofocus
+                            autocomplete="apellidoPaterno"
+                        />
 
-                        <!--Logo de la empresa-->
-                        <div class="mb-4">
-                            <h3 class="pt-4 text-2xl text-ligth"><b>Registro Nuevo Usuario</b></h3>
-                        </div>
-
-                        <!--Input de Nombre-->
-                        <div class="mb-4">
-                            <InputLabel for="nombre" value="Nombre" />
-
-                            <TextInput
-                                id="nombre"
-                                type="text"
-                                class="mt-1 block w-full"
-                                v-model="form.nombre"
-                                required
-                                autofocus
-                                autocomplete="nombre"
-                            />
-
-                            <InputError class="mt-2" :message="form.errors.nombre" />
-                        </div>
-
-                        <!--Input de Apellido Paterno-->
-                        <div class="mb-4">
-                            <InputLabel for="apellidoPaterno" value="Apellido Paterno" />
-
-                            <TextInput
-                                id="apellidoPaterno"
-                                type="text"
-                                class="mt-1 block w-full"
-                                v-model="form.apellidoPaterno"
-                                required
-                                autofocus
-                                autocomplete="apellidoPaterno"
-                            />
-
-                            <InputError class="mt-2" :message="form.errors.apellidoPaterno" />
-                        </div>
-
-                        <!--Input de Apellido Materno-->
-                        <div class="mb-4">
-                            <InputLabel for="apellidoMaterno" value="Apellido Materno" />
-
-                            <TextInput
-                                id="apellidoMaterno"
-                                type="text"
-                                class="mt-1 block w-full"
-                                v-model="form.apellidoMaterno"
-                                required
-                                autofocus
-                                autocomplete="apellidoMaterno"
-                            />
-
-                            <InputError class="mt-2" :message="form.errors.apellidoMaterno" />
-                        </div>
-
-                        <!--Input de Telefono-->
-                        <div class="mb-4">
-                            <InputLabel for="telefono" value="Telefono" />
-
-                            <TextInput
-                                id="telefono"
-                                type="text"
-                                class="mt-1 block w-full"
-                                v-model="form.telefono"
-                                required
-                                autofocus
-                                autocomplete="telefono"
-                            />
-
-                            <InputError class="mt-2" :message="form.errors.telefono" />
-                        </div>
-
-                        <!--Input de Fecha de Nacimiento-->
-                        <div class="mb-4">
-                            <InputLabel for="fecha_de_nacimiento" value="Fecha de Nacimiento" />
-
-                            <TextInput
-                                id="fecha_de_nacimiento"
-                                type="date"
-                                class="mt-1 block w-full"
-                                v-model="form.fecha_de_nacimiento"
-                                required
-                                autofocus
-                                autocomplete="fecha_de_nacimiento"
-                            />
-
-                            <InputError class="mt-2" :message="form.errors.fecha_de_nacimiento" />
-                        </div>
-
-                        <!--Input de Email-->
-                        <div class="mb-4">
-                            <InputLabel for="email" value="Email" />
-
-                            <TextInput
-                                id="email"
-                                type="email"
-                                class="mt-1 block w-full"
-                                v-model="form.email"
-                                required
-                                autocomplete="username"
-                            />
-
-                            <InputError class="mt-2" :message="form.errors.email" />
-                        </div>
-
-                        <!--Input de Password-->
-                        <div class="mb-4">
-                            <InputLabel for="password" value="Password" />
-
-                            <TextInput
-                                id="password"
-                                type="password"
-                                class="mt-1 block w-full"
-                                v-model="form.password"
-                                required
-                                autocomplete="new-password"
-                            />
-
-                            <InputError class="mt-2" :message="form.errors.password" />
-                        </div>
-
-                        <!--Input de Confirm Password-->
-                        <div class="mb-4">
-                            <InputLabel for="password_confirmation" value="Confirm Password" />
-
-                            <TextInput
-                                id="password_confirmation"
-                                type="password"
-                                class="mt-1 block w-full"
-                                v-model="form.password_confirmation"
-                                required
-                                autocomplete="new-password"
-                            />
-
-                            <InputError class="mt-2" :message="form.errors.password_confirmation" />
-                        </div>
-
-                        <!--Checkbox de contrato-->
-                        <div class="mb-4">
-                            <Checkbox
-                                id="acepto_contrato"
-                                v-model="form.acepto_contrato"
-                                name="acepto_contrato"
-                                value=1
-                                unchecked-value=0
-                            ></Checkbox>
-                            <span>   He leído y Acepto el Contrato <strong style="visibility:hidden;">{{ form.acepto_contrato }}</strong></span>
+                        <InputError class="mt-2" :message="form.errors.apellidoPaterno" />
+                    </div>
+                </div>
                 
-                            <InputError class="mt-2" :message="form.errors.acepto_contrato" />
-                        </div>
+            </div>
 
-                        <!--Button de Registro Acceso-->
-                        <div class="mb-4" align="right">
-                            <Link
-                                :href="route('login')"
-                                class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                            >
-                                ¿Ya tienes Cuenta?
-                            </Link>
-                            <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" style="background: #0065b5;">
-                                <font-awesome-icon icon="user-plus" />&nbspRegistrarse
-                            </PrimaryButton>
-                        </div>   
-                    </form>
+            <div class="-mx-3 md:flex">
+
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <!--Input de Apellido Materno-->
+                    <div class="mb-4">
+                        <InputLabel for="apellidoMaterno" value="Apellido Materno" />
+
+                        <TextInput
+                            id="apellidoMaterno"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.apellidoMaterno"
+                            required
+                            autofocus
+                            autocomplete="apellidoMaterno"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.apellidoMaterno" />
+                    </div>
+                </div>
+
+                <div class="md:w-1/2 px-3">
+                    <!--Input de Telefono-->
+                    <div class="mb-4">
+                        <InputLabel for="telefono" value="Teléfono" />
+
+                        <TextInput
+                            id="telefono"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.telefono"
+                            required
+                            autofocus
+                            autocomplete="telefono"
+                            maxlength="10" 
+                            pattern="[0-9]+"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.telefono" />
+                    </div>
                 </div>
             </div>
+
+            <div class="-mx-3 md:flex">
+
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <!--Input de Fecha de Nacimiento-->
+                    <div class="mb-4">
+                        <InputLabel for="fecha_de_nacimiento" value="Fecha de Nacimiento" />
+
+                        <TextInput
+                            id="fecha_de_nacimiento"
+                            type="date"
+                            class="mt-1 block w-full"
+                            v-model="form.fecha_de_nacimiento"
+                            required
+                            autofocus
+                            autocomplete="fecha_de_nacimiento"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.fecha_de_nacimiento" />
+                    </div>
+                </div>
+
+                <div class="md:w-1/2 px-3">
+                    <!--Input de Email-->
+                    <div class="mb-4">
+                        <InputLabel for="email" value="Correo Electrónico" />
+
+                        <TextInput
+                            id="email"
+                            type="email"
+                            class="mt-1 block w-full"
+                            v-model="form.email"
+                            required
+                            placeholder="usuario@gmail.com"
+                            autocomplete="username"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.email" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="-mx-3 md:flex">
+
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <!--Input de Password-->
+                    <div class="mb-4">
+                        <InputLabel for="password" value="Contraseña" />
+
+                        <TextInput
+                            id="password"
+                            type="password"
+                            class="mt-1 block w-full"
+                            v-model="form.password"
+                            required
+                            placeholder="***********"
+                            autocomplete="new-password"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.password" />
+                    </div>
+                </div>
+
+                <div class="md:w-1/2 px-3">
+                    <!--Input de Confirm Password-->
+                    <div class="mb-4">
+                        <InputLabel for="password_confirmation" value="Confirmar Contraseña" />
+
+                        <TextInput
+                            id="password_confirmation"
+                            type="password"
+                            class="mt-1 block w-full"
+                            v-model="form.password_confirmation"
+                            required
+                            placeholder="***********"
+                            autocomplete="new-password"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                    </div>
+                </div>
+            </div>
+
+            <!--Checkbox de contrato-->
+            <div class="mb-4">
+                <Checkbox
+                    id="acepto_contrato"
+                    v-model="form.acepto_contrato"
+                    name="acepto_contrato"
+                    value=1
+                    unchecked-value=0
+                ></Checkbox>
+                <span>&nbsp&nbsp<ModalContrato /><strong style="visibility:hidden;">{{ form.acepto_contrato }}</strong></span>
+                    
+                <InputError class="mt-2" :message="form.errors.acepto_contrato" />
+            </div>
+
+            <!--Button de Registro Acceso-->
+            <div class="mb-4" align="right">
+                <Link
+                    :href="route('login')"
+                    class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                >
+                    ¿Ya tienes Cuenta?
+                </Link>
+                <PrimaryButton class="ml-4 bg-blue-950" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Registrarse
+                </PrimaryButton>
+            </div> 
         </div>
-    </div>
+    </form>
 
     <!-- Footer -->
     <footer class="bg-blue-950 dark:bg-gray-900 border-top">
@@ -278,7 +307,7 @@ const submit = () => {
                     <div class="flex flex-col items-center">
                         <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"><font-awesome-icon icon="phone" /> +52 (222) 888 8526</h6>
                         <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500 text-center"><font-awesome-icon icon="location-dot" /> Cerrada Allende 6, 72710 San Lorenzo Almecatla, Pue.</h6>
-                        <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"><font-awesome-icon icon="envelope" /> iesa@gmail.com</h6>
+                        <h6 class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"><font-awesome-icon icon="fa-solid fa-envelope" /> iesa@gmail.com</h6>
                     </div>
                 </div>
 
@@ -307,5 +336,4 @@ const submit = () => {
             </div>
         </div>
     </footer>
-
 </template>
