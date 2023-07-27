@@ -47,12 +47,12 @@ const submit = () => {
                         autofocus
                     />
 
-                    <InputError class="mt-2" :message="form.errors.email" />
+                    <InputError class="mt-2" :message="form.errors.password" />
                 </div>
                
                 <div class="flex items-center justify-end mt-4">
                     <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" style="background: #0065b5;">
-                        <font-awesome-icon icon="circle-check" /> &nbspConfirmar Contraseña
+                        <font-awesome-icon icon="circle-check" /> &nbspConfirmar
                     </PrimaryButton>
                 </div>
             </div>

@@ -25,10 +25,10 @@ const form = useForm({
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
+            <h2 class="text-lg font-medium text-gray-900">Información del Perfil</h2>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Update your account's profile information and email address.
+            <p class="mt-1 text-sm text-gray-600">
+                Actualice la información de perfil y la dirección de correo electrónico de su cuenta.
             </p>
         </header>
 
@@ -45,6 +45,7 @@ const form = useForm({
                     required
                     autofocus
                     autocomplete="nombre"
+                    maxlength="50"
                 />
 
                 <InputError class="mt-2" :message="form.errors.nombre" />
@@ -61,6 +62,7 @@ const form = useForm({
                     required
                     autofocus
                     autocomplete="apellidoPaterno"
+                    maxlength="50"
                 />
 
                 <InputError class="mt-2" :message="form.errors.apellidoPaterno" />
@@ -77,6 +79,7 @@ const form = useForm({
                     required
                     autofocus
                     autocomplete="apellidoMaterno"
+                    maxlength="50"
                 />
 
                 <InputError class="mt-2" :message="form.errors.apellidoMaterno" />
@@ -93,13 +96,14 @@ const form = useForm({
                     required
                     autofocus
                     autocomplete="telefono"
+                    maxlength="10"
                 />
 
                 <InputError class="mt-2" :message="form.errors.telefono" />
             </div>
 
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Correo Electrónico" />
 
                 <TextInput
                     id="email"
@@ -108,37 +112,38 @@ const form = useForm({
                     v-model="form.email"
                     required
                     autocomplete="username"
+                    maxlength="60"
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
-                <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                    Your email address is unverified.
+                <p class="text-sm mt-2 text-gray-800">
+                    Su dirección de correo electrónico no está verificada.
                     <Link
                         :href="route('verification.send')"
                         method="post"
                         as="button"
-                        class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Click here to re-send the verification email.
+                    Haga clic aquí para volver a enviar el correo electrónico de verificación.
                     </Link>
                 </p>
 
                 <div
                     v-show="status === 'verification-link-sent'"
-                    class="mt-2 font-medium text-sm text-green-600 dark:text-green-400"
+                    class="mt-2 font-medium text-sm text-green-600"
                 >
-                    A new verification link has been sent to your email address.
+                Se ha enviado un nuevo enlace de verificación a su dirección de correo electrónico.
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <PrimaryButton :disabled="form.processing">Guardar</PrimaryButton>
 
                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Guardado.</p>
                 </Transition>
             </div>
         </form>

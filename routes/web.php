@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/show/{noticia}', [NoticiaController::class, 'createComment'])->name('dashboard.createComment');
     Route::get('/dashboard/{noticia}', [NoticiaController::class, 'showComment'])->name('dashboard.showComment');
     Route::post('/dashboard/show', [NoticiaController::class, 'saveComment'])->name('dashboard.saveComment');
+    Route::get('/dashboard/{postId}/comments_summary', [NoticiaController::class, 'getCount']);
 
     //Arreglar la ruta de las reacciones
     Route::post('/dashboard/{postId}/reactions', [PostVoteController::class, 'store']);
@@ -93,9 +94,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/personas/show/user/{id}', [PersonasController::class, 'showProfile'])->name('personas.showProfile');
     Route::get('/personas/showUser/{id}', [PersonasController::class, 'showUser'])->name('personas.showUser');
     Route::get('/personas/showPost/{id}', [PersonasController::class, 'showPost'])->name('personas.showPost');
-    Route::get('/personas/showComment/{id}', [PersonasController::class, 'showComment'])->name('personas.showComment');
-    Route::get('/personas/createComment/{id}', [PersonasController::class, 'createComment'])->name('personas.createComment');
-    Route::post('/personas/createComment', [PersonasController::class, 'saveComment'])->name('personas.saveComment');
     Route::get('/personas/show/deudas/{id}', [PersonasController::class, 'deudas'])->name('personas.deudas');
     Route::get('/personas/showDeuda/{id}', [PersonasController::class, 'showDeuda'])->name('personas.showDeuda');
     Route::get('/personas/showComment/Deuda/{id}', [PersonasController::class, 'showCommentDeudas'])->name('personas.showCommentDeudas');

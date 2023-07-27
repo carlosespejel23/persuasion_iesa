@@ -52,6 +52,7 @@ class NoticiaController extends Controller
             'users.nombre', 
             'users.apellidoPaterno', 
             'users.apellidoMaterno', 
+            'users.profile_image',
             'posts.contenido', 
             'posts.estado', 
             'posts.post_anonimo', 
@@ -81,7 +82,8 @@ class NoticiaController extends Controller
             'comentarios.updated_at',
             'users.nombre',
             'users.apellidoPaterno',
-            'users.apellidoMaterno'
+            'users.apellidoMaterno',
+            'users.profile_image',
         )
         ->orderBy('comentarios.created_at', 'desc')
         ->get();
@@ -103,5 +105,20 @@ class NoticiaController extends Controller
         $comentario = Comentario::create($request->validated());
 
         return Redirect::route('dashboard'); //aqui se pueden direccionar ventanas modales
+    }
+
+    //Cuenta los comentarios de una noticia
+    public function getCount($postId)
+    {
+        $comentarios = Noticia::findOrFail($postId);
+
+        // Actualiza las estadísticas de los comentarios del post
+        $commentsSummary = DB::table('comentarios')
+            ->select('posts_id', DB::raw('COUNT(*) as count'))
+            ->where('posts_id', '=', $postId)
+            ->groupBy('posts_id')
+            ->pluck('count', 'posts_id');
+
+        return response()->json(['comments_summary' => $commentsSummary]);
     }
 }

@@ -10,10 +10,10 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { usePage } from '@inertiajs/vue3';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faThumbsUp} from '@fortawesome/free-solid-svg-icons';
+import {faThumbsUp, faShare} from '@fortawesome/free-solid-svg-icons';
 import {faCircleCheck} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faThumbsUp, faCircleCheck);
+library.add(faThumbsUp, faCircleCheck, faShare);
 
 //Actualiza el nombre de los emojis
 const page = usePage();
@@ -43,7 +43,7 @@ const submit = () => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
                 Sección de Configuración
             </h2>
         </template>
@@ -55,7 +55,7 @@ const submit = () => {
                 <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
 
                     <center>
-                       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bot%C3%B3n_Me_gusta.svg/1200px-Bot%C3%B3n_Me_gusta.svg.png" width="100" /> 
+                       <img src="/images/like_reacted.png" width="100" /> 
                     </center>
 
                     <div class="space-x-4 p-6 bg-white py-4 text-center">
@@ -78,7 +78,7 @@ const submit = () => {
                 <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
 
                     <center>
-                        <img src="https://i.pinimg.com/236x/1a/55/94/1a55942a043629f29df82ba57103e0bc.jpg" width="100"/>
+                        <img src="/images/dislike_reacted.png" width="85"/>
                     </center>
 
                     <div class="space-x-4 p-6 bg-white py-4 text-center">
@@ -101,7 +101,7 @@ const submit = () => {
                 <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
 
                     <center>
-                        <img src="https://definicion.de/wp-content/uploads/2010/08/comentario-1.png" width="100"/>
+                        <img src="/images/comentarios.png" width="100"/>
                     </center>
 
                     <div class="space-x-4 p-6 bg-white py-4 text-center">
@@ -124,7 +124,7 @@ const submit = () => {
                 <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
 
                     <center>
-                        <img src="https://cdn-icons-png.flaticon.com/512/25/25702.png" width="100"/>
+                        <font-awesome-icon :icon="['fas', 'share']" size="5x"/>
                     </center>
 
                     <div class="space-x-4 p-6 bg-white py-4 text-center">
@@ -149,7 +149,7 @@ const submit = () => {
             <div class="flex items-center gap-4 justify-center mt-4">
                 <PrimaryButton :disabled="form.processing" class="bg-blue-950">Actualizar Cambios</PrimaryButton>
                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Cambios Guardados <font-awesome-icon icon="fa-regular fa-circle-check" /></p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Cambios Guardados <font-awesome-icon icon="fa-regular fa-circle-check" /></p>
                 </Transition>
             </div>
 

@@ -2,11 +2,12 @@
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import FileInput from '@/Components/FileInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
+import { useForm, usePage } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
 import axios from 'axios';
+import Modal from '@/Components/Modal.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 defineProps<{
     mustVerifyEmail?: Boolean;
@@ -27,13 +28,11 @@ const formData = new FormData();
 
 const handleProfileImageChange = (event: { target: { files: any[]; }; }) => {
   const file = event.target.files[0];
-  console.log(file);
 
   const allowedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png'];
   const fileType = file.type;
 
   if (!allowedMimeTypes.includes(fileType.toLowerCase())) {
-    console.error('El tipo de archivo no está permitido. Solo se aceptan archivos JPEG, JPG o PNG.');
     return;
   }
 
@@ -77,19 +76,61 @@ const submit = async () => {
     });
 
   } catch (error) {
-    console.error(error);
   }
 };
 
+// Estado de las ventanas modales
+const showModalEmpty = ref(false);
+const showModalUploaded = ref(false);
+
+// Función para manejar el clic en el botón de guardar
+const handleSaveClick = () => {
+  if (form.profile_image !== null && Object.keys(form.profile_image).length !== 0) {
+    // Mostrar la ventana modal de "¡Ups, no has seleccionado nada! :("
+    showModalEmpty.value = true;
+  } else {
+    // Mostrar la ventana modal de "Ya está subiendo tu nueva foto de perfil"
+    showModalUploaded.value = true;
+  }
+};
+
+// Funciones para cerrar las ventanas modales
+const closeModalEmpty = () => {
+  showModalEmpty.value = false;
+};
+
+const closeModalUploaded = () => {
+  showModalUploaded.value = false;
+};
 </script>
+
+<style>
+.div-container {
+  max-width: 300px;
+  height: 300px; /* Puedes ajustar la altura según tus necesidades */
+}
+
+.profile-image-containers {
+  width: 300px; /* Ajusta el tamaño según tus necesidades */
+  height: 300px; /* Ajusta el tamaño según tus necesidades */
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-images {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
 
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Foto de Perfil</h2>
+            <h2 class="text-lg font-medium text-gray-900">Foto de Perfil</h2>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Update your account's profile photo.
+            <p class="mt-1 text-sm text-gray-600">
+              Actualiza la foto de perfil de tu cuenta.
             </p>
         </header>
 
@@ -97,15 +138,15 @@ const submit = async () => {
 
             <div>
 
-                <div class="mt-4 card shadow-lg">
-                  <div class="card-body py-4">
-                      <div class="row">
-                        <div class="col-12 col-md-3 px-0 text-center">
-                            <img :src="selectedImage" class="align-self-center mb-4 mb-md-0 rounded-square" /> <!--Redondea la img-->
-                        </div>
-                      </div>
+              <div class="mt-4 card">
+                <div class="py-4">
+                  <div class="d-flex justify-content-center align-items-center div-container">
+                    <div class="profile-image-containers">
+                      <img :src="selectedImage" class="profile-images" />
+                    </div>
                   </div>
                 </div>
+              </div>
 
                 <InputLabel for="profile_image" />
 
@@ -125,18 +166,39 @@ const submit = async () => {
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
-
-                <!--Aqui quiero que muestres al usuario una ventana modal para que asegure que ya se esta subiendo su foto, porque este 
-                componente ya no me sirve. Si puedes arreglarlo, tambien es valido-->
-
-                <!--El componente de aqui abajo es el que no sirve-->
-
-                <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
-                </Transition> 
-
+                <PrimaryButton :disabled="form.processing"  @click="handleSaveClick" style="cursor: pointer;">Guardar</PrimaryButton>
             </div>
+
+            <!-- Ventana modal 1: Cuando el input está vacío -->
+            <Modal :show="showModalEmpty" @close="closeModalEmpty">
+              <div class="p-6">
+                <h2 class="text-lg font-medium text-gray-900">
+                  ¡Ups, no has seleccionado nada! :(
+                </h2>
+                <p class="mt-1 text-sm text-gray-600">
+                  Selecciona una foto de perfil válida.
+                </p>
+                <div class="mt-6 flex justify-end">
+                  <SecondaryButton @click="closeModalEmpty">Cerrar</SecondaryButton>
+                </div>
+              </div>
+            </Modal>
+
+            <!-- Ventana modal 2: Cuando ya hay una foto cargada -->
+            <Modal :show="showModalUploaded" @close="closeModalUploaded">
+              <div class="p-6">
+                <h2 class="text-lg font-medium text-gray-900">
+                  ¡Excelente!
+                </h2>
+                <p class="mt-1 text-sm text-gray-600">
+                  Ya estás subiendo tu nueva foto de perfil.
+                </p>
+                <div class="mt-6 flex justify-end">
+                  <SecondaryButton @click="closeModalUploaded">Cerrar</SecondaryButton>
+                </div>
+              </div>
+            </Modal>
+
         </form>
     </section>
 </template>

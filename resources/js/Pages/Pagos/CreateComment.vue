@@ -96,9 +96,9 @@ onMounted(async () => {
 
                         <div class="py-3" v-for="(comentario, id) in cad">
                             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 border-2 rounded-md border-blue-950">
-                                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">Fecha: {{ comentario.created_at }}</div>
-                                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">Contenido: {{ comentario.comentario }}</div>
+                                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                                    <div class="p-2 text-gray-900" :key="id">Fecha: {{ comentario.created_at }}</div>
+                                    <div class="p-2 text-gray-900" :key="id">{{ comentario.comentario }}</div>
                                 </div>
                             </div>
                         </div>

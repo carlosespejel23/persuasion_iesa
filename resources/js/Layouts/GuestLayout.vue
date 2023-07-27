@@ -7,7 +7,7 @@ import { Link } from '@inertiajs/vue3';
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-white dark:bg-gray-900">
         <div>
             <Link href="/">
-                <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
+                <img src="https://persuacion.000webhostapp.com/logotipo.png" alt="" width="200">
             </Link>
         </div>
 

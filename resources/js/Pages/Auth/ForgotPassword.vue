@@ -60,7 +60,7 @@ const submit = () => {
     <div class="max-w-lg mx-auto my-10 bg-white p-10 rounded-xl border">
 
         <h1 class="text-4xl font-medium text-center text-black">Recuperar Contraseña</h1>
-        <p class="text-slate-500 text-center text-black">
+        <p class="text-center text-black">
             Ingresa el correo electrónico para recuperar tu cuenta, al recibir el enlace en tu correo sigue los pasos para restablecerla.
         </p>
         <form @submit.prevent="submit">

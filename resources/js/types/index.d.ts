@@ -17,6 +17,7 @@ export interface Noticia {
     nombre: string
     apellidoPaterno: string,
     apellidoMaterno: string,
+    profile_image: string;
     slug: string;
     contenido: string;
     estado: number;
@@ -32,6 +33,7 @@ export interface Comentarios {
     nombre: string
     apellidoPaterno: string,
     apellidoMaterno: string,
+    profile_image: string;
     contenido: string;
     estado: number;
     created_at: string;

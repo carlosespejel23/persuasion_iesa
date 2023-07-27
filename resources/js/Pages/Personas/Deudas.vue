@@ -40,41 +40,65 @@ const redirectToComment = (id: number) => {
 };
 </script>
 
+<style>
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Template del nombre del usuario */
+.profile-image-containers {
+  width: 60px; 
+  height: 60px; 
+  border-radius: 50%;
+  overflow: hidden;
+}
+</style>
+
 <template>
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
         <template #header>
-            <!--Le agregas la foto de perfil, y le pones formato pa' que se vea vrgas-->
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Perfil del usuario: {{ user?.nombre }} {{ user?.apellidoPaterno }} {{ user?.apellidoMaterno }}</h2>
+          <div class="flex items-center">
+            <div class="profile-image-containers">
+              <img :src="user?.profile_image" class="profile-image" />
+            </div>&nbsp;&nbsp;&nbsp;
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ user?.nombre }} {{ user?.apellidoPaterno }} {{ user?.apellidoMaterno }}</h2>
+          </div>
         </template>
 
-        <!--Aqui va el componente de la noticia, nomas los acomodas en una tarjeta-->
+        <!--Aqui va la info del usuario-->
         <div class="py-3">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">INFORMACION</div>
-                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">Correo Electronico: {{ user?.email }}</div>
-                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">Telefono: {{ user?.telefono }}</div>
-                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">Se unio: {{ user?.created_at }}</div>
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-2 text-gray-900" :key="id">INFORMACION</div>
+                    <div class="p-2 text-gray-900" :key="id">Correo Electronico: {{ user?.email }}</div>
+                    <div class="p-2 text-gray-900" :key="id">Telefono: {{ user?.telefono }}</div>
+                    <div class="p-2 text-gray-900" :key="id">Se unio: {{ user?.created_at }}</div>
                 </div>
             </div>
         </div>
 
         <!--Si quieres aqui haces un mini menu-->
-        <a @click="redirectToDeudas(user.id)" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+        <a @click="redirectToDeudas(user.id)" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Sección Deudas
         </a><br>
-        <a @click="redirectToPerfil(user.id)" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+        <a @click="redirectToPerfil(user.id)" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Publicaciones
         </a>
 
         <hr>
         <br>
 
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">Deudores y Pagos</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">Deudores y Pagos</h2><br>
 
-        <!--Aqui va el componente de la noticia, nomas los acomodas en una tarjeta-->
+        <div v-if="deudas.length === 0">
+          <h1 class="mt-4 text-lg text-gray-700 text-center">Este usuario aún no tiene deudores y pagos :(</h1>
+        </div>
+
+        <!--Aqui va el componente de la deuda, nomas los acomodas-->
         <div class="py-3" v-for="(deudor, id) in deudas">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">

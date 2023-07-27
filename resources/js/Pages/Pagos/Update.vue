@@ -58,7 +58,7 @@ const redirectToPost = (id: number) => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
                 Sección Actualización de Pagos
             </h2>
         </template>
@@ -91,28 +91,28 @@ const redirectToPost = (id: number) => {
                                         <PrimaryButton :disabled="form.processing" class="bg-green-400 hover:bg-green-950">Actualizar Pago</PrimaryButton>
 
                                         <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                                            <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Cobrado</p>
+                                            <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Cobrado</p>
                                         </Transition>
                                     </div>
                                     
                                     <br>
 
-                                    <div class="p-2 text-gray-900 dark:text-gray-100" v-if="cantidadRestante <= 0">
+                                    <div class="p-2 text-gray-900" v-if="cantidadRestante <= 0">
                                         <p>Pago completado.</p>
                                     </div>
 
                                     <!-- Muestra la cantidad restante cuando no se haya completado el pago -->
-                                    <div class="p-2 text-gray-900 dark:text-gray-100" v-else>
+                                    <div class="p-2 text-gray-900" v-else>
                                         <p>Cantidad restante: ${{ cantidadRestante.toFixed(2) }}</p>
                                     </div>
 
-                                    <div class="p-2 text-gray-900 dark:text-gray-100">
+                                    <div class="p-2 text-gray-900">
                                         <p>Monto a pagar: ${{ deudor?.monto_a_pagar }}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <a @click="redirectToPost(deudor.id)" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                            <a @click="redirectToPost(deudor.id)" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 <div align="center">
                                     <font-awesome-icon icon="fa-solid fa-comments" class="facom"/>
                                 </div>

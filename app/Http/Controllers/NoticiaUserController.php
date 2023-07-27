@@ -27,9 +27,11 @@ class NoticiaUserController extends Controller
             'users.nombre',
             'users.apellidoPaterno',
             'users.apellidoMaterno',
+            'users.profile_image',
             'posts.contenido',
             'posts.created_at'
         )
+        ->orderBy('posts.created_at', 'desc')
         ->get();
 
         return response()->json($post);

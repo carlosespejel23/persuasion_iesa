@@ -45,6 +45,7 @@ const submit = () => {
     </Head>
 
     <GuestLayout>
+        <br><br>
 
         <form @submit.prevent="submit">
 
@@ -77,6 +78,7 @@ const submit = () => {
                                                 required
                                                 autofocus
                                                 autocomplete="nombre"
+                                                maxlength="50"
                                             />
 
                                             <InputError class="mt-2" :message="form.errors.nombre" />
@@ -93,6 +95,7 @@ const submit = () => {
                                                 required
                                                 autofocus
                                                 autocomplete="apellidoPaterno"
+                                                maxlength="50"
                                             />
 
                                             <InputError class="mt-2" :message="form.errors.apellidoPaterno" />
@@ -109,6 +112,7 @@ const submit = () => {
                                                 required
                                                 autofocus
                                                 autocomplete="apellidoMaterno"
+                                                maxlength="50"
                                             />
 
                                             <InputError class="mt-2" :message="form.errors.apellidoMaterno" />
@@ -125,6 +129,7 @@ const submit = () => {
                                                 required
                                                 autofocus
                                                 autocomplete="telefono"
+                                                maxlength="10"
                                             />
 
                                             <InputError class="mt-2" :message="form.errors.telefono" />
@@ -140,6 +145,7 @@ const submit = () => {
                                                 v-model="form.email"
                                                 required
                                                 autocomplete="email"
+                                                maxlength="60"
                                             />
 
                                             <InputError class="mt-2" :message="form.errors.email" />

@@ -34,6 +34,7 @@ class PersonasController extends Controller
             'users.nombre',
             'users.apellidoPaterno',
             'users.apellidoMaterno',
+            'users.profile_image',
         )
         ->where('users.id', '!=', $userId)
         ->orderBy('users.created_at', 'desc')
@@ -58,6 +59,7 @@ class PersonasController extends Controller
             'users.nombre',
             'users.apellidoPaterno',
             'users.apellidoMaterno',
+            'users.profile_image',
             'users.email',
             'users.telefono',
             'users.fecha_de_nacimiento',
@@ -80,10 +82,12 @@ class PersonasController extends Controller
             'users.nombre',
             'users.apellidoPaterno',
             'users.apellidoMaterno',
+            'users.profile_image',
             'posts.contenido',
             'posts.created_at'
         )
         ->where('users.id', '=', $id)
+        ->orderBy('posts.created_at', 'desc')
         ->get();
 
         return response()->json($post);
@@ -101,7 +105,8 @@ class PersonasController extends Controller
             'comentarios.created_at',
             'users.nombre',
             'users.apellidoPaterno',
-            'users.apellidoMaterno'
+            'users.apellidoMaterno',
+            'users.profile_image'
         )
         ->orderBy('comentarios.created_at', 'desc')
         ->get();
@@ -151,6 +156,7 @@ class PersonasController extends Controller
             'deudores.created_at'
         )
         ->where('users.id', '=', $id)
+        ->orderBy('deudores.created_at', 'desc')
         ->get();
 
         return response()->json($deuda);
