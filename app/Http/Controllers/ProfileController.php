@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Deudor;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -93,5 +94,15 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function checkEmailExists(Request $request)
+    {
+        $user = $request->user();
+        $emailExists = Deudor::where('email', $user->email)
+        ->orWhere('telefono', $user->telefono)
+        ->exists();
+
+        return response()->json(['emailExists' => $emailExists]);
     }
 }
