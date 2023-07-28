@@ -36,11 +36,16 @@ Route::get('/', function () {
 
 //Panel de noticias principal
 Route::get('/dashboard', [NoticiaController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard/showAll', [NoticiaController::class, 'showAll'])->name('dashboard.showAll');
 
 //Noticia compartida
 Route::get('/noticia/{slug}', [NoticiaCompartidaController::class, 'index'])->name('noticia.share');
 Route::get('/noticia/cj-json-post/share/{slug}', [NoticiaCompartidaController::class, 'showPost']);
 Route::get('/noticia/cj-json-post-comment/share/{slug}', [NoticiaCompartidaController::class, 'showComment']);
+
+//Ruta de las reacciones
+Route::get('/dashboard/{postId}/reactions-summary', [PostVoteController::class, 'getCount']);
+Route::get('/dashboard/{postId}/comments_summary', [NoticiaController::class, 'getCount']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -51,15 +56,12 @@ Route::middleware('auth')->group(function () {
     //Sección Noticias
     Route::get('/dashboard/create', [NoticiaController::class, 'createPost'])->name('dashboard.create');
     Route::post('/dashboard/create', [NoticiaController::class, 'savePost'])->name('dashboard.save');
-    Route::get('/dashboard/showAll', [NoticiaController::class, 'showAll'])->name('dashboard.showAll');
     Route::get('/dashboard/show/{noticia}', [NoticiaController::class, 'createComment'])->name('dashboard.createComment');
     Route::get('/dashboard/{noticia}', [NoticiaController::class, 'showComment'])->name('dashboard.showComment');
     Route::post('/dashboard/show', [NoticiaController::class, 'saveComment'])->name('dashboard.saveComment');
-    Route::get('/dashboard/{postId}/comments_summary', [NoticiaController::class, 'getCount']);
 
-    //Arreglar la ruta de las reacciones
+    //Ruta de las reacciones
     Route::post('/dashboard/{postId}/reactions', [PostVoteController::class, 'store']);
-    Route::get('/dashboard/{postId}/reactions-summary', [PostVoteController::class, 'getCount']);
 
     //Sección Deudores
     Route::get('/deudores', [DeudorController::class, 'index'])->name('deudores');

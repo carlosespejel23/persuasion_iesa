@@ -35,7 +35,6 @@ export interface Comentarios {
     apellidoMaterno: string,
     profile_image: string;
     contenido: string;
-    estado: number;
     created_at: string;
     updated_at: string;
 }

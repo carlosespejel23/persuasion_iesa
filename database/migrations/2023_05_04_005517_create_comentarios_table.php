@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('posts_id');
             $table->foreign('posts_id', 'fk_comentario_post')->references('id')->on('posts')->onDelete('cascade')->onUpdate('restrict');
             $table->text('contenido');
-            $table->boolean('estado')->default(1);
             $table->timestamps();
         });
     }

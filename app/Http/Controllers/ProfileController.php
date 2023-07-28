@@ -45,7 +45,7 @@ class ProfileController extends Controller
     public function storePhoto(Request $request): RedirectResponse
     {
         $request->validate([
-            'profile_image' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:5120'],
+            'profile_image' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:3120'],
         ]);
 
         $user = $request->user();

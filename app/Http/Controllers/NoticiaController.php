@@ -6,6 +6,7 @@ use App\Http\Requests\ValidarComentario;
 use App\Http\Requests\ValidarPost;
 use App\Models\Comentario;
 use App\Models\Noticia;
+use App\Models\Reaction;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,15 +18,12 @@ class NoticiaController extends Controller
     public function index(){
         $noticias = Noticia::all();
         $comentarios = Comentario::all();
-
-        if ($noticias->isEmpty() && $comentarios->isEmpty()) {
-            $noticias = null;
-            $comentarios = null;
-        }
+        $reacciones = Reaction::all();
 
         return Inertia::render('Dashboard', [
             'noticias' => $noticias,
-            'comentarios' => $comentarios
+            'comentarios' => $comentarios,
+            'reactions_summary' => $reacciones
         ]);
     }
 
@@ -53,11 +51,9 @@ class NoticiaController extends Controller
             'users.apellidoPaterno', 
             'users.apellidoMaterno', 
             'users.profile_image',
-            'posts.contenido', 
-            'posts.estado', 
+            'posts.contenido',
             'posts.post_anonimo', 
-            'posts.created_at', 
-            'posts.updated_at'
+            'posts.created_at'
         )
         ->orderBy('posts.created_at', 'desc')
         ->get();
@@ -77,9 +73,7 @@ class NoticiaController extends Controller
             'comentarios.usuarios_id',
             'comentarios.posts_id',
             'comentarios.contenido',
-            'comentarios.estado',
             'comentarios.created_at',
-            'comentarios.updated_at',
             'users.nombre',
             'users.apellidoPaterno',
             'users.apellidoMaterno',

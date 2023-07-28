@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreign('usuarios_id', 'fk_post_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('slug')->unique();
             $table->text('contenido');
-            $table->boolean('estado')->default(1);
             $table->boolean('post_anonimo');
             $table->timestamps();
         });

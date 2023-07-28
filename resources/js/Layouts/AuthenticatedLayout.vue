@@ -200,7 +200,7 @@ const selectedImage = ref<string | ArrayBuffer | null>(user.profile_image);
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="bg-gray-100">
                 <slot />
             </main>
         </div>

@@ -9,13 +9,16 @@ import {faAddressCard} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(faAddressCard);
 
+// Establecemos el límite máximo de noticias a mostrar
+const maxPostsToShow = 50;
+
 //Esto es para extraer los datos de deudores
 const item = ref<User[]>([]);
 
 onMounted(async () => {
   try {
     const response = await axios.get('/personas/show');
-    item.value = response.data;
+    item.value = response.data.slice(0, maxPostsToShow);
   } catch (error) {
     console.error(error);
   }
