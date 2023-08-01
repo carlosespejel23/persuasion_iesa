@@ -44,6 +44,10 @@ const redirectToPost = (id: number) => {
   border-radius: 50%;
   overflow: hidden;
 }
+
+#card{
+  border-color: #0065b5;
+}
 </style>
 
 <template>
@@ -56,12 +60,12 @@ const redirectToPost = (id: number) => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">Sección de Personas</h2>
+            <h2 class="font-semibold text-xl text-white leading-tight text-center">Sección de Personas</h2>
         </template>
 
         <div class="mx-auto px-10 py-5 sm:px-6 lg:max-w-7xl lg:px-8">
           <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            <a v-for="(user, id) in item" class="group border-2 border-blue-950 p-5 rounded-lg duration-300 hover:scale-105 hover:shadow-xl bg-white">
+            <a v-for="(user, id) in item" class="group border-2 border-blue-950 p-5 rounded-lg duration-300 hover:scale-105 hover:shadow-xl bg-white" id="card">
               <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
                 <center>
                   <div class="profile-image-containers">

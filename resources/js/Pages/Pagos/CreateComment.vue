@@ -50,6 +50,12 @@ onMounted(async () => {
 });
 </script>
 
+<style scoped>
+    .comentar{
+        font-size: large;
+    }
+</style>
+
 <template>
 
     <Head>
@@ -59,8 +65,15 @@ onMounted(async () => {
     </Head>
 
     <GuestLayout>
+
+        <template #header>
+            <h2 class="font-semibold text-xl text-white leading-tight text-center">
+              Comentarios
+            </h2>
+        </template>
+
         <form @submit.prevent="submit">
-            <div class="p-6 bg-white flex items-center justify-center">
+            <div class="p-6 bg-gray-100 flex items-center justify-center">
                 <div>
                     <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 border-2 duration-300 hover:scale-105 hover:shadow-xl">
                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -89,10 +102,15 @@ onMounted(async () => {
 
                             <div class="flex items-center justify-end mt-4">
                                 <PrimaryButton class="ml-4 bg-blue-950" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                    Comentar&nbsp<font-awesome-icon icon="fa-regular fa-comment-dots" />
+                                    Comentar&nbsp<font-awesome-icon icon="fa-regular fa-comment-dots" class="comentar" />
                                 </PrimaryButton>
                             </div>
                         </div>
+
+                        <h2 class="pt-3 pb-2 text-gray-800 text-lg">
+                            Lista de Comentarios
+                        </h2>
+                        <hr>
 
                         <div class="py-3" v-for="(comentario, id) in cad">
                             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 border-2 rounded-md border-blue-950">

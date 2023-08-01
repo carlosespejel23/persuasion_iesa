@@ -6,9 +6,9 @@ import NavLink from '@/components/NavLink.vue';
 import ResponsiveNavLink from '@/components/ResponsiveNavLink.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {faNewspaper, faAddressBook, faIdBadge} from '@fortawesome/free-regular-svg-icons';
-import {faUsers, faGear, faHandHoldingDollar, faMoneyBill} from '@fortawesome/free-solid-svg-icons';
+import {faUsers, faGear, faHandHoldingDollar, faFileInvoiceDollar} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faNewspaper, faUsers, faGear, faHandHoldingDollar, faAddressBook, faMoneyBill, faIdBadge);
+library.add(faNewspaper, faUsers, faGear, faHandHoldingDollar, faAddressBook, faFileInvoiceDollar, faIdBadge);
 import { Link, usePage } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
@@ -35,7 +35,7 @@ const selectedImage = ref<string | ArrayBuffer | null>(user.profile_image);
 
 <template>
     <div>
-        <div class="min-h-screen bg-white">
+        <div class="min-h-screen bg-gray-100">
             <nav class="border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,7 +44,7 @@ const selectedImage = ref<string | ArrayBuffer | null>(user.profile_image);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <img src="https://persuacion.000webhostapp.com/logotipo.png" width="80" />
+                                    <img src="https://persuacion.000webhostapp.com/logotipo.png" width="100" />
                                 </Link>
                             </div>
 
@@ -57,10 +57,10 @@ const selectedImage = ref<string | ArrayBuffer | null>(user.profile_image);
                                     <h1 class="text-gray-800">Deudores&nbsp&nbsp<font-awesome-icon icon="fa-regular fa-id-badge" /></h1>
                                 </NavLink>
                                 <NavLink :href="route('deudas')" :active="route().current('deudas')">
-                                    <h1 class="text-gray-800">Deudas&nbsp&nbsp<font-awesome-icon icon="hand-holding-dollar" /></h1>
+                                    <h1 class="text-gray-800">Deudas&nbsp&nbsp<font-awesome-icon icon="fa-solid fa-file-invoice-dollar" /></h1>
                                 </NavLink>
                                 <NavLink :href="route('pagos')" :active="route().current('pagos')">
-                                    <h1 class="text-gray-800">Pagos&nbsp&nbsp<font-awesome-icon icon="money-bill" /></h1>
+                                    <h1 class="text-gray-800">Pagos&nbsp&nbsp<font-awesome-icon icon="hand-holding-dollar" /></h1>
                                 </NavLink>
                                 <NavLink :href="`/configuracion`" :active="route().current('configuracion.edit')">
                                     <h1 class="text-gray-800">Configuración&nbsp&nbsp<font-awesome-icon icon="gear" /></h1>
@@ -79,7 +79,7 @@ const selectedImage = ref<string | ArrayBuffer | null>(user.profile_image);
                                         <span class="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-800 bg-white hover:text-gray-500 focus:outline-none transition ease-in-out duration-150"
+                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-800 bg-gray-100 hover:text-gray-500 focus:outline-none transition ease-in-out duration-150"
                                             >
                                             <div class="profile-image-container">
                                                 <img :src="selectedImage" class="profile-image" />
@@ -193,8 +193,8 @@ const selectedImage = ref<string | ArrayBuffer | null>(user.profile_image);
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="bg-blue-950 shadow" v-if="$slots.header">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>

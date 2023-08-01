@@ -21,11 +21,16 @@ onMounted(async () => {
 </script>
 
 <template>
+
+    <Head>
+      <title>
+        Comentarios | Persuación
+      </title>
+    </Head>
     <GuestLayout>
-        <Head title="Comentarios" />
 
         <template #header>
-            <h1 class="font-semibold text-xl text-gray-800 leading-tight mx-auto text-center">
+            <h1 class="font-semibold text-xl text-white leading-tight mx-auto text-center">
                 Comentarios sobre los Deudores
             </h1>
         </template>

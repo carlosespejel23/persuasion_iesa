@@ -128,7 +128,7 @@ const getTelegramLink = (noticia: any) => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">Mis Noticias</h2>
+            <h2 class="font-semibold text-xl text-white leading-tight text-center">Mis Noticias</h2>
         </template>
 
         <!--Componente de la noticia-->
@@ -179,25 +179,25 @@ const getTelegramLink = (noticia: any) => {
 
                 <!-- Ventana modal -->
                 <Modal :show="showModal" @close="closeModal">
-                    <div class="p-6">
-                    <h2 class="text-lg font-medium text-gray-900">
+                  <div class="p-6">
+                    <h2 class="text-lg font-medium text-black">
                         Compartir Noticia
                     </h2>
-                    <p class="mt-1 text-sm text-gray-600">
+                    <p class="mt-1 text-sm text-black">
                         Selecciona una red social para compartir la noticia.
 
                         <!-- Botones de compartir -->
                         <div class="p-2 text-gray-900">
-                            <div class="flex items-center">
-                            <a :href="getFacebookShareLink(noticia)"><font-awesome-icon :icon="['fab', 'facebook']" size="3x"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a :href="getTwitterShareLink(noticia)"><font-awesome-icon :icon="['fab', 'twitter']" size="3x"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a :href="getWhatsAppShareLink(noticia)"><font-awesome-icon :icon="['fab', 'whatsapp']" size="3x"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a :href="getGmailLink(noticia)"><font-awesome-icon :icon="['fas', 'envelope']" size="3x"/></a>
-                            <a :href="getTelegramLink(noticia)"><font-awesome-icon :icon="['fab', 'telegram']" size="3x"/></a>
+                            <div class="flex items-center justify-center">
+                            <a :href="getFacebookShareLink(noticia)"><font-awesome-icon :icon="['fab', 'facebook']" size="4x" class="p-4 hover:text-blue-800" /></a>
+                            <a :href="getTwitterShareLink(noticia)"><font-awesome-icon :icon="['fab', 'twitter']" size="4x" class="p-4 hover:text-blue-400" /></a>
+                            <a :href="getWhatsAppShareLink(noticia)"><font-awesome-icon :icon="['fab', 'whatsapp']" size="4x" class="p-4 hover:text-green-500" /></a>
+                            <a :href="getGmailLink(noticia)"><font-awesome-icon :icon="['far', 'envelope']" size="4x" class="p-4 hover:text-red-500" /></a>
+                            <a :href="getTelegramLink(noticia)"><font-awesome-icon :icon="['fab', 'telegram']" size="4x" class="p-4 hover:text-blue-300" /></a>
                             </div>
                         </div>
                     </p>
-                    <div class="mt-6 flex justify-end">
+                    <div class="mt-3 flex justify-end">
                         <SecondaryButton @click="closeModal">Cancelar</SecondaryButton>
                     </div>
                     </div>

@@ -163,13 +163,13 @@ const getTelegramLink = (noticia: any) => {
 
                         <template v-else>
                             <Link :href="route('login')">
-                                <ButtonNav class="ml-4 bg-white smaller-text">
+                                <ButtonNav class="ml-4 bg-white smaller-text uppercase">
                                     <font-awesome-icon icon="right-to-bracket" />&nbsp&nbspIniciar Sesión
                                 </ButtonNav>
                             </Link>
 
                             <Link :href="route('register')" v-if="canRegister">
-                                <ButtonNav class="ml-4 bg-white smaller-text">
+                                <ButtonNav class="ml-4 bg-white smaller-text uppercase">
                                     <font-awesome-icon icon="users" />&nbsp&nbspRegistrarse
                                 </ButtonNav>
                             </Link>
@@ -181,87 +181,85 @@ const getTelegramLink = (noticia: any) => {
         </div>
     </nav>
 
-    <div class="min-h-screen bg-gray-100"><br><br>
+    
+    <div class="min-h-screen bg-gray-100"><br>
+        <!-- Page Content -->
+        <main>
+            <slot />
 
-<!-- Page Content -->
-<main>
-    <slot />
-    <!--Componente de la noticia-->
-    <div class="py-3" v-for="(noticia, id) in item" :key="id">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex"> <!-- Agregamos la clase flex aquí -->
+            <!--Componente de la noticia-->
+            <div class="py-3" v-for="(noticia, id) in item" :key="id">
+                <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 px-5 rounded">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex"> <!-- Agregamos la clase flex aquí -->
 
-                <!-- Espacio reservado para la fotografía de perfil -->
-                <div class="p-2">
-                    <div v-if="noticia.post_anonimo === 1">
-                        <div class="profile-image-container">
-                            <img src="/images/anonimo.png" class="profile-image" />
+                        <!-- Espacio reservado para la fotografía de perfil -->
+                        <div class="p-2">
+                            <div v-if="noticia.post_anonimo === 1">
+                                <div class="profile-image-container">
+                                    <img src="/images/anonimo.png" class="profile-image" />
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="profile-image-container">
+                                    <img :src="noticia.profile_image" class="profile-image" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div v-else>
-                        <div class="profile-image-container">
-                            <img :src="noticia.profile_image" class="profile-image" />
+
+                        <div class="flex-1"> <!-- Utilizamos flex-1 para que el contenido ocupe todo el espacio restante -->
+                            <div v-if="noticia.post_anonimo === 1">
+                                <div class="flex items-center">
+                                    <div class="p-2 text-gray-900 font-semibold">Anónimo &nbsp;&nbsp;·</div>
+                                    <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}</div>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="flex items-center"> <!-- Utilizamos flex para alinear el nombre y la fecha horizontalmente -->
+                                    <div class="p-2 text-gray-900 font-semibold">{{ noticia.nombre }} {{ noticia.apellidoPaterno }} {{ noticia.apellidoMaterno }} &nbsp;&nbsp;·</div>
+                                    <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}</div>
+                                </div>
+                            </div>
+
+                            <div class=" text-gray-900">&nbsp;&nbsp;{{ noticia.contenido }}</div>
+
+                            <div class="p-2 flex items-center">
+                                <ReactionsComponent :post-id="noticia.id"></ReactionsComponent>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a @click="handleClick">
+                                    <font-awesome-icon :icon="['fas', 'share']" />
+                                </a>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
-                <div class="flex-1"> <!-- Utilizamos flex-1 para que el contenido ocupe todo el espacio restante -->
-                    <div v-if="noticia.post_anonimo === 1">
-                        <div class="flex items-center">
-                            <div class="p-2 text-gray-900 font-semibold">Anónimo &nbsp;&nbsp;·</div>
-                            <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}</div>
+                <!-- Ventana modal -->
+                <Modal :show="showModal" @close="closeModal">
+                    <div class="p-6">
+                        <h2 class="text-lg font-medium text-black">
+                            Compartir Noticia
+                        </h2>
+                        <p class="mt-1 text-sm text-black">
+                            Selecciona una red social para compartir la noticia.
+
+                            <!-- Botones de compartir -->
+                            <div class="p-2 text-gray-900">
+                                <div class="flex items-center justify-center">
+                                    <a :href="getFacebookShareLink(noticia)"><font-awesome-icon :icon="['fab', 'facebook']" size="4x" class="p-4 hover:text-blue-800" /></a>
+                                    <a :href="getTwitterShareLink(noticia)"><font-awesome-icon :icon="['fab', 'twitter']" size="4x" class="p-4 hover:text-blue-400" /></a>
+                                    <a :href="getWhatsAppShareLink(noticia)"><font-awesome-icon :icon="['fab', 'whatsapp']" size="4x" class="p-4 hover:text-green-500" /></a>
+                                    <a :href="getGmailLink(noticia)"><font-awesome-icon :icon="['far', 'envelope']" size="4x" class="p-4 hover:text-red-500" /></a>
+                                    <a :href="getTelegramLink(noticia)"><font-awesome-icon :icon="['fab', 'telegram']" size="4x" class="p-4 hover:text-blue-300" /></a>
+                                </div>
+                            </div>
+                        </p>
+                        <div class="mt-3 flex justify-end">
+                            <SecondaryButton @click="closeModal">Cancelar</SecondaryButton>
                         </div>
                     </div>
-                    <div v-else>
-                        <div class="flex items-center"> <!-- Utilizamos flex para alinear el nombre y la fecha horizontalmente -->
-                            <div class="p-2 text-gray-900 font-semibold">{{ noticia.nombre }} {{ noticia.apellidoPaterno }} {{ noticia.apellidoMaterno }} &nbsp;&nbsp;·</div>
-                            <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}</div>
-                        </div>
-                    </div>
-
-                    <div class=" text-gray-900">&nbsp;&nbsp;{{ noticia.contenido }}</div>
-
-                    <div class="p-2 flex items-center">
-                        <ReactionsComponent :post-id="noticia.id"></ReactionsComponent>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a @click="handleClick">
-                            <font-awesome-icon :icon="['fas', 'share']" />
-                        </a>
-                    </div>
-                </div>
-
+                </Modal>
             </div>
-        </div>
-
-        <!-- Ventana modal -->
-        <Modal :show="showModal" @close="closeModal">
-            <div class="p-6">
-            <h2 class="text-lg font-medium text-gray-900">
-                Compartir Noticia
-            </h2>
-            <p class="mt-1 text-sm text-gray-600">
-                Selecciona una red social para compartir la noticia.
-
-                <!-- Botones de compartir -->
-                <div class="p-2 text-gray-900">
-                    <div class="flex items-center">
-                    <a :href="getFacebookShareLink(noticia)"><font-awesome-icon :icon="['fab', 'facebook']" size="3x"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a :href="getTwitterShareLink(noticia)"><font-awesome-icon :icon="['fab', 'twitter']" size="3x"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a :href="getWhatsAppShareLink(noticia)"><font-awesome-icon :icon="['fab', 'whatsapp']" size="3x"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a :href="getGmailLink(noticia)"><font-awesome-icon :icon="['fas', 'envelope']" size="3x"/></a>
-                    <a :href="getTelegramLink(noticia)"><font-awesome-icon :icon="['fab', 'telegram']" size="3x"/></a>
-                    </div>
-                </div>
-            </p>
-            <div class="mt-6 flex justify-end">
-                <SecondaryButton @click="closeModal">Cancelar</SecondaryButton>
-            </div>
-            </div>
-        </Modal>
-
+        </main>
     </div>
-
-</main>
-</div>
-
 </template>
 

@@ -57,56 +57,31 @@ const submit = () => {
     <nav class="bg-blue-950 px-6 relative shadow-md">
         <div class="flex flex-row justify-between items-center py-2">
             <Link href="/"><img src="https://persuacion.000webhostapp.com/logob.png" width="100" /></Link>
-
-            <div class="group flex flex-col items-center">
-
-                <button class="p-2 rounded-lg md:hidden">
-                    <font-awesome-icon icon="fa-solid fa-bars" class="fabards" />
-                </button>
-
-                <div class="hidden group-hover:block md:block absolute md:static bg-blue-950 inset-x-0 top-16 py-3 shadow-md md:shadow-none text-gray-600">
-                    <div class="flex flex-row justify-center items-center text-center font-semibold text-gray-500">
-                        <Link href="/">
-                            <ButtonNav>
-                                <font-awesome-icon icon="circle-arrow-left" />&nbspRegresar
-                            </ButtonNav>
-                        </Link>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </nav>  
+    </nav>
 
-    <!--Aqui empieza el formulario dentro de un container-->
-    <div class="container mx-auto">
+    <!--Comienza el fomrulario de inicio de sesion-->
+    <form class="px-6" @submit.prevent="submit">
 
-        <!--Aqui es para crear contenedor flexible centrado horizontalmente-->
-        <div class="flex justify-center px-6 my-12">
+        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+            {{ status }}
+        </div>
 
-            <!--Parte donde se adaptara a todas las pantallas-->
-            <div class="w-full xl:w-3/4 lg:w-11/12 flex">
+            <div class="container mx-auto">
+                <div class="flex justify-center px-6 my-12">
+                    <div class="w-full xl:w-3/4 lg:w-11/12 flex">
 
-                <!--Primera parte del login que es una imagen-->
-                <div class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg" 
-                    style="background-image: url('https://posgradosadistancia.com.ar/wp-content/uploads/2021/04/Objetivos-de-las-Finanzas.jpg')">
-                    <!--Aqui va una imagen haciendo referencia a la app-->
-                </div>
-                
-
-                <!--Segunda parte del login que donde se ubican los input-->
-                <div class="w-full lg:w-1/2 border p-2 rounded-lg lg:rounded-l-none">
-
-                    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-                            {{ status }}
-                    </div>
-
-                    <!--Comienza el formulrio-->
-					<form class="px-8 pt-6 mb-4  rounded" @submit.prevent="submit">
-
-                        <div class="mb-4">
-                            <h3 class="pt-4 text-4xl text-center"><b>Inicio de Sesión</b></h3>
+                        <!--Primera parte del login que es una imagen-->
+                        <div class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg" 
+                            style="background-image: url('https://posgradosadistancia.com.ar/wp-content/uploads/2021/04/Objetivos-de-las-Finanzas.jpg')">
+                            <!--Aqui va una imagen haciendo referencia a la app-->
                         </div>
+
+                        <!--Segunda parte del login que donde se ubican los input-->
+                        <div class="w-full lg:w-1/2 border p-10 rounded-lg lg:rounded-l-none">
+                            <div class="mb-4">
+                                <h3 class="pt-4 text-4xl text-center"><b>Inicio de Sesión</b></h3>
+                            </div>
 
                             <!--Input de Email o Correo Electronico-->
 							<div class="mb-4">
@@ -141,7 +116,7 @@ const submit = () => {
                                 </label>
 							</div>
 
-							<div class="mb-6 text-center">
+                            <div class="mb-6 text-center">
                                 <!--Link para redireccionar al formulario de recuperar contraseña-->
                                 <Link
                                     v-if="canResetPassword"
@@ -157,7 +132,7 @@ const submit = () => {
                                 </PrimaryButton>
 							</div>
 
-							<hr class="mb-6 border-t" />
+                            <hr class="mb-6 border-t" />
 
                             <!--Link para acceder al formulario de registro-->
 							<div class="text-center">
@@ -169,11 +144,11 @@ const submit = () => {
                                     Registrate
                                 </Link></p>
 							</div>
-					</form>
-				</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+    </form> 
 
     <!-- Footer -->
     <footer class="bg-blue-950 border-top">
@@ -181,34 +156,18 @@ const submit = () => {
         <div class="container px-6 py-12 mx-auto">
 
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
-                <div class="sm:col-span-2">
-                    <h1 class="max-w-lg text-xl font-semibold tracking-tight text-white xl:text-2xl">Libertad de Expresión y Seguridad Financiera</h1>
+
+                <div class="sm:col-span-12">
+
+                    <center><h1 class="max-w-lg text-xl font-semibold tracking-tight text-white xl:text-2xl">Libertad de Expresión y Seguridad Financiera</h1></center>
 
                     <div class="flex flex-col mx-auto mt-6 space-y-3 md:space-y-0 md:flex-row">
                     
-                        <p class="text-justify text-white">
+                        <p class="text-center text-white">
                             Esta empresa se dedica a brindar un servicio de préstamos a un conjunto de personas que lo solicite, y a su vez
                             existe una comunidad virtual donde las personas pueden compartir alguna noticia o hacer un comentario donde podran 
                             interactuar con reacciones.
                         </p>
-                    </div>
-                </div>
-
-                <div class="items-center">
-                    <h1 class="max-w-lg text-xl font-semibold tracking-tight text-white xl:text-2xl text-center">Contacto</h1>
-                    <div class="flex flex-col items-center">
-                        <h6 class="text-white transition-colors duration-300 hover:text-blue-500"><font-awesome-icon icon="phone" /> +52 (222) 888 8526</h6>
-                        <h6 class="text-white transition-colors duration-300 hover:text-blue-500 text-center"><font-awesome-icon icon="location-dot" /> Cerrada Allende 6, 72710 San Lorenzo Almecatla, Pue.</h6>
-                        <h6 class="text-white transition-colors duration-300 hover:text-blue-500"><font-awesome-icon icon="fa-solid fa-envelope" /> iesa@gmail.com</h6>
-                    </div>
-                </div>
-
-                <div>
-                    <h1 class="max-w-lg text-xl font-semibold tracking-tight text-white xl:text-2xl text-center">Redes Sociales</h1>
-                    <div class="flex flex-col items-center">
-                        <a href="https://es-la.facebook.com/" class="text-white transition-colors duration-300 hover:text-blue-500"><font-awesome-icon icon="fa-brands fa-square-facebook" class="face" /></a>
-                        <a href="#" class="text-white transition-colors duration-300 hover:text-red-500"><font-awesome-icon icon="fa-brands fa-square-youtube" class="you" /></a>
-                        <a href="#" class="text-white transition-colors duration-300 hover:text-cyan-400"><font-awesome-icon icon="fa-brands fa-square-twitter" class="twi" /></a>
                     </div>
                 </div>
             </div>

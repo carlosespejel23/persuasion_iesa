@@ -2,6 +2,7 @@
 import GuestLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
+import TextInputPrice from '@/components/TextInputPrice.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
@@ -45,8 +46,6 @@ const submit = () => {
     </Head>
 
     <GuestLayout>
-        <br><br>
-
         <form @submit.prevent="submit">
 
             <div class="p-6 bg-white flex items-center justify-center">
@@ -55,13 +54,13 @@ const submit = () => {
 
                     <div>
 
-                        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 border-2">
 
                             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-2">
 
                                 <div class="lg:col-span-2">
 
-                                    <center><img src="https://persuacion.000webhostapp.com/deudor.png" width="100" /></center>
+                                    <center><img src="https://persuacion.000webhostapp.com/deu.png" width="150" /></center>
                                     <h2 class="font-semibold text-xl text-gray-600 mb-6 text-center">Agregar Nuevo Deudor</h2>
                                     <hr>
                                     <br>
@@ -153,9 +152,8 @@ const submit = () => {
                                         </div>
 
                                         <div class="md:col-span-3">
-                                            <InputLabel for="monto_a_pagar" value="Monto a pagar" />
 
-                                            <TextInput
+                                            <TextInputPrice
                                                 id="monto_a_pagar"
                                                 type="text"
                                                 class="mt-1 block w-full"
@@ -174,11 +172,10 @@ const submit = () => {
                                     </div>
 
                                     <div class="flex items-center justify-end mt-4">
-                                        <PrimaryButton class="ml-4 bg-blue-950" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                        <PrimaryButton class="bg-blue-950" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                             Agregar Deudor
                                         </PrimaryButton>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

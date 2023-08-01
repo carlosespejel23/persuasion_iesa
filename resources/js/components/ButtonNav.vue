@@ -8,7 +8,6 @@
         font-semibold 
         text-lg 
         text-black 
-        uppercase 
         tracking-widest  
         transition 
         ease-in-out 

@@ -31,7 +31,11 @@ const submit = () => {
 };
 </script>
 
-
+<style scoped>
+    #card{
+        border-color: #0065b5;
+    }
+</style>
 
 <template>
     
@@ -43,16 +47,16 @@ const submit = () => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+            <h2 class="font-semibold text-xl text-white leading-tight text-center">
                 Sección de Configuración
             </h2>
         </template>
 
         <!-- component -->
         <form @submit.prevent="submit">
-            <div class="flex py-8 flex-col items-center justify-center space-y-6 bg-white px-6 sm:flex-row sm:space-x-6 sm:space-y-0">
+            <div class="flex py-8 flex-col items-center justify-center space-y-6 bg-gray-100 px-6 sm:flex-row sm:space-x-6 sm:space-y-0">
 
-                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
+                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl" id="card">
 
                     <center>
                        <img src="/images/like_reacted.png" width="100" /> 
@@ -75,7 +79,7 @@ const submit = () => {
 
                 </div>
 
-                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
+                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl" id="card">
 
                     <center>
                         <img src="/images/dislike_reacted.png" width="85"/>
@@ -98,7 +102,7 @@ const submit = () => {
 
                 </div>
 
-                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
+                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl" id="card">
 
                     <center>
                         <img src="/images/comentarios.png" width="100"/>
@@ -121,7 +125,7 @@ const submit = () => {
 
                 </div>
 
-                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
+                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl" id="card">
 
                     <center>
                         <font-awesome-icon :icon="['fas', 'share']" size="5x"/>
@@ -149,10 +153,9 @@ const submit = () => {
             <div class="flex items-center gap-4 justify-center mt-4">
                 <PrimaryButton :disabled="form.processing" class="bg-blue-950">Actualizar Cambios</PrimaryButton>
                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Cambios Guardados <font-awesome-icon icon="fa-regular fa-circle-check" /></p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-green-500">Cambios Guardados <font-awesome-icon icon="fa-regular fa-circle-check" /></p>
                 </Transition>
             </div>
-
             <br>
         </form>
     </AuthenticatedLayout>

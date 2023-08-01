@@ -75,9 +75,13 @@ const formatTimeSincePublished = (dateString: string) => {
 
 <template>
     <GuestLayout>
-        <Head title="Comentarios" /><br>
+        <Head>
+          <title>
+            Comentarios | Persuación
+          </title>
+        </Head><br>
 
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-6xl px-10 mx-auto sm:px-6 lg:px-8">
             <form @submit.prevent="submit">
                 <div>
                     <InputLabel for="contenido" value="Comentario" />
@@ -102,7 +106,7 @@ const formatTimeSincePublished = (dateString: string) => {
                 <input type="hidden" v-model="form.posts_id"/>
 
                 <div class="flex items-center justify-end mt-4">
-                    <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <PrimaryButton class="bg-blue-950" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Agregar Comentario
                     </PrimaryButton>
                 </div>

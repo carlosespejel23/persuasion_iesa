@@ -34,88 +34,92 @@ const form = useForm({
 
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
 
-            <div>
-                <InputLabel for="nombre" value="Nombre" />
+            <div class="lg:col-span-2">
+                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6">
+                    <div class="md:col-span-3">
+                        <InputLabel for="nombre" value="Nombre" />
 
-                <TextInput
-                    id="nombre"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.nombre"
-                    required
-                    autofocus
-                    autocomplete="nombre"
-                    maxlength="50"
-                />
+                        <TextInput
+                            id="nombre"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.nombre"
+                            required
+                            autofocus
+                            autocomplete="nombre"
+                            maxlength="50"
+                        />
 
-                <InputError class="mt-2" :message="form.errors.nombre" />
-            </div>
+                        <InputError class="mt-2" :message="form.errors.nombre" />
+                    </div>
 
-            <div>
-                <InputLabel for="apellidoPaterno" value="Apellido Paterno" />
+                    <div class="md:col-span-3">
+                        <InputLabel for="apellidoPaterno" value="Apellido Paterno" />
 
-                <TextInput
-                    id="apellidoPaterno"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.apellidoPaterno"
-                    required
-                    autofocus
-                    autocomplete="apellidoPaterno"
-                    maxlength="50"
-                />
+                        <TextInput
+                            id="apellidoPaterno"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.apellidoPaterno"
+                            required
+                            autofocus
+                            autocomplete="apellidoPaterno"
+                            maxlength="50"
+                        />
 
-                <InputError class="mt-2" :message="form.errors.apellidoPaterno" />
-            </div>
+                        <InputError class="mt-2" :message="form.errors.apellidoPaterno" />
+                    </div>
 
-            <div>
-                <InputLabel for="apellidoMaterno" value="Apellido Materno" />
+                    <div class="md:col-span-3">
+                        <InputLabel for="apellidoMaterno" value="Apellido Materno" />
 
-                <TextInput
-                    id="apellidoMaterno"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.apellidoMaterno"
-                    required
-                    autofocus
-                    autocomplete="apellidoMaterno"
-                    maxlength="50"
-                />
+                        <TextInput
+                            id="apellidoMaterno"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.apellidoMaterno"
+                            required
+                            autofocus
+                            autocomplete="apellidoMaterno"
+                            maxlength="50"
+                        />
 
-                <InputError class="mt-2" :message="form.errors.apellidoMaterno" />
-            </div>
+                        <InputError class="mt-2" :message="form.errors.apellidoMaterno" />
+                    </div>
 
-            <div>
-                <InputLabel for="telefono" value="Telefono" />
+                    <div class="md:col-span-3">
+                        <InputLabel for="telefono" value="Telefono" />
 
-                <TextInput
-                    id="telefono"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.telefono"
-                    required
-                    autofocus
-                    autocomplete="telefono"
-                    maxlength="10"
-                />
+                        <TextInput
+                            id="telefono"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.telefono"
+                            required
+                            autofocus
+                            autocomplete="telefono"
+                            maxlength="10"
+                        />
 
-                <InputError class="mt-2" :message="form.errors.telefono" />
-            </div>
+                        <InputError class="mt-2" :message="form.errors.telefono" />
+                    </div>
 
-            <div>
-                <InputLabel for="email" value="Correo Electrónico" />
+                    <div class="md:col-span-6">
+                        <InputLabel for="email" value="Correo Electrónico" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                    maxlength="60"
-                />
+                        <TextInput
+                            id="email"
+                            type="email"
+                            class="mt-1 block w-full"
+                            v-model="form.email"
+                            required
+                            autocomplete="username"
+                            maxlength="60"
+                        />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                        <InputError class="mt-2" :message="form.errors.email" />
+                    </div>
+                </div>
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
@@ -140,7 +144,7 @@ const form = useForm({
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Guardar</PrimaryButton>
+                <PrimaryButton :disabled="form.processing" class="bg-blue-950">Guardar</PrimaryButton>
 
                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Guardado.</p>

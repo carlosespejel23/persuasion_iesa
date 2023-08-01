@@ -135,11 +135,9 @@ const closeModalUploaded = () => {
         </header>
 
         <form @submit.prevent="submit" class="mt-6 space-y-6" enctype="multipart/form-data">
-
-            <div>
-
+            <div class="items-center justify-center">
               <div class="mt-4 card">
-                <div class="py-4">
+                <div class="py-2">
                   <div class="d-flex justify-content-center align-items-center div-container">
                     <div class="profile-image-containers">
                       <img :src="selectedImage" class="profile-images" />
@@ -154,7 +152,7 @@ const closeModalUploaded = () => {
                   id="profile_image"
                   label="Seleccionar imagen"
                   type="file"
-                  class="mt-1 block w-full"
+                  class="mt-1 block w-50"
                   :modelValue="form.profile_image"
                   @update:modelValue="form.profile_image = $event"
                   @change="handleProfileImageChange($event)"
@@ -165,8 +163,8 @@ const closeModalUploaded = () => {
                 <InputError class="mt-2" :message="form.errors.profile_image" />
             </div>
 
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing"  @click="handleSaveClick" style="cursor: pointer;">Guardar</PrimaryButton>
+            <div class="flex items-center justify-center gap-4">
+                <PrimaryButton :disabled="form.processing"  @click="handleSaveClick" style="cursor: pointer;" class="bg-blue-950">Guardar</PrimaryButton>
             </div>
 
             <!-- Ventana modal 1: Cuando el input está vacío -->
