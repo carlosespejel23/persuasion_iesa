@@ -39,8 +39,8 @@ const redirectToPost = (id: number) => {
 
 /* Template del nombre del usuario */
 .profile-image-containers {
-  width: 100px; 
-  height: 100px; 
+  width: 100%; 
+  height: 100%; 
   border-radius: 50%;
   overflow: hidden;
 }
