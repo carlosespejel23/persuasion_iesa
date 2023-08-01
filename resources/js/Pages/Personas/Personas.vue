@@ -77,7 +77,7 @@ const redirectToPost = (id: number) => {
               <h1 class="mt-4 text-lg text-black text-center" :key="id">{{ user.nombre }} {{ user.apellidoPaterno }} {{ user.apellidoMaterno }}</h1>
               <br>
               <center>
-                <a @click="redirectToPost(user.id)" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                <a @click="redirectToPost(user.id)" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   <button class="bg-white text-black font-bold rounded border-b-2 border-gray-400 hover:border-black hover:bg-gray-400 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
                     <span class="mr-2">Ver Perfil</span>
                     <font-awesome-icon icon="fa-regular fa-address-card" />
