@@ -47,6 +47,11 @@ const redirectToComment = (id: number) => {
 </script>
 
 <style>
+.div-container {
+  max-width: 280px;
+  height: 280px; /* Puedes ajustar la altura según tus necesidades */
+}
+
 .profile-image {
   width: 100%;
   height: 100%;
@@ -55,8 +60,8 @@ const redirectToComment = (id: number) => {
 
 /* Template del nombre del usuario */
 .profile-image-containers {
-  width: 100%; 
-  height: 100%; 
+  width: 280px; 
+  height: 280px; 
   border-radius: 50%;
   overflow: hidden;
 }
@@ -88,8 +93,10 @@ const redirectToComment = (id: number) => {
                 </list-group-item>
               </list-group>
             </dropdown>
-            <div class="profile-image-containers">
-              <center><img :src="user?.profile_image" class="profile-image" /></center>
+            <div class="div-container">
+              <div class="profile-image-containers">
+                <center><img :src="user?.profile_image" class="profile-image" /></center>
+              </div>
             </div>
             <h1 class="font-semibold py-2 text-3xl text-center text-black leading-tight">{{ user?.nombre }} {{ user?.apellidoPaterno }} {{ user?.apellidoMaterno }}</h1>
             <hr>

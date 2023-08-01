@@ -31,6 +31,11 @@ const redirectToPost = (id: number) => {
 </script>
 
 <style>
+.div-container {
+  max-width: 200px;
+  height: 200px; /* Puedes ajustar la altura según tus necesidades */
+}
+
 .profile-image {
   width: 100%;
   height: 100%;
@@ -39,8 +44,8 @@ const redirectToPost = (id: number) => {
 
 /* Template del nombre del usuario */
 .profile-image-containers {
-  width: 100%; 
-  height: 100%; 
+  width: 200px; 
+  height: 200px; 
   border-radius: 50%;
   overflow: hidden;
 }
@@ -68,8 +73,10 @@ const redirectToPost = (id: number) => {
             <a v-for="(user, id) in item" class="group border-2 border-blue-950 p-5 rounded-lg duration-300 hover:scale-105 hover:shadow-xl bg-white" id="card">
               <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
                 <center>
-                  <div class="profile-image-containers">
-                    <img :src="user?.profile_image" class="profile-image" />
+                  <div class="div-container">
+                    <div class="profile-image-containers">
+                      <img :src="user?.profile_image" class="profile-image" />
+                    </div>    
                   </div>
                 </center>
               </div>

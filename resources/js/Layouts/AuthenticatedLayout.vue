@@ -159,10 +159,10 @@ const selectedImage = ref<string | ArrayBuffer | null>(user.profile_image);
                             <h1 class="text-gray-800">Deudores&nbsp&nbsp<font-awesome-icon icon="fa-regular fa-id-badge" /></h1>
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('deudas')" :active="route().current('deudas')">
-                            <h1 class="text-gray-800">Deudas&nbsp&nbsp<font-awesome-icon icon="hand-holding-dollar" /></h1>
+                            <h1 class="text-gray-800">Deudas&nbsp&nbsp<font-awesome-icon icon="fa-solid fa-file-invoice-dollar" /></h1>
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('pagos')" :active="route().current('pagos')">
-                            <h1 class="text-gray-800">Pagos&nbsp&nbsp<font-awesome-icon icon="money-bill" /></h1>
+                            <h1 class="text-gray-800">Pagos&nbsp&nbsp<font-awesome-icon icon="hand-holding-dollar" /></h1>
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="`/configuracion`" :active="route().current('configuracion.edit')">
                             <h1 class="text-gray-800">Configuración&nbsp&nbsp<font-awesome-icon icon="gear" /></h1>
