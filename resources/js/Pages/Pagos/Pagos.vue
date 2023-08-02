@@ -37,8 +37,9 @@ const redirectToPost = (id: number) => {
   
   <Head>
     <title>
-      Pagos | Persuación
+      Pagos | Persuasión
     </title>
+    <link rel="icon" href="/images/icono.png" type="image/x-icon">
   </Head>
 
   <AuthenticatedLayout>
@@ -58,7 +59,7 @@ const redirectToPost = (id: number) => {
         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           <a v-for="(deudor, id) in item" class="group border-2 border-blue-950 p-5 rounded-lg duration-300 hover:scale-105 hover:shadow-xl bg-white" id="card">
             <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
-              <center><img src="https://persuacion.000webhostapp.com/pago.png" width="150" /></center>
+              <center><img src="/images/pago.png" width="150" /></center>
             </div>
 
             <h1 class="mt-4 text-lg text-black text-center" :key="id">{{ deudor.nombre }} {{ deudor.apellidoPaterno }} {{ deudor.apellidoMaterno }}</h1>

@@ -143,8 +143,8 @@ const getTelegramLink = (noticia: any) => {
   overflow: hidden;
 }
 
-dropdown{
-  position: right;
+#card{
+  border-color: #0065b5;
 }
 </style>
 
@@ -152,8 +152,9 @@ dropdown{
 
     <Head>
       <title>
-        Perfil | Persuación
+        Perfil | Persuasión
       </title>
+      <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <AuthenticatedLayout>
@@ -206,7 +207,7 @@ dropdown{
             <!--Componente de la noticia-->
             <div class="py-3" v-for="(noticia, id) in noticias" :key="id">
                 <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden border shadow-sm sm:rounded-lg flex"> <!-- Agregamos la clase flex aquí -->
+                    <div class="bg-white overflow-hidden border shadow-sm sm:rounded-lg flex duration-300 hover:scale-105 hover:shadow-xl" id="card"> <!-- Agregamos la clase flex aquí -->
 
                         <!-- Espacio reservado para la fotografía de perfil -->
                         <div class="p-2">

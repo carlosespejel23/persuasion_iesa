@@ -54,8 +54,9 @@ const redirectToPost = (id: number) => {
 
     <Head>
       <title>
-        Personas | Persuación
+        Personas | Persuasión
       </title>
+      <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <AuthenticatedLayout>

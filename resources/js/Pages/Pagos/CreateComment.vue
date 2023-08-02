@@ -60,8 +60,9 @@ onMounted(async () => {
 
     <Head>
         <title>
-            Comentarios | Persuación
+            Comentarios | Persuasión
         </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <GuestLayout>

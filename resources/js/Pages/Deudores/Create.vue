@@ -41,8 +41,9 @@ const submit = () => {
     
     <Head>
         <title>
-            Nuevo Deudor | Persuación
+            Nuevo Deudor | Persuasión
         </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <GuestLayout>
@@ -60,7 +61,7 @@ const submit = () => {
 
                                 <div class="lg:col-span-2">
 
-                                    <center><img src="https://persuacion.000webhostapp.com/deu.png" width="150" /></center>
+                                    <center><img src="/images/deu.png" width="150" /></center>
                                     <h2 class="font-semibold text-xl text-gray-600 mb-6 text-center">Agregar Nuevo Deudor</h2>
                                     <hr>
                                     <br>

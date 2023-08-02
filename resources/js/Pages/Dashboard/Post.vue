@@ -75,11 +75,12 @@ const formatTimeSincePublished = (dateString: string) => {
 
 <template>
     <GuestLayout>
-        <Head>
-          <title>
-            Comentarios | Persuación
-          </title>
-        </Head><br>
+      <Head>
+        <title>
+            Comentario | Persuasión
+        </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
+      </Head><br>
 
         <div class="max-w-6xl px-10 mx-auto sm:px-6 lg:px-8">
             <form @submit.prevent="submit">

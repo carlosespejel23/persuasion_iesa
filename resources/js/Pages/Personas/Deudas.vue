@@ -60,10 +60,19 @@ const redirectToComment = (id: number) => {
   border-radius: 50%;
   overflow: hidden;
 }
+
+#card{
+  border-color: #0065b5;
+}
 </style>
 
 <template>
-    <Head title="Dashboard" />
+    <Head>
+      <title>
+        Deudas | Persuasión
+      </title>
+      <link rel="icon" href="/images/icono.png" type="image/x-icon">
+    </Head>
 
     <AuthenticatedLayout>
       <div class="h-screen bg-white pt-10">
@@ -111,12 +120,12 @@ const redirectToComment = (id: number) => {
             </div>
             <!--Aqui va el componente de la deuda, nomas los acomodas-->
             <div class="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 xl:gap-x-8">
-            <div class="py-2" v-for="(deudor, id) in deudas">
+            <div class="py-5" v-for="(deudor, id) in deudas">
                 <div class="max-w-7xl mx-auto sm:px-4 lg:px-6">
-                    <div class="bg-white border p-2 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white border p-2 dark:bg-gray-800 overflow-hidden rounded shadow-sm sm:rounded-lg duration-300 hover:scale-105 hover:shadow-xl" id="card">
 
                       <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
-                          <center><img src="https://persuacion.000webhostapp.com/deuda.png" width="150" /></center>
+                          <center><img src="/images/deuda.png" width="150" /></center>
                       </div>
                         <!--Esta es la informacion del deudor-->
                         <div class="p-2 text-gray-900 text-center dark:text-gray-100" :key="id">{{ deudor.nombre }} {{ deudor.apellidoPaterno }} {{ deudor.apellidoMaterno }}</div>
@@ -131,7 +140,7 @@ const redirectToComment = (id: number) => {
                         <div class="text-red-500 text-center dark:text-gray-100" v-else>
                             <p>Deuda en proceso</p>
                         </div>
-                        <hr>
+
                         <a @click="redirectToComment(deudor.id)" class="underline text-xm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                           <div align="center">
                             <ButtonNav class="text-sm">

@@ -41,8 +41,9 @@ const submit = () => {
     
     <Head>
         <title>
-            Configuración | Persuación
+            Configuración | Persuasión
         </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <AuthenticatedLayout>

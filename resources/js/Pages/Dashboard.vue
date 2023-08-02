@@ -127,8 +127,9 @@ const redirectToProfile = (id: number) => {
     
     <Head>
         <title>
-            Noticias | Persuación
+            Noticias | Persuasión
         </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <AuthenticatedLayout>

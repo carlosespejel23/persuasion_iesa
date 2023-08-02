@@ -49,14 +49,14 @@ const submit = () => {
 
     <Head>
         <title>
-            Login | Persuación
+            Login | Persuasión
         </title>
     </Head>
 
     <!--Barra de navegacion-->
     <nav class="bg-blue-950 px-6 relative shadow-md">
         <div class="flex flex-row justify-between items-center py-2">
-            <Link href="/"><img src="https://persuacion.000webhostapp.com/logob.png" width="100" /></Link>
+            <Link href="/"><img src="/images/logob.png" width="100" /></Link>
         </div>
     </nav>
 
@@ -176,7 +176,7 @@ const submit = () => {
 
             <div class="flex items-center justify-between">
                 <Link href="/">
-                    <img class="w-auto h-7" src="https://persuacion.000webhostapp.com/logob.png" alt="">
+                    <img class="w-auto h-7" src="/images/logob.png" alt="">
                 </Link>
                 
                 <div class="flex -mx-2">

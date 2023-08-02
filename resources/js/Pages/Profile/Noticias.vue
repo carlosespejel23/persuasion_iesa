@@ -124,7 +124,12 @@ const getTelegramLink = (noticia: any) => {
 </style>
 
 <template>
-    <Head title="Dashboard" />
+    <Head>
+        <title>
+            Mis Noticias | Persuasión
+        </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
+    </Head>
 
     <AuthenticatedLayout>
         <template #header>

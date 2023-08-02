@@ -44,7 +44,7 @@ const selectedImage = ref<string | ArrayBuffer | null>(user.profile_image);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <img src="https://persuacion.000webhostapp.com/logotipo.png" width="100" />
+                                    <img src="/images/logotipo.png" width="100" />
                                 </Link>
                             </div>
 

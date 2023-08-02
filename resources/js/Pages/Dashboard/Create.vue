@@ -32,8 +32,9 @@ const submit = () => {
     <GuestLayout>
         <Head>
             <title>
-                Nueva Noticia | Persuación
+                Nueva Noticia | Persuasión
             </title>
+            <link rel="icon" href="/images/icono.png" type="image/x-icon">
         </Head>
 
         <template #header>

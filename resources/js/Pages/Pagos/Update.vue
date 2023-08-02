@@ -53,8 +53,9 @@ const redirectToPost = (id: number) => {
     
     <Head>
         <title>
-            Actualizar Pago | Persuación
+            Actualizar Pago | Persuasión
         </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <AuthenticatedLayout>

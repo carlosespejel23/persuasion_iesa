@@ -135,17 +135,17 @@ const getTelegramLink = (noticia: any) => {
 <template>
     <Head>
         <title>
-            Inicio | Persuación  
+            Inicio | Persuasión  
         </title>
         
-        <link rel="icon" href="{{ asset('icons/icono.ico') }}" type="image/x-icon">
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <!--Barra de navegacion-->
     <nav class="bg-white px-6 relative" v-if="canLogin">
 
         <div class="flex flex-row justify-between items-center py-2">
-            <Link href="/"><img src="https://persuacion.000webhostapp.com/logotipo.png" width="100" /></Link>
+            <Link href="/"><img src="/images/logotipo.png" width="100" /></Link>
 
             <div class="group flex flex-col items-center">
 
