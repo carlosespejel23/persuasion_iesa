@@ -41,6 +41,7 @@ onMounted(async () => {
 
 // Ventana modal para compartir noticia
 const showModal = ref(false);
+const showModalWelcome = ref(false);
 
 const handleClick = () => {
     showModal.value = true;
@@ -48,7 +49,13 @@ const handleClick = () => {
 
 const closeModal = () => {
   showModal.value = false;
+  showModalWelcome.value = false;
 };
+
+// Mostrar la ventana modal cuando la página se carga
+onMounted(() => {
+  showModalWelcome.value = true;
+});
 
 // Función para formatear la diferencia de tiempo desde que se publicó el post
 const formatTimeSincePublished = (dateString: string) => {
@@ -140,6 +147,20 @@ const getTelegramLink = (noticia: any) => {
         
         <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
+
+    <Modal :show="showModalWelcome" @close="closeModal">
+        <div class="p-6">
+            <h2 class="text-lg font-medium text-black">
+                ¡Bienvenido a <strong>PERSUASIÓN FINANCIAL</strong>!
+            </h2>
+            <p class="mt-1 text-sm text-black">
+                <strong>Inicia Sesión</strong> o <strong>Registrate</strong> para poder disfrutar una experiencia completa en la aplicación.
+            </p>
+            <div class="mt-3 flex justify-end">
+                <SecondaryButton @click="closeModal">Cerrar</SecondaryButton>
+            </div>
+        </div>
+    </Modal>
 
     <!--Barra de navegacion-->
     <nav class="bg-white px-6 relative" v-if="canLogin">
