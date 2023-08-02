@@ -64,6 +64,7 @@ const redirectToComment = (id: number) => {
   height: 280px; 
   border-radius: 50%;
   overflow: hidden;
+  position: justify-center;
 }
 
 #card{
@@ -129,11 +130,10 @@ const redirectToComment = (id: number) => {
             <div class="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 xl:gap-x-8">
             <div class="py-5" v-for="(deudor, id) in deudas">
                 <div class="max-w-7xl mx-auto sm:px-4 lg:px-6">
-<<<<<<< HEAD
+
                     <div class="bg-white border p-2 dark:bg-gray-800 overflow-hidden rounded shadow-sm sm:rounded-lg duration-300 hover:scale-105 hover:shadow-xl" id="card">
-=======
-                    <div class="bg-white border p-2 shadow-sm sm:rounded-lg">
->>>>>>> 20335eb7aea2bb29e2e1eec3f8a76282ed2d4394
+
+                    <div class="bg-white p-2  sm:rounded-lg">
 
                       <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
                           <center><img src="/images/deuda.png" width="150" /></center>
@@ -151,28 +151,20 @@ const redirectToComment = (id: number) => {
                         <div class="text-red-500 text-center" v-else>
                             <p>Deuda en proceso</p>
                         </div>
-<<<<<<< HEAD
-
-                        <a @click="redirectToComment(deudor.id)" class="underline text-xm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-=======
-                        <hr>
                         <a @click="redirectToComment(deudor.id)" class="underline text-xm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
->>>>>>> 20335eb7aea2bb29e2e1eec3f8a76282ed2d4394
                           <div align="center">
                             <ButtonNav class="text-sm">
                               Ver Comentarios&nbsp<font-awesome-icon icon="fa-solid fa-comments" />
                             </ButtonNav>
                         </div>
                         </a>
-
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
+              </div>
             </div>
           </div>
-
-
         </div>
-      </div>
     </AuthenticatedLayout>
 </template>
