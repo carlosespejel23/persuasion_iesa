@@ -47,7 +47,7 @@ const submit = () => {
         </p>
         <form @submit.prevent="submit">
 
-            <div v-if="status" class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+            <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                 {{ status }}
             </div>
 
@@ -79,7 +79,7 @@ const submit = () => {
                     <p align="center" style="font-size: small;">¿No tienes Cuenta? 
                         <Link
                             :href="route('register')"
-                            class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                         Registrate</Link>
                     </p>
@@ -89,7 +89,7 @@ const submit = () => {
     </div>
 
     <!-- Footer -->
-    <footer class="bg-blue-950 dark:bg-gray-900 border-top">
+    <footer class="bg-blue-950">
 
         <div class="container px-6 py-12 mx-auto">
 
@@ -107,7 +107,7 @@ const submit = () => {
                 </div>
             </div>
 
-            <hr class="my-6 border-gray-100 md:my-8 dark:border-gray-700">
+            <hr class="my-6 border-gray-100 md:my-8">
 
             <div class="flex items-center justify-between">
                 <Link href="/">

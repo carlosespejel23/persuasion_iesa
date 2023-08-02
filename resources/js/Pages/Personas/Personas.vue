@@ -31,6 +31,11 @@ const redirectToPost = (id: number) => {
 </script>
 
 <style>
+.div-container {
+  max-width: 200px;
+  height: 200px; /* Puedes ajustar la altura según tus necesidades */
+}
+
 .profile-image {
   width: 100%;
   height: 100%;
@@ -39,8 +44,8 @@ const redirectToPost = (id: number) => {
 
 /* Template del nombre del usuario */
 .profile-image-containers {
-  width: 100%; 
-  height: 100%; 
+  width: 200px; 
+  height: 200px; 
   border-radius: 50%;
   overflow: hidden;
 }
@@ -69,8 +74,10 @@ const redirectToPost = (id: number) => {
             <a v-for="(user, id) in item" class="group border-2 border-blue-950 p-5 rounded-lg duration-300 hover:scale-105 hover:shadow-xl bg-white" id="card">
               <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
                 <center>
-                  <div class="profile-image-containers">
-                    <img :src="user?.profile_image" class="profile-image" />
+                  <div class="div-container">
+                    <div class="profile-image-containers">
+                      <img :src="user?.profile_image" class="profile-image" />
+                    </div>    
                   </div>
                 </center>
               </div>
@@ -78,7 +85,7 @@ const redirectToPost = (id: number) => {
               <h1 class="mt-4 text-lg text-black text-center" :key="id">{{ user.nombre }} {{ user.apellidoPaterno }} {{ user.apellidoMaterno }}</h1>
               <br>
               <center>
-                <a @click="redirectToPost(user.id)" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                <a @click="redirectToPost(user.id)" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   <button class="bg-white text-black font-bold rounded border-b-2 border-gray-400 hover:border-black hover:bg-gray-400 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
                     <span class="mr-2">Ver Perfil</span>
                     <font-awesome-icon icon="fa-regular fa-address-card" />

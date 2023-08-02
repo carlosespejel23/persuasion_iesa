@@ -122,6 +122,11 @@ const getTelegramLink = (noticia: any) => {
 </script>
 
 <style>
+.div-container {
+  max-width: 280px;
+  height: 280px; /* Puedes ajustar la altura según tus necesidades */
+}
+
 .profile-image-container {
   width: 40px; /* Ajusta el tamaño según tus necesidades */
   height: 40px; /* Ajusta el tamaño según tus necesidades */
@@ -137,8 +142,8 @@ const getTelegramLink = (noticia: any) => {
 
 /* Template del nombre del usuario */
 .profile-image-containers {
-  width: 100%; 
-  height: 100%; 
+  width: 280px; 
+  height: 280px; 
   border-radius: 50%;
   overflow: hidden;
 }
@@ -163,7 +168,7 @@ const getTelegramLink = (noticia: any) => {
 
           <!--Apartado de la foto de perfil-->
           <div class="mt-6 mb-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
-            <dropdown class="inline-flex items-center text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+            <dropdown class="inline-flex items-center text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50">
               <template #trigger>
                 <span><font-awesome-icon icon="fa-solid fa-ellipsis" size="2x" /></span>
               </template>
@@ -180,15 +185,17 @@ const getTelegramLink = (noticia: any) => {
                 </list-group-item>
               </list-group>
             </dropdown>
-            <div class="profile-image-containers">
-              <center><img :src="user?.profile_image" class="profile-image" /></center>
+            <div class="div-container">
+              <div class="profile-image-containers">
+                <center><img :src="user?.profile_image" class="profile-image" /></center>
+              </div>
             </div>
             <h1 class="font-semibold py-2 text-3xl text-center text-black leading-tight">{{ user?.nombre }} {{ user?.apellidoPaterno }} {{ user?.apellidoMaterno }}</h1>
             <hr>
             <br>
             <div class="py-2 rounded-lg bg-gray-100">
               <h2 class="font-semibold py-2 p-3 text-black leading-tight">Información</h2>
-              <h2 class="font-semibold py-2 p-6 text-black leading-tight" :key="id">Email:  {{ user?.email }}</h2>
+              <h2 class="font-semibold py-2 p-6 text-black leading-tight" :key="id">Correo Electrónico:  {{ user?.email }}</h2>
               <h2 class="font-semibold py-2 p-6 text-black leading-tight" :key="id">Teléfono:  {{ user?.telefono }}</h2>
               <h2 class="font-semibold py-2 p-6 text-black leading-tight" :key="id">Se Unio:  {{ user?.created_at }}</h2>
             </div>
