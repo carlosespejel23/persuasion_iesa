@@ -80,7 +80,14 @@ const formatTimeSincePublished = (dateString: string) => {
             Comentario | Persuasión
         </title>
         <link rel="icon" href="/images/icono.png" type="image/x-icon">
-      </Head><br>
+      </Head>
+
+      <template #header>
+            <h2 class="font-semibold text-xl text-white leading-tight text-center">
+              Deja un Comentario
+            </h2>
+        </template>
+        <br>
 
         <div class="max-w-6xl px-10 mx-auto sm:px-6 lg:px-8">
             <form @submit.prevent="submit">
@@ -114,7 +121,7 @@ const formatTimeSincePublished = (dateString: string) => {
             </form>
         </div>
 
-        <div class="py-3" v-for="(comentario, id) in comentarios">
+        <div class="py-3 px-10" v-for="(comentario, id) in comentarios">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex">
 

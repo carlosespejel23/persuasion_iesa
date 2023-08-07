@@ -5,7 +5,9 @@ import { Head, Link } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref, onMounted, defineProps } from 'vue';
 import { usePage } from '@inertiajs/vue3';
-import { Dropdown, ListGroup, ListGroupItem } from 'flowbite-vue';
+//import { Dropdown, ListGroup, ListGroupItem } from 'flowbite-vue';
+import Dropdown from '@/components/Dropdown.vue';
+import DropdownLink from '@/components/DropdownLink.vue';
 import ReactionsComponent from '@/components/ReactionsComponent.vue';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
@@ -14,9 +16,9 @@ import { format, differenceInSeconds, differenceInMinutes, differenceInHours, di
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {faNewspaper, faEnvelope} from '@fortawesome/free-regular-svg-icons';
 import {faFacebook, faTelegram, faTwitter, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
-import { faShare, faPhone, faEllipsis} from '@fortawesome/free-solid-svg-icons'
+import { faShare, faPhone, faEllipsisVertical} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faNewspaper, faFacebook, faTwitter, faWhatsapp, faTelegram, faEnvelope, faShare, faPhone, faEllipsis);
+library.add(faNewspaper, faFacebook, faTwitter, faWhatsapp, faTelegram, faEnvelope, faShare, faPhone, faEllipsisVertical);
 
 //Esto es para extraer las noticias
 const noticias = ref<Noticia[]>([]);
@@ -168,23 +170,23 @@ const getTelegramLink = (noticia: any) => {
 
           <!--Apartado de la foto de perfil-->
           <div class="mt-6 mb-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
-            <dropdown class="inline-flex items-center text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50">
+            <Dropdown>
               <template #trigger>
-                <span><font-awesome-icon icon="fa-solid fa-ellipsis" size="2x" /></span>
+                <div align="right"><span><font-awesome-icon icon="fa-solid fa-ellipsis-vertical" size="2x" /></span></div>
               </template>
-              <list-group>
-                <list-group-item>
-                  <a @click="redirectToDeudas(user.id)" class="text-sm text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Deudas
-                  </a>
-                </list-group-item>
-                <list-group-item>
-                  <a @click="redirectToPerfil(user.id)" class="text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <template #content>
+                <DropdownLink @click="redirectToPerfil(user.id)">
+                  <a class="text-sm text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Publicaciones
                   </a>
-                </list-group-item>
-              </list-group>
-            </dropdown>
+                </DropdownLink>
+                <DropdownLink  @click="redirectToDeudas(user.id)">
+                  <a class="text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Deudas
+                  </a>
+                </DropdownLink>
+              </template>
+            </Dropdown>
             <div class="div-container">
               <div class="profile-image-containers">
                 <center><img :src="user?.profile_image" class="profile-image" /></center>
@@ -214,7 +216,7 @@ const getTelegramLink = (noticia: any) => {
             <!--Componente de la noticia-->
             <div class="py-3" v-for="(noticia, id) in noticias" :key="id">
                 <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden border shadow-sm sm:rounded-lg flex duration-300 hover:scale-105 hover:shadow-xl" id="card"> <!-- Agregamos la clase flex aquí -->
+                    <div class="bg-white overflow-hidden border shadow-sm sm:rounded-lg flex" id="card"> <!-- Agregamos la clase flex aquí -->
 
                         <!-- Espacio reservado para la fotografía de perfil -->
                         <div class="p-2">

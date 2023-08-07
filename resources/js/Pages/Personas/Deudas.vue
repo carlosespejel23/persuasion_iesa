@@ -5,12 +5,14 @@ import { Head, Link } from '@inertiajs/vue3';
 import ButtonNav from '@/components/ButtonNav.vue';
 import axios from 'axios';
 import { ref, onMounted, computed } from 'vue';
-import { Dropdown, ListGroup, ListGroupItem } from 'flowbite-vue';
+//import { Dropdown, ListGroup, ListGroupItem } from 'flowbite-vue';
+import Dropdown from '@/components/Dropdown.vue';
+import DropdownLink from '@/components/DropdownLink.vue';
 import { usePage } from '@inertiajs/vue3';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEllipsis, faComments} from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisVertical, faComments} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faEllipsis, faComments);
+library.add(faEllipsisVertical, faComments);
 
 //Esto es para extraer las deudas
 const deudas = ref<Deudor[]>([]);
@@ -64,7 +66,6 @@ const redirectToComment = (id: number) => {
   height: 280px; 
   border-radius: 50%;
   overflow: hidden;
-  position: justify-center;
 }
 
 #card{
@@ -86,25 +87,25 @@ const redirectToComment = (id: number) => {
 
           <!--Apartado de la foto de perfil-->
           <div class="mt-6 mb-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
-            <dropdown class="inline-flex items-center text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50">
+            <Dropdown>
               <template #trigger>
-                <span><font-awesome-icon icon="fa-solid fa-ellipsis" size="2x" /></span>
+                <div align="right"><span><font-awesome-icon icon="fa-solid fa-ellipsis-vertical" size="2x" /></span></div>
               </template>
-              <list-group>
-                <list-group-item>
-                  <a @click="redirectToDeudas(user.id)" class="text-sm text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Deudas
-                  </a>
-                </list-group-item>
-                <list-group-item>
-                  <a @click="redirectToPerfil(user.id)" class="text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <template #content>
+                <DropdownLink @click="redirectToPerfil(user.id)">
+                  <a class="text-sm text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Publicaciones
                   </a>
-                </list-group-item>
-              </list-group>
-            </dropdown>
+                </DropdownLink>
+                <DropdownLink  @click="redirectToDeudas(user.id)">
+                  <a class="text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Deudas
+                  </a>
+                </DropdownLink>
+              </template>
+            </Dropdown>
             <div class="div-container">
-              <div class="profile-image-containers">
+              <div class="profile-image-containers" align="center">
                 <center><img :src="user?.profile_image" class="profile-image" /></center>
               </div>
             </div>
@@ -127,13 +128,14 @@ const redirectToComment = (id: number) => {
               <h1 class="mt-4 text-lg text-gray-700 text-center">Este usuario aún no tiene deudores y pagos :(</h1>
             </div>
             <!--Aqui va el componente de la deuda, nomas los acomodas-->
-            <div class="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 xl:gap-x-8">
+            <div class="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 xl:gap-x-8">
+
             <div class="py-5" v-for="(deudor, id) in deudas">
                 <div class="max-w-7xl mx-auto sm:px-4 lg:px-6">
 
-                    <div class="bg-white border p-2 dark:bg-gray-800 overflow-hidden rounded shadow-sm sm:rounded-lg duration-300 hover:scale-105 hover:shadow-xl" id="card">
+                    <div class="bg-white border p-2 overflow-hidden rounded shadow-sm sm:rounded-lg" id="card">
 
-                    <div class="bg-white p-2  sm:rounded-lg">
+                    <div class="bg-white p-2 sm:rounded-lg">
 
                       <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
                           <center><img src="/images/deuda.png" width="150" /></center>

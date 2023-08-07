@@ -40,11 +40,11 @@ onMounted(async () => {
           <h1 class="mt-4 text-lg text-gray-700 text-center">Este deudor aún no tiene comentarios :(</h1>
         </div>
 
-        <div class="py-3" v-for="(comentario, id) in cad">
+        <div class="py-3 px-10" v-for="(comentario, id) in cad">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-2 text-gray-900" :key="id">Fecha: {{ comentario.created_at }}</div>
-                    <div class="p-2 text-gray-900" :key="id">{{ comentario.comentario }}</div>
+                  <div class="p-2 text-black text-justify" :key="id">{{ comentario.comentario }}</div>
+                  <div class="p-2 text-black text-sm" align="right" :key="id">Fecha: {{ comentario.created_at }}</div>
                 </div>
             </div>
         </div>
