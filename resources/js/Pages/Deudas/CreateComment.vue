@@ -75,7 +75,7 @@ onMounted(async () => {
         <form @submit.prevent="submit">
             <div class="p-6 bg-gray-100 flex items-center justify-center">
                 <div>
-                    <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 border-2 duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 border-2">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">
                                 Agregar Nuevo Comentario
@@ -113,7 +113,7 @@ onMounted(async () => {
                         <hr>
 
                         <div class="py-3" v-for="(comentario, id) in cad">
-                            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 border-2 rounded-md border-blue-950">
+                            <div class="max-w-2xl mx-auto sm:px-6 lg:px-8 border-2 rounded-md border-blue-950">
                                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                     <div class="p-2 text-black text-justify" :key="id">{{ comentario.comentario }}</div>
                                     <div class="p-2 text-black text-sm" align="right" :key="id">Fecha: {{ comentario.created_at }}</div>

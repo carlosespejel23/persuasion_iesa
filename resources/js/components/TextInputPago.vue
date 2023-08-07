@@ -19,7 +19,7 @@ defineExpose({ focus: () => input.value?.focus() });
 </script>
 
 <template>
-      <label for="price" class="block text-sm font-medium leading-6 text-gray-900">Cantidad Recibida</label>
+      <label for="price" class="block text-lg font-medium leading-6 text-gray-900">Cantidad Recibida</label>
       <div class="relative rounded-md shadow-sm">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <span class="text-gray-500 sm:text-sm">$</span>
