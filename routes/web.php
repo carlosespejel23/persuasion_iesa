@@ -105,6 +105,9 @@ Route::middleware('auth')->group(function () {
     //Sección noticias del usuario autenticado
     Route::get('/noticias', [NoticiaUserController::class, 'index'])->name('noticias');
     Route::get('/noticias/showPost', [NoticiaUserController::class,'showPost']);
+    Route::get('/noticias/editar-noticia/{id}', [NoticiaUserController::class,'editPost'])->name('editar.noticia');
+    Route::patch('/noticias/updatePost/{id}', [NoticiaUserController::class,'updatePost'])->name('update.noticia');
+    Route::delete('/noticias/deletePost/{id}', [NoticiaUserController::class,'deletePost'])->name('delete.noticia');
 });
 
 require __DIR__.'/auth.php';

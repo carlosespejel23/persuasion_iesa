@@ -16,12 +16,6 @@ const form = useForm({
     password: '',
 });
 
-/*const confirmUserDeletion = () => {
-    confirmingUserDeletion.value = true;
-
-    nextTick(() => passwordInput.value?.focus());
-};*/
-
 const deleteUser = () => {
     form.delete(route('profile.destroy'), {
         preserveScroll: true,
@@ -30,12 +24,6 @@ const deleteUser = () => {
         onFinish: () => form.reset(),
     });
 };
-
-/*const closeModal = () => {
-    confirmingUserDeletion.value = false;
-
-    form.reset();
-};*/
 
 const showConfirmModal = ref(false);
 const showErrorModal = ref(false);

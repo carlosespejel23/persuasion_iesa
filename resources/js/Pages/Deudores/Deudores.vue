@@ -99,7 +99,7 @@ const closeModalUploaded = () => {
                                 </button>
                             </form>
 
-                            <!-- Ventana modal 2: Cuando ya hay una foto cargada -->
+                            <!-- Ventana modal cuando se haya eliminado el deudor -->
                             <Modal :show="showModalUploaded" @close="closeModalUploaded">
                                 <div class="p-6">
                                     <h2 class="text-lg text-center font-medium text-gray-900">

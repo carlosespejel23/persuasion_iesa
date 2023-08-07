@@ -26,6 +26,7 @@ class PersonasController extends Controller
         ]);
     }
 
+    //Mostrar personas en la sección principal para observar los perfiles
     public function show() {
         $userId = auth()->user()->getAuthIdentifier();
         $user = DB::table('users')
@@ -37,6 +38,7 @@ class PersonasController extends Controller
             'users.profile_image',
         )
         ->where('users.id', '!=', $userId)
+        ->take(50)
         ->orderBy('users.created_at', 'desc')
         ->get();
 

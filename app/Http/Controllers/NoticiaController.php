@@ -56,6 +56,7 @@ class NoticiaController extends Controller
             'posts.created_at'
         )
         ->orderBy('posts.created_at', 'desc')
+        ->take(200)
         ->get();
 
         return response()->json($noticias);

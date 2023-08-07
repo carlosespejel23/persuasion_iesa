@@ -43,6 +43,7 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
     }
 
+    //Guardar una nueva foto de perfil
     public function storePhoto(Request $request): RedirectResponse
     {
         $request->validate([
@@ -96,6 +97,7 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+    //Verifica si el usuario no es un deudor
     public function checkEmailExists(Request $request)
     {
         $user = $request->user();

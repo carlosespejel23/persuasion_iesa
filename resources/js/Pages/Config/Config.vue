@@ -51,7 +51,11 @@ const submit = () => {
             <h2 class="font-semibold text-xl text-white leading-tight text-center">
                 Sección de Configuración
             </h2>
-        </template>
+        </template><br><br>
+
+        <h1 class="text-gray-800 leading-tight text-center">
+            En esta sección tú puedes cambiar el nombre de tu icono, porque tú tienes el control.
+        </h1>
 
         <!-- component -->
         <form @submit.prevent="submit">

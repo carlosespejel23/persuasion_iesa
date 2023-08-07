@@ -1,20 +1,23 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Noticia } from '@/types';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref, onMounted, defineProps } from 'vue';
 import ReactionsComponent from '@/components/ReactionsComponent.vue';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DangerButton from '@/Components/DangerButton.vue';
+import Dropdown from '@/components/Dropdown.vue';
+import DropdownLink from '@/components/DropdownLink.vue';
 import { format, differenceInSeconds, differenceInMinutes, differenceInHours, differenceInDays } from 'date-fns';
 //Importacion de iconos
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {faNewspaper, faEnvelope} from '@fortawesome/free-regular-svg-icons';
 import {faFacebook, faTelegram, faTwitter, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
-import { faShare } from '@fortawesome/free-solid-svg-icons'
+import { faShare, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faNewspaper, faFacebook, faTwitter, faWhatsapp, faTelegram, faEnvelope, faShare);
+library.add(faNewspaper, faFacebook, faTwitter, faWhatsapp, faTelegram, faEnvelope, faShare, faCheck);
 
 interface ReactionSummary {
   [key: string]: number;
@@ -32,9 +35,9 @@ onMounted(async () => {
   }
 });
 
-//Esto es para mandar la URL de cada noticia a los comentarios
-const redirectToPost = (id: number) => {
-  window.location.href = `/dashboard/show/${id}`;
+//Esto es para ir a la vista de editar post
+const redirectToEditPost = (id: number) => {
+  window.location.href = `/noticias/editar-noticia/${id}`;
 };
 
 // Función para formatear la diferencia de tiempo desde que se publicó el post
@@ -106,6 +109,27 @@ const getTelegramLink = (noticia: any) => {
   const telegramUrl = `https://telegram.me/share/url?url=${encodeURIComponent(appUrl + noticia.slug)}&text=${encodeURIComponent(telegramText)}`;
   return telegramUrl;
 };
+
+//Formulario de Datos
+const form = useForm({
+    id: '',
+});
+
+// Estado de la ventana modal para eliminar noticia
+const showModalUploaded = ref(false);
+
+// Función para manejar el clic en el botón de eliminar
+const handleSaveClick = () => {
+  showModalUploaded.value = true;
+
+  setTimeout(() => {
+      showModalUploaded.value = false;
+    }, 1000);
+};
+
+const closeModalUploaded = () => {
+    showModalUploaded.value = false;
+};
 </script>
 
 <style>
@@ -159,13 +183,22 @@ const getTelegramLink = (noticia: any) => {
                             <div v-if="noticia.post_anonimo === 1">
                                 <div class="flex items-center">
                                     <div class="p-2 text-gray-900 font-semibold">Anónimo &nbsp;&nbsp;·</div>
-                                    <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}</div>
+                                    <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="text-sm text-gray-500 ml-1"><a @click="redirectToEditPost(noticia.id)">editar</a></div>
                                 </div>
                             </div>
                             <div v-else>
                                 <div class="flex items-center"> <!-- Utilizamos flex para alinear el nombre y la fecha horizontalmente -->
                                     <div class="p-2 text-gray-900 font-semibold">{{ noticia.nombre }} {{ noticia.apellidoPaterno }} {{ noticia.apellidoMaterno }} &nbsp;&nbsp;·</div>
-                                    <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}</div>
+                                    <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="text-sm text-gray-500 ml-1 flex items-center">
+
+                                      <a @click="redirectToEditPost(noticia.id)"> <button style="background-color: #99dbff; padding: 3px 7px; border: none; border-radius: 4px; color: white;">editar</button>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</a>
+                                      <form @submit.prevent="form.delete(route('delete.noticia', noticia.id))">
+                                        <a @click="handleSaveClick" :disabled="form.processing" style="background-color: #ff9999; padding: 3px 7px; border: none; border-radius: 4px; color: white;"><button>eliminar</button></a>
+                                      </form>
+
+                                    </div>
                                 </div>
                             </div>
 
@@ -179,10 +212,19 @@ const getTelegramLink = (noticia: any) => {
                             </div>
                         </div>
 
+                        <!-- Ventana modal para confirmar eliminacion de la noticia-->
+                        <Modal :show="showModalUploaded" @close="closeModalUploaded">
+                          <div class="p-6">
+                              <h2 class="text-lg text-center font-medium text-gray-900">
+                                Noticia eliminada exitosamente &nbsp;&nbsp;<font-awesome-icon :icon="['fas', 'check']" style="color: #26c94f;" />
+                              </h2>
+                          </div>
+                        </Modal>
+
                     </div>
                 </div>
 
-                <!-- Ventana modal -->
+                <!-- Ventana modal para compartir la noticia-->
                 <Modal :show="showModal" @close="closeModal">
                   <div class="p-6">
                     <h2 class="text-lg font-medium text-black">
