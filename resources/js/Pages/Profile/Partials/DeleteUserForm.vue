@@ -7,6 +7,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
+import axios from 'axios';
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref<HTMLInputElement | null>(null);
@@ -14,12 +15,6 @@ const passwordInput = ref<HTMLInputElement | null>(null);
 const form = useForm({
     password: '',
 });
-
-const confirmUserDeletion = () => {
-    confirmingUserDeletion.value = true;
-
-    nextTick(() => passwordInput.value?.focus());
-};
 
 const deleteUser = () => {
     form.delete(route('profile.destroy'), {
@@ -30,9 +25,28 @@ const deleteUser = () => {
     });
 };
 
-const closeModal = () => {
-    confirmingUserDeletion.value = false;
+const showConfirmModal = ref(false);
+const showErrorModal = ref(false);
 
+const confirmUserDeletion = () => {
+    axios.get('/profile/check')
+        .then((response) => {
+            const emailExists = response.data.emailExists;
+            if (emailExists) {
+                showErrorModal.value = true;
+            } else {
+                showConfirmModal.value = true;
+                nextTick(() => passwordInput.value?.focus());
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
+
+const closeModal = () => {
+    showConfirmModal.value = false;
+    showErrorModal.value = false;
     form.reset();
 };
 </script>
@@ -40,29 +54,28 @@ const closeModal = () => {
 <template>
     <section class="space-y-6">
         <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Delete Account</h2>
+            <h2 class="text-lg font-medium text-gray-900">Eliminar Cuenta</h2>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting
-                your account, please download any data or information that you wish to retain.
+            <p class="mt-1 text-sm text-gray-600">
+                Una vez eliminada su cuenta, todos sus recursos y datos se borrarán permanentemente.
             </p>
         </header>
 
-        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
+        <DangerButton @click="confirmUserDeletion">Eliminar Cuenta</DangerButton>
 
-        <Modal :show="confirmingUserDeletion" @close="closeModal">
+        <!--Ventana modal de eliminar cuenta-->
+        <Modal v-if="showConfirmModal" :show="showConfirmModal" @close="closeModal">
             <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    Are you sure you want to delete your account?
+                <h2 class="text-lg font-medium text-gray-900">
+                    ¿Está seguro de que desea eliminar su cuenta?
                 </h2>
 
-                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Once your account is deleted, all of its resources and data will be permanently deleted. Please
-                    enter your password to confirm you would like to permanently delete your account.
+                <p class="mt-1 text-sm text-gray-600">
+                    Una vez eliminada su cuenta, todos sus recursos y datos se borrarán permanentemente. Por favor, introduzca su contraseña para confirmar que desea eliminar definitivamente su cuenta.
                 </p>
 
                 <div class="mt-6">
-                    <InputLabel for="password" value="Password" class="sr-only" />
+                    <InputLabel for="password" value="Contraseña" class="sr-only" />
 
                     <TextInput
                         id="password"
@@ -70,7 +83,7 @@ const closeModal = () => {
                         v-model="form.password"
                         type="password"
                         class="mt-1 block w-3/4"
-                        placeholder="Password"
+                        placeholder="Contraseña"
                         @keyup.enter="deleteUser"
                     />
 
@@ -78,7 +91,7 @@ const closeModal = () => {
                 </div>
 
                 <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>
+                    <SecondaryButton @click="closeModal"> Cancelar </SecondaryButton>
 
                     <DangerButton
                         class="ml-3"
@@ -86,8 +99,23 @@ const closeModal = () => {
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
-                        Delete Account
+                        Eliminar Cuenta
                     </DangerButton>
+                </div>
+            </div>
+        </Modal>
+
+        <!-- Ventana modal de error al eliminar la cuenta-->
+        <Modal v-else :show="showErrorModal" @close="closeModal">
+            <div class="p-6">
+                <h2 class="text-lg font-medium text-red-600">
+                    Error al eliminar la cuenta
+                </h2>
+                <p class="mt-1 text-sm text-gray-600">
+                    ¡Ups!, no se puede eliminar la cuenta. Tu cuenta esta registrada como un deudor
+                </p>
+                <div class="mt-6 flex justify-end">
+                    <SecondaryButton @click="closeModal">Cerrar</SecondaryButton>
                 </div>
             </div>
         </Modal>

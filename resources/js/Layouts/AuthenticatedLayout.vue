@@ -1,23 +1,42 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
-import { usePage } from '@inertiajs/inertia-vue3';
+import Dropdown from '@/components/Dropdown.vue';
+import DropdownLink from '@/components/DropdownLink.vue';
+import NavLink from '@/components/NavLink.vue';
+import ResponsiveNavLink from '@/components/ResponsiveNavLink.vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {faNewspaper, faAddressBook, faIdBadge} from '@fortawesome/free-regular-svg-icons';
+import {faUsers, faGear, faHandHoldingDollar, faFileInvoiceDollar} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+library.add(faNewspaper, faUsers, faGear, faHandHoldingDollar, faAddressBook, faFileInvoiceDollar, faIdBadge);
+import { Link, usePage } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
 
-/*const user = usePage().props.auth.user;
-const id = user.id;*/
+const user = usePage().props.auth.user;
+
+const selectedImage = ref<string | ArrayBuffer | null>(user.profile_image);
 </script>
+
+<style>
+.profile-image-container {
+  width: 40px; /* Ajusta el tamaño según tus necesidades */
+  height: 40px; /* Ajusta el tamaño según tus necesidades */
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+        <div class="min-h-screen bg-gray-100">
+            <nav class="border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -25,31 +44,29 @@ const id = user.id;*/
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                                    />
+                                    <img src="/images/logotipo.png" width="100" />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Noticias
+                                    <h1 class="text-gray-800">Noticias &nbsp&nbsp<font-awesome-icon icon="fa-regular fa-newspaper" /></h1>
                                 </NavLink>
                                 <NavLink :href="route('deudores')" :active="route().current('deudores')">
-                                    Deudores
+                                    <h1 class="text-gray-800">Deudores&nbsp&nbsp<font-awesome-icon icon="fa-regular fa-id-badge" /></h1>
                                 </NavLink>
                                 <NavLink :href="route('deudas')" :active="route().current('deudas')">
-                                    Deudas
+                                    <h1 class="text-gray-800">Deudas&nbsp&nbsp<font-awesome-icon icon="fa-solid fa-file-invoice-dollar" /></h1>
                                 </NavLink>
                                 <NavLink :href="route('pagos')" :active="route().current('pagos')">
-                                    Pagos
+                                    <h1 class="text-gray-800">Pagos&nbsp&nbsp<font-awesome-icon icon="hand-holding-dollar" /></h1>
                                 </NavLink>
                                 <NavLink :href="`/configuracion`" :active="route().current('configuracion.edit')">
-                                    Configuración
+                                    <h1 class="text-gray-800">Configuración&nbsp&nbsp<font-awesome-icon icon="gear" /></h1>
                                 </NavLink>
                                 <NavLink :href="route('personas')" :active="route().current('personas')">
-                                    Personas
+                                    <h1 class="text-gray-800">Personas&nbsp&nbsp<font-awesome-icon icon="users" /></h1>
                                 </NavLink>
                             </div>
                         </div>
@@ -62,8 +79,11 @@ const id = user.id;*/
                                         <span class="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-800 bg-gray-100 hover:text-gray-500 focus:outline-none transition ease-in-out duration-150"
                                             >
+                                            <div class="profile-image-container">
+                                                <img :src="selectedImage" class="profile-image" />
+                                            </div> &nbsp;&nbsp;
                                                 {{ $page.props.auth.user.nombre }} {{ $page.props.auth.user.apellidoPaterno }} {{ $page.props.auth.user.apellidoMaterno }}
 
                                                 <svg
@@ -83,10 +103,10 @@ const id = user.id;*/
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
+                                        <DropdownLink :href="route('profile.edit')"> Perfil </DropdownLink>
                                         <DropdownLink :href="route('noticias')"> Mis Noticias </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
+                                            Finalizar Sesión
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
@@ -97,7 +117,7 @@ const id = user.id;*/
                         <div class="-mr-2 flex items-center sm:hidden">
                             <button
                                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                             >
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
@@ -133,23 +153,39 @@ const id = user.id;*/
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                            <h1 class="text-gray-800">Noticias &nbsp&nbsp<font-awesome-icon icon="fa-regular fa-newspaper" /></h1>
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('deudores')" :active="route().current('deudores')">
+                            <h1 class="text-gray-800">Deudores&nbsp&nbsp<font-awesome-icon icon="fa-regular fa-id-badge" /></h1>
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('deudas')" :active="route().current('deudas')">
+                            <h1 class="text-gray-800">Deudas&nbsp&nbsp<font-awesome-icon icon="fa-solid fa-file-invoice-dollar" /></h1>
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('pagos')" :active="route().current('pagos')">
+                            <h1 class="text-gray-800">Pagos&nbsp&nbsp<font-awesome-icon icon="hand-holding-dollar" /></h1>
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="`/configuracion`" :active="route().current('configuracion.edit')">
+                            <h1 class="text-gray-800">Configuración&nbsp&nbsp<font-awesome-icon icon="gear" /></h1>
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('personas')" :active="route().current('personas')">
+                            <h1 class="text-gray-800">Personas&nbsp&nbsp<font-awesome-icon icon="users" /></h1>
                         </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+                    <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="px-4">
-                            <div class="font-medium text-base text-gray-800 dark:text-gray-200">
+                            <div class="font-medium text-base text-gray-800">
                                 {{ $page.props.auth.user.nombre }}
                             </div>
                             <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('profile.edit')"> <h1 class="text-gray-800">Perfil</h1> </ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('noticias')"> <h1 class="text-gray-800">Mis Noticias</h1> </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
+                                <h1 class="text-gray-800">Finalizar Sesión</h1>
                             </ResponsiveNavLink>
                         </div>
                     </div>
@@ -157,14 +193,14 @@ const id = user.id;*/
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white dark:bg-gray-800 shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="bg-blue-950 shadow" v-if="$slots.header">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="bg-gray-100">
                 <slot />
             </main>
         </div>

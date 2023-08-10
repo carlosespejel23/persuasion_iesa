@@ -39,10 +39,17 @@ class RegisteredUserController extends Controller
             'telefono' => 'required|string|max:255',
             'fecha_de_nacimiento' => 'required|date',
             'acepto_contrato' => 'required|boolean',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $defaultImagePath = 'profiles/default.jpg';
+
+        // Generar el nuevo nombre de archivo para la imagen de perfil del usuario
+        $extension = pathinfo($defaultImagePath, PATHINFO_EXTENSION);
+        $newImagePath = "profiles/default.{$extension}";
+
+        // Crear el usuario con la imagen de perfil por defecto
         $user = User::create([
             'nombre' => $request->nombre,
             'apellidoPaterno' => $request->apellidoPaterno,
@@ -51,9 +58,16 @@ class RegisteredUserController extends Controller
             'fecha_de_nacimiento' => $request->fecha_de_nacimiento,
             'acepto_contrato' => $request->acepto_contrato,
             'email' => $request->email,
-            'profile_image' => Storage::url('profiles/default.jpg'),
+            'profile_image' => Storage::url($defaultImagePath),
             'password' => Hash::make($request->password),
         ]);
+
+        // Copiar la imagen default al nuevo perfil del usuario
+        Storage::copy($defaultImagePath, $newImagePath);
+
+        // Actualizar el campo de la imagen de perfil del usuario con la nueva ruta
+        $user->profile_image = Storage::url($newImagePath);
+        $user->save();
 
         event(new Registered($user));
 

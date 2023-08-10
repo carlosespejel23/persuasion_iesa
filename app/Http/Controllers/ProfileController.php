@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Deudor;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -42,29 +43,33 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
     }
 
+    //Guardar una nueva foto de perfil
     public function storePhoto(Request $request): RedirectResponse
     {
         $request->validate([
-            'profile_image' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:5120'],
+            'profile_image' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:3120'],
         ]);
 
         $user = $request->user();
 
-        // Eliminar imagen anterior si existe
-        if ($user->profile_image) {
-            // Obtener el nombre de archivo actual
-            $currentFileName = basename($user->profile_image);
-            
-            // Eliminar la imagen anterior
-            Storage::disk('public')->delete('profiles/' . $currentFileName);
-        }
-
-        // Guardar la nueva imagen
+        // Guardar la nueva imagen solo si el usuario proporciona una imagen personalizada
         if ($request->hasFile('profile_image')) {
-            $profileImage = $request->file('profile_image');
-            $fileName = $profileImage->getClientOriginalName();
-            $path = $profileImage->storeAs('profiles', $fileName, 'public');
-            $user->profile_image = '/storage/' . $path; // Agregar '/storage/' al inicio de la ruta
+            // Obtener el nombre original de la imagen de perfil del usuario (sin la ruta)
+            $currentFileName = basename($user->profile_image);
+
+            // Generar el nuevo nombre de archivo para la nueva imagen de perfil
+            $newFileName = 'profile_' . uniqid() . '.' . $request->file('profile_image')->getClientOriginalExtension();
+
+            // Eliminar la imagen anterior solo si el nombre de archivo es diferente a "default"
+            if ($currentFileName !== 'default.jpg') {
+                Storage::disk('public')->delete('profiles/' . $currentFileName);
+            }
+
+            // Guardar la nueva imagen con el nuevo nombre de archivo
+            $path = $request->file('profile_image')->storeAs('profiles', $newFileName, 'public');
+
+            // Actualizar el campo de la imagen de perfil del usuario con la nueva ruta
+            $user->profile_image = '/storage/' . $path;
             $user->save();
         }
 
@@ -90,5 +95,16 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    //Verifica si el usuario no es un deudor
+    public function checkEmailExists(Request $request)
+    {
+        $user = $request->user();
+        $emailExists = Deudor::where('email', $user->email)
+        ->orWhere('telefono', $user->telefono)
+        ->exists();
+
+        return response()->json(['emailExists' => $emailExists]);
     }
 }

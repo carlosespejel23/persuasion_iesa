@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Deudor } from '@/types';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref, onMounted, defineProps } from 'vue';
+import Modal from '@/Components/Modal.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {faUserPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+library.add(faUserPlus, faTrash);
 
 //Esto es para extraer los datos de deudores
 const item = ref<Deudor[]>([]);
@@ -18,41 +24,100 @@ onMounted(async () => {
 });
 
 //Esto es para eliminar un deudor
-const redirectToPost = (id: number) => {
-  window.location.href = `/deudores/${id}`;
+const deudor = usePage().props.auth.deudor;
+
+//Formulario de Datos
+const form = useForm({
+    id: '',
+});
+
+// Estado de la ventana modal
+const showModalUploaded = ref(false);
+
+// Función para manejar el clic en el botón de eliminar
+const handleSaveClick = () => {
+    showModalUploaded.value = true;
+};
+
+const closeModalUploaded = () => {
+  showModalUploaded.value = false;
 };
 </script>
 
+<style scoped>
+    #card{
+        border-color: #0065b5;
+    }
+</style>
+
 <template>
-    <Head title="Dashboard" />
+
+    <Head>
+        <title>
+            Deudores | Persuasión
+        </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
+    </Head>
 
     <AuthenticatedLayout>
+        
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Seccion de Deudores</h2>
+            <h1 class="font-semibold text-xl text-white leading-tight mx-auto text-center">
+                Sección de Deudores
+            </h1>
         </template>
 
-        <!--Aqui le pones el boton a la vista de crear noticia con la ruta: route('dashboard.create'), ahorita nomas esta como link-->
-        <div class="flex items-center mt-4">
-            <Link
-                :href="route('deudores.create')"
-                class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-            >
-                Agregar Deudor
-            </Link>
-        </div>
-
-        
         <!--Aqui va el componente de la noticia, nomas los acomodas en una tarjeta-->
-        <div class="py-3" v-for="(deudor, id) in item">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <!--Esta es la informacion del deudor-->
-                    <div class="p-2 text-gray-900 dark:text-gray-100" :key="id">{{ deudor.nombre }} {{ deudor.apellidoPaterno }} {{ deudor.apellidoMaterno }}</div>
+        <div class="mx-auto px-10 py-5 sm:px-6 lg:max-w-7xl lg:px-8 bg-gray-100">
 
-                    <!--Aqui pones un boton para eliminar el deudor con la ruta /deudores/${id} para que haga su funcion-->
-
-                </div>
+            <div class="mb-5">
+                <Link :href="route('deudores.create')">
+                    <button class="bg-white text-gray-800 font-bold rounded border-b-2 border-blue-950 hover:border-blue-950 hover:bg-blue-950 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
+                        <span class="mr-2">Agregar Deudor</span>
+                        <font-awesome-icon icon="user-plus" />
+                    </button>
+                </Link>
             </div>
+
+            <div v-if="item.length === 0"><br><br>
+                    <h1 class="mt-4 text-lg text-gray-700 text-center">Ups, aún no tienes deudores :(</h1>
+            </div>
+
+            <div v-else>
+                <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                    <a v-for="(deudor, id) in item" class="group border-2 p-5 rounded-lg duration-300 hover:scale-105 hover:shadow-xl bg-white" id="card">
+                        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
+                            <center><img src="/images/deu.png" width="150" /></center>
+                        </div>
+                        <h1 class="mt-4 text-lg text-black text-center" :key="id">{{ deudor.nombre }} {{ deudor.apellidoPaterno }} {{ deudor.apellidoMaterno }}</h1>
+                        <br>
+                        <center>
+                            <form @submit.prevent="form.delete(route('deudores.destroy', deudor.id))">
+                                <button :disabled="form.processing" @click="handleSaveClick" style="cursor: pointer;" class="bg-white text-gray-800 font-bold rounded border-b-2 border-red-400 hover:border-red-950 hover:bg-red-400 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
+                                    <span class="mr-2">Eliminar Deudor</span>
+                                    <font-awesome-icon icon="fa-solid fa-trash" />
+                                </button>
+                            </form>
+
+                            <!-- Ventana modal cuando se haya eliminado el deudor -->
+                            <Modal :show="showModalUploaded" @close="closeModalUploaded">
+                                <div class="p-6">
+                                    <h2 class="text-lg text-center font-medium text-gray-900">
+                                    Eliminado
+                                    </h2>
+                                    <center><img src="/videos/eliminar.gif" width="150" /></center>
+                                    <p class="mt-1 text-sm text-center text-gray-600">
+                                        Has eliminado un deudor de tu lista.
+                                    </p>
+                                    <div class="mt-6 flex justify-end">
+                                    <SecondaryButton @click="closeModalUploaded">Cerrar</SecondaryButton>
+                                    </div>
+                                </div>
+                            </Modal>
+                        </center>
+                    </a>
+                </div>
+            </div>  
         </div>
     </AuthenticatedLayout>
 </template>

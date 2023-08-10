@@ -9,6 +9,11 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { usePage } from '@inertiajs/vue3';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {faThumbsUp, faShare} from '@fortawesome/free-solid-svg-icons';
+import {faCircleCheck} from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+library.add(faThumbsUp, faCircleCheck, faShare);
 
 //Actualiza el nombre de los emojis
 const page = usePage();
@@ -26,26 +31,43 @@ const submit = () => {
 };
 </script>
 
+<style scoped>
+    #card{
+        border-color: #0065b5;
+    }
+</style>
+
 <template>
-    <Head title="Dashboard" />
+    
+    <Head>
+        <title>
+            Configuración | Persuasión
+        </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
+    </Head>
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Seccion de Configuración</h2>
-        </template>
+            <h2 class="font-semibold text-xl text-white leading-tight text-center">
+                Sección de Configuración
+            </h2>
+        </template><br><br>
 
-        <!--Aqui va el componente de la noticia, nomas le das formato-->
-        <div class="py-3">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <form @submit.prevent="submit">
-                    <div class="p-2 text-gray-900 dark:text-gray-100">
-                        <p>En esta sección tú puedes cambiar el nombre de tu reacción, porque tú tienes el control</p>
-                    </div>
+        <h1 class="text-gray-800 leading-tight text-center">
+            En esta sección tú puedes cambiar el nombre de tu icono, porque tú tienes el control.
+        </h1>
 
-                    <div>
-                        <!--El InputLabel lo remplazas por la imagen-->
-                        <InputLabel for="like" value="Img de Like" />
+        <!-- component -->
+        <form @submit.prevent="submit">
+            <div class="flex py-8 flex-col items-center justify-center space-y-6 bg-gray-100 px-6 sm:flex-row sm:space-x-6 sm:space-y-0">
 
+                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl" id="card">
+
+                    <center>
+                       <img src="/images/like_reacted.png" width="100" /> 
+                    </center>
+
+                    <div class="space-x-4 p-6 bg-white py-4 text-center">
                         <TextInput
                             id="like"
                             type="text"
@@ -60,10 +82,15 @@ const submit = () => {
                         <InputError class="mt-2" :message="form.errors.like" />
                     </div>
 
-                    <div>
-                        <!--El InputLabel lo remplazas por la imagen-->
-                        <InputLabel for="enojo" value="Img de Me Enoja" />
+                </div>
 
+                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl" id="card">
+
+                    <center>
+                        <img src="/images/dislike_reacted.png" width="85"/>
+                    </center>
+
+                    <div class="space-x-4 p-6 bg-white py-4 text-center">
                         <TextInput
                             id="enojo"
                             type="text"
@@ -78,10 +105,15 @@ const submit = () => {
                         <InputError class="mt-2" :message="form.errors.enojo" />
                     </div>
 
-                    <div>
-                        <!--El InputLabel lo remplazas por la imagen-->
-                        <InputLabel for="comentar" value="Img de Comentar" />
+                </div>
 
+                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl" id="card">
+
+                    <center>
+                        <img src="/images/comentarios.png" width="100"/>
+                    </center>
+
+                    <div class="space-x-4 p-6 bg-white py-4 text-center">
                         <TextInput
                             id="comentar"
                             type="text"
@@ -96,10 +128,15 @@ const submit = () => {
                         <InputError class="mt-2" :message="form.errors.comentar" />
                     </div>
 
-                    <div>
-                        <!--El InputLabel lo remplazas por la imagen-->
-                        <InputLabel for="compartir" value="Img de Compartir" />
+                </div>
 
+                <div class="w-full max-w-sm py-8 overflow-hidden border-2 rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl" id="card">
+
+                    <center>
+                        <font-awesome-icon :icon="['fas', 'share']" size="5x"/>
+                    </center>
+
+                    <div class="space-x-4 p-6 bg-white py-4 text-center">
                         <TextInput
                             id="compartir"
                             type="text"
@@ -114,15 +151,17 @@ const submit = () => {
                         <InputError class="mt-2" :message="form.errors.compartir" />
                     </div>
 
-                    <div class="flex items-center gap-4">
-                        <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                </div>
 
-                        <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                            <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
-                        </Transition>
-                    </div>
-                </form>
             </div>
-        </div>
+
+            <div class="flex items-center gap-4 justify-center mt-4">
+                <PrimaryButton :disabled="form.processing" class="bg-blue-950">Actualizar Cambios</PrimaryButton>
+                <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
+                    <p v-if="form.recentlySuccessful" class="text-sm text-green-500">Cambios Guardados <font-awesome-icon icon="fa-regular fa-circle-check" /></p>
+                </Transition>
+            </div>
+            <br>
+        </form>
     </AuthenticatedLayout>
 </template>

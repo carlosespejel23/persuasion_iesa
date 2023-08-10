@@ -36,29 +36,33 @@ Route::get('/', function () {
 
 //Panel de noticias principal
 Route::get('/dashboard', [NoticiaController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard/showAll', [NoticiaController::class, 'showAll'])->name('dashboard.showAll');
 
 //Noticia compartida
 Route::get('/noticia/{slug}', [NoticiaCompartidaController::class, 'index'])->name('noticia.share');
 Route::get('/noticia/cj-json-post/share/{slug}', [NoticiaCompartidaController::class, 'showPost']);
 Route::get('/noticia/cj-json-post-comment/share/{slug}', [NoticiaCompartidaController::class, 'showComment']);
 
+//Ruta de las reacciones
+Route::get('/dashboard/{postId}/reactions-summary', [PostVoteController::class, 'getCount']);
+Route::get('/dashboard/{postId}/comments_summary', [NoticiaController::class, 'getCount']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/photo', [ProfileController::class, 'storePhoto'])->name('profile.updatePhoto');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/check', [ProfileController::class, 'checkEmailExists']);
 
     //Sección Noticias
     Route::get('/dashboard/create', [NoticiaController::class, 'createPost'])->name('dashboard.create');
     Route::post('/dashboard/create', [NoticiaController::class, 'savePost'])->name('dashboard.save');
-    Route::get('/dashboard/showAll', [NoticiaController::class, 'showAll'])->name('dashboard.showAll');
     Route::get('/dashboard/show/{noticia}', [NoticiaController::class, 'createComment'])->name('dashboard.createComment');
     Route::get('/dashboard/{noticia}', [NoticiaController::class, 'showComment'])->name('dashboard.showComment');
     Route::post('/dashboard/show', [NoticiaController::class, 'saveComment'])->name('dashboard.saveComment');
 
-    //Arreglar la ruta de las reacciones
+    //Ruta de las reacciones
     Route::post('/dashboard/{postId}/reactions', [PostVoteController::class, 'store']);
-    Route::get('/dashboard/{postId}/reactions-summary', [PostVoteController::class, 'getCount']);
 
     //Sección Deudores
     Route::get('/deudores', [DeudorController::class, 'index'])->name('deudores');
@@ -93,9 +97,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/personas/show/user/{id}', [PersonasController::class, 'showProfile'])->name('personas.showProfile');
     Route::get('/personas/showUser/{id}', [PersonasController::class, 'showUser'])->name('personas.showUser');
     Route::get('/personas/showPost/{id}', [PersonasController::class, 'showPost'])->name('personas.showPost');
-    Route::get('/personas/showComment/{id}', [PersonasController::class, 'showComment'])->name('personas.showComment');
-    Route::get('/personas/createComment/{id}', [PersonasController::class, 'createComment'])->name('personas.createComment');
-    Route::post('/personas/createComment', [PersonasController::class, 'saveComment'])->name('personas.saveComment');
     Route::get('/personas/show/deudas/{id}', [PersonasController::class, 'deudas'])->name('personas.deudas');
     Route::get('/personas/showDeuda/{id}', [PersonasController::class, 'showDeuda'])->name('personas.showDeuda');
     Route::get('/personas/showComment/Deuda/{id}', [PersonasController::class, 'showCommentDeudas'])->name('personas.showCommentDeudas');
@@ -104,6 +105,9 @@ Route::middleware('auth')->group(function () {
     //Sección noticias del usuario autenticado
     Route::get('/noticias', [NoticiaUserController::class, 'index'])->name('noticias');
     Route::get('/noticias/showPost', [NoticiaUserController::class,'showPost']);
+    Route::get('/noticias/editar-noticia/{id}', [NoticiaUserController::class,'editPost'])->name('editar.noticia');
+    Route::patch('/noticias/updatePost/{id}', [NoticiaUserController::class,'updatePost'])->name('update.noticia');
+    Route::delete('/noticias/deletePost/{id}', [NoticiaUserController::class,'deletePost'])->name('delete.noticia');
 });
 
 require __DIR__.'/auth.php';
