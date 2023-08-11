@@ -18,8 +18,16 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 </script>
 
 <template>
+
+    <Head>
+        <title>
+            Verificar Email
+        </title>
+
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
+    </Head>
+
     <GuestLayout>
-        <Head title="Email Verification" />
 
         <div class="mb-4 text-sm text-gray-600">
             Gracias por registrarte. Antes de empezar, ¿podrías verificar tu dirección de correo electrónico haciendo clic en el enlace que te acabamos de enviar? Si no lo has recibido, estaremos encantados de enviarte otro.
@@ -31,7 +39,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 
         <form @submit.prevent="submit">
             <div class="mt-4 flex items-center justify-between">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing" class="bg-blue-950">
                     Reenviar correo
                 </PrimaryButton>
 

@@ -166,7 +166,9 @@ const getTelegramLink = (noticia: any) => {
     <nav class="bg-white px-6 relative" v-if="canLogin">
 
         <div class="flex flex-row justify-between items-center py-2">
-            <Link href="/"><img src="/images/logotipo.png" width="100" /></Link>
+            <Link href="/">
+                <img src="/images/logotipo.png" width="100" />
+            </Link>
 
             <div class="group flex flex-col items-center">
 
@@ -207,6 +209,9 @@ const getTelegramLink = (noticia: any) => {
         <!-- Page Content -->
         <main>
             <slot />
+
+            <h1 class="max-w-6xl text-3xl mx-auto sm:px-6 lg:px-8 px-5">Noticias</h1>
+            <hr class="max-w-6xl mx-auto sm:px-6 lg:px-8 px-5 bg-blue-950">
 
             <!--Componente de la noticia-->
             <div class="py-3" v-for="(noticia, id) in item" :key="id">

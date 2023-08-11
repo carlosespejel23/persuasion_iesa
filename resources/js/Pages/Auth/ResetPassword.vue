@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInputEmail from '@/components/TextInputEmail.vue';
-import TextInputPassword from '@/components/TextInputPassword.vue';
+import TextEmail from '@/components/TextEmail.vue';
+import TextPassword from '@/components/TextPassword.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -28,14 +28,15 @@ const submit = () => {
     
     <Head>
         <title>
-            Restablecer Contraseña | Persuación
+            Restablecer Contraseña | Persuasión
         </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <!--Barra de navegacion-->
-    <nav class="bg-white px-6 relative shadow-md">
+    <nav class="bg-blue-950 px-6 relative shadow-md">
         <div class="flex flex-row justify-between items-center py-2">
-            <Link href="/"><img src="https://persuacion.000webhostapp.com/logotipo.png" width="100" /></Link>
+            <Link href="/"><img src="/images/logob.png" width="100" /></Link>
         </div>
     </nav>
 
@@ -51,7 +52,7 @@ const submit = () => {
             <div class="flex flex-col space-y-5">
 
                 <div>
-                    <TextInputEmail
+                    <TextEmail
                         id="email"
                         type="email"
                         class="mt-1 block w-full"
@@ -65,7 +66,7 @@ const submit = () => {
                 </div>
 
                 <div>
-                    <TextInputPassword
+                    <TextPassword
                         id="password"
                         type="password"
                         class="mt-1 block w-full"
@@ -78,7 +79,7 @@ const submit = () => {
                 </div>
 
                 <div>
-                    <TextInputPassword
+                    <TextPassword
                         id="password_confirmation"
                         type="password"
                         class="mt-1 block w-full"
@@ -91,13 +92,51 @@ const submit = () => {
                 </div>
                
                 <div class="flex items-center justify-end mt-4">
-                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing" style="background: #0065b5;">
+                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing" class="bg-blue-950">
                         Restablecer
                     </PrimaryButton>
                 </div>
 
             </div>
         </form>
-    </div>    
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-950 border-top">
+
+        <div class="container px-6 py-12 mx-auto">
+
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
+
+                <div class="sm:col-span-12">
+
+                    <center><h1 class="max-w-lg text-xl font-semibold tracking-tight text-white xl:text-2xl">Libertad de Expresión y Seguridad Financiera</h1></center>
+
+                    <div class="flex flex-col mx-auto mt-6 space-y-3 md:space-y-0 md:flex-row">
+                    
+                        <p class="text-center text-white">
+                            Esta empresa se dedica a brindar un servicio de préstamos a un conjunto de personas que lo solicite, y a su vez
+                            existe una comunidad virtual donde las personas pueden compartir alguna noticia o hacer un comentario donde podran 
+                            interactuar con reacciones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-6 border-gray-100 md:my-8">
+
+            <div class="flex items-center justify-between">
+                <Link href="/">
+                    <img class="w-auto h-7" src="/images/logob.png" alt="">
+                </Link>
+                
+                <div class="flex -mx-2">
+                    <p class="text-white text-sm">
+                        © Todos los Derechos Reservados | Persuasión
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>    
 
 </template>

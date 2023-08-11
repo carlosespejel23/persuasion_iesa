@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Checkbox from '@/Components/Checkbox.vue';
 import InputError from '@/Components/InputError.vue';
-import ButtonNav from '@/components/ButtonNav.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextEmail from '@/components/TextEmail.vue';
+import GuestLayout from '@/components/GuestLayout.vue';
 import TextPassword from '@/components/TextPassword.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -51,6 +51,7 @@ const submit = () => {
         <title>
             Login | Persuasión
         </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <!--Barra de navegacion-->
@@ -181,7 +182,7 @@ const submit = () => {
                 
                 <div class="flex -mx-2">
                     <p class="text-white text-sm">
-                        © Todos los Derechos Reservados | Persuación
+                        © Todos los Derechos Reservados | Persuasión
                     </p>
                 </div>
             </div>

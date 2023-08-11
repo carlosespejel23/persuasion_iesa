@@ -47,6 +47,7 @@ const submit = () => {
         <title>
             Registro | Persuasión
         </title>
+        <link rel="icon" href="/images/icono.png" type="image/x-icon">
     </Head>
 
     <!--Barra de navegacion-->
@@ -292,7 +293,7 @@ const submit = () => {
                 
                 <div class="flex -mx-2">
                     <p class="text-white text-sm">
-                        © Todos los Derechos Reservados | Persuación
+                        © Todos los Derechos Reservados | Persuasión
                     </p>
                 </div>
             </div>
