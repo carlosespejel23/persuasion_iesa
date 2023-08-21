@@ -86,7 +86,8 @@ class PersonasController extends Controller
             'users.apellidoMaterno',
             'users.profile_image',
             'posts.contenido',
-            'posts.created_at'
+            'posts.created_at',
+            'posts.updated_at'
         )
         ->where('users.id', '=', $id)
         ->orderBy('posts.created_at', 'desc')

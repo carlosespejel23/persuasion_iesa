@@ -6,6 +6,7 @@ export interface User {
     apellidoMaterno: string,
     telefono: string,
     email: string;
+    nacionalidad: string;
     profile_image: string;
     email_verified_at: string;
     created_at: string;
@@ -47,6 +48,9 @@ export interface Deudor {
     apellidoMaterno: string;
     email: string;
     telefono: string;
+    nacionalidad: string;
+    curp: string;
+    rfc: string;
     monto_a_pagar: number;
     monto_pagado: number;
     created_at: string;

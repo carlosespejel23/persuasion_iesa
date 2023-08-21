@@ -190,7 +190,10 @@ const closeModalUploaded = () => {
                             <div v-else>
                                 <div class="flex items-center"> <!-- Utilizamos flex para alinear el nombre y la fecha horizontalmente -->
                                     <div class="p-2 text-gray-900 font-semibold">{{ noticia.nombre }} {{ noticia.apellidoPaterno }} {{ noticia.apellidoMaterno }} &nbsp;&nbsp;·</div>
-                                    <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}</div>
+                                    <div v-if="noticia.created_at !== noticia.updated_at">
+                                      <div class="text-sm text-gray-600 ml-1">&nbsp;&nbsp;·&nbsp;&nbsp;editado</div>
+                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="text-sm text-gray-500 ml-1 flex items-center">
 
                                       <a @click="redirectToEditPost(noticia.id)"> <button style="background-color: #99dbff; padding: 3px 7px; border: none; border-radius: 4px; color: white;">editar</button>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</a>

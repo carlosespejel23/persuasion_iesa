@@ -53,7 +53,8 @@ class NoticiaController extends Controller
             'users.profile_image',
             'posts.contenido',
             'posts.post_anonimo', 
-            'posts.created_at'
+            'posts.created_at',
+            'posts.updated_at'
         )
         ->orderBy('posts.created_at', 'desc')
         ->take(200)

@@ -229,6 +229,9 @@ const getTelegramLink = (noticia: any) => {
                             <div class="flex items-center"> <!-- Utilizamos flex para alinear el nombre y la fecha horizontalmente -->
                                 <div class="p-2 text-gray-900 font-semibold"> {{ noticia.nombre }} {{ noticia.apellidoPaterno }} {{ noticia.apellidoMaterno }} &nbsp;&nbsp;·</div>
                                 <div class="text-sm text-gray-600 ml-1">{{ formatTimeSincePublished(noticia.created_at) }}</div>
+                                <div v-if="noticia.created_at !== noticia.updated_at">
+                                  <div class="text-sm text-gray-600 ml-1">&nbsp;&nbsp;·&nbsp;&nbsp;editado</div>
+                                </div>
                             </div>
 
                             <div class=" text-gray-900">&nbsp;&nbsp;{{ noticia.contenido }}</div>

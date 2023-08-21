@@ -75,4 +75,22 @@ BEGIN
   VALUES (NEW.id, 'Me Enoja', 'Me Gusta', 'Comentar', 'Compartir');
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER insert_users_historial AFTER DELETE ON users
+FOR EACH ROW
+BEGIN
+  INSERT INTO users_historial (usuario_id, nombre, apellidoPaterno, apellidoMaterno, telefono, fecha_de_nacimiento, email, nacionalidad, fecha_baja)
+  VALUES (OLD.id, OLD.nombre, OLD.apellidoPaterno, OLD.apellidoMaterno, OLD.telefono, OLD.fecha_de_nacimiento, OLD.email, OLD.nacionalidad, NOW());
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER insert_deudores_historial AFTER DELETE ON deudores
+FOR EACH ROW
+BEGIN
+  INSERT INTO deudores_historial (usuario_id, nombre, apellidoPaterno, apellidoMaterno, email, telefono, curp, rfc, nacionalidad, monto_a_pagar, monto_pagado, fecha_baja)
+  VALUES (OLD.id, OLD.nombre, OLD.apellidoPaterno, OLD.apellidoMaterno, OLD.email, OLD.telefono, OLD.curp, OLD.rfc, OLD.nacionalidad, OLD.monto_a_pagar, OLD.monto_pagado, NOW());
+END //
+DELIMITER ;
 ```

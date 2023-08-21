@@ -6,6 +6,7 @@ import axios from 'axios';
 import { ref, onMounted, defineProps } from 'vue';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {faUserPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -41,6 +42,11 @@ const handleSaveClick = () => {
 
 const closeModalUploaded = () => {
   showModalUploaded.value = false;
+};
+
+//Esto es para ir a la informacion del deudor
+const redirectToDeudor = (id: number) => {
+  window.location.href = `/deudores/deudor/${id}`;
 };
 </script>
 
@@ -90,14 +96,21 @@ const closeModalUploaded = () => {
                             <center><img src="/images/deu.png" width="150" /></center>
                         </div>
                         <h1 class="mt-4 text-lg text-black text-center" :key="id">{{ deudor.nombre }} {{ deudor.apellidoPaterno }} {{ deudor.apellidoMaterno }}</h1>
-                        <br>
+                        
                         <center>
-                            <form @submit.prevent="form.delete(route('deudores.destroy', deudor.id))">
-                                <button :disabled="form.processing" @click="handleSaveClick" style="cursor: pointer;" class="bg-white text-gray-800 font-bold rounded border-b-2 border-red-400 hover:border-red-950 hover:bg-red-400 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
-                                    <span class="mr-2">Eliminar Deudor</span>
-                                    <font-awesome-icon icon="fa-solid fa-trash" />
-                                </button>
-                            </form>
+                            <div class="flex items-center">
+                                <a @click="redirectToDeudor(deudor.id)">
+                                    <button class="bg-white text-gray-800 font-bold rounded border-b-2 border-blue-950 hover:border-blue-950 hover:bg-blue-950 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
+                                        <span class="mr-2 text-sm">Ver Deudor</span>
+                                    </button>
+                                </a>
+                                <form @submit.prevent="form.delete(route('deudores.destroy', deudor.id))">
+                                    <button :disabled="form.processing" @click="handleSaveClick" style="cursor: pointer;" class="bg-white text-gray-800 font-bold rounded border-b-2 border-red-400 hover:border-red-950 hover:bg-red-400 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
+                                        <span class="mr-2 text-sm">Eliminar Deudor</span>
+                                        <font-awesome-icon icon="fa-solid fa-trash" />
+                                    </button>
+                                </form>
+                            </div>
 
                             <!-- Ventana modal cuando se haya eliminado el deudor -->
                             <Modal :show="showModalUploaded" @close="closeModalUploaded">

@@ -70,6 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/deudores/create', [DeudorController::class, 'create'])->name('deudores.create');
     Route::post('/deudores/create', [DeudorController::class, 'save'])->name('deudores.save');
     Route::delete('/deudores/{id}', [DeudorController::class, 'destroy'])->name('deudores.destroy');
+    Route::get('/deudores/deudor/{id}', [DeudorController::class, 'showInfoDeudor'])->name('deudores.showInfo');
+    Route::get('/deudores/deudor/show/{id}', [DeudorController::class, 'showDeudor'])->name('deudores.showDeudor');
+    Route::patch('/deudores/deudor/{id}', [DeudorController::class, 'agregarInfoDeudor'])->name('deudores.agregarInfoDeudor');
 
     //Sección Deudas
     Route::get('/deudas', [ComentarioActualizarDeudaController::class, 'index'])->name('deudas');

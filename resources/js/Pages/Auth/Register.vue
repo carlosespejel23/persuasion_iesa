@@ -6,10 +6,12 @@ import TextInput from '@/Components/TextInput.vue';
 import ModalContrato from '@/components/ModalContrato.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import Checkbox from '@/Components/Checkbox.vue';
+import Dropdown from '@/components/Dropdown.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faUserPlus, faCircleArrowLeft, faPhone, faLocationDot, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import {faSquareFacebook, faSquareTwitter, faSquareYoutube} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { ref } from 'vue';
 library.add(faUser, faUserPlus, faCircleArrowLeft, faSquareFacebook, faSquareTwitter, faSquareYoutube, faPhone, faLocationDot, faEnvelope);
 
 const form = useForm({
@@ -18,6 +20,7 @@ const form = useForm({
     apellidoMaterno: '',
     telefono: '',
     fecha_de_nacimiento: '',
+    nacionalidad: '',
     acepto_contrato: '',
     email: '',
     password: '',
@@ -29,6 +32,28 @@ const submit = () => {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
+
+//Lista de paises para iterar en el componente Dropdown
+const nacionalidades = [
+  "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia",
+  "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice", "Benín", "Bielorrusia", "Birmania", "Bolivia",
+  "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún",
+  "Canadá", "Catar", "Chad", "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia", "Comoras", "Corea del Norte", "Corea del Sur",
+  "Costa de Marfil", "Costa Rica", "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", "Emiratos Árabes Unidos",
+  "Eritrea", "Eslovaquia", "Eslovenia", "España", "Estados Unidos", "Estonia", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón",
+  "Gambia", "Georgia", "Ghana", "Granada", "Grecia", "Guatemala", "Guyana", "Guinea", "Guinea ecuatorial", "Guinea-Bisáu", "Haití", "Honduras",
+  "Hungría", "India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Israel", "Italia", "Jamaica",
+  "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia",
+  "Liechtenstein", "Lituania", "Luxemburgo", "Madagascar", "Malasia", "Malaui", "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania",
+  "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger",
+  "Nigeria", "Noruega", "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú",
+  "Polonia", "Portugal", "Reino Unido", "República Centroafricana", "República Checa", "República Democrática del Congo", "República Dominicana",
+  "Ruanda", "Rumania", "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía",
+  "Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia", "Sri Lanka", "Suazilandia",
+  "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental", "Togo",
+  "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu",
+  "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue",
+];
 </script>
 
 <style>
@@ -39,6 +64,14 @@ const submit = () => {
       .face, .you, .twi{
         font-size: 180%;
       }
+</style>
+
+<style scoped>
+.dropdown-options {
+  max-height: 150px; /* Establece la altura máxima deseada */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+  border: 1px solid #ccc; /* Agrega un borde para separar visualmente las opciones */
+}
 </style>
 
 <template>
@@ -234,18 +267,56 @@ const submit = () => {
                 </div>
             </div>
 
-            <!--Checkbox de contrato-->
-            <div class="mb-4">
-                <Checkbox
-                    id="acepto_contrato"
-                    v-model="form.acepto_contrato"
-                    name="acepto_contrato"
-                    value=1
-                    unchecked-value=0
-                ></Checkbox>
-                <span>&nbsp&nbsp<ModalContrato /><strong style="visibility:hidden;">{{ form.acepto_contrato }}</strong></span>
-                    
-                <InputError class="mt-2" :message="form.errors.acepto_contrato" />
+            <div class="-mx-3 md:flex">
+
+                <Dropdown align="left" width="48" v-model="form.nacionalidad" required>
+                    <template #trigger>
+                        <span class="inline-flex rounded-md">
+                            <button
+                                type="button"
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-800 bg-gray-100 hover:text-gray-500 focus:outline-none transition ease-in-out duration-150"
+                            >
+
+                            <InputLabel for="nacionalidad" value="Nacionalidad: " /> &nbsp;&nbsp;{{ form.nacionalidad }}
+                                <svg
+                                    class="ml-2 -mr-0.5 h-4 w-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </button>
+                        </span>
+                    </template>
+
+                    <template #content>
+                        <div class="dropdown-options">
+                            <option @click="form.nacionalidad = nacionalidad" v-for="nacionalidad in nacionalidades" :key="nacionalidad" class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-300 hover:bg-gray-800 focus:outline-none focus:bg-gray-800 transition duration-150 ease-in-out">
+                                {{ nacionalidad }}
+                            </option>
+                        </div>
+                    </template>
+                </Dropdown>
+                <InputError class="mt-2" :message="form.errors.nacionalidad" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <!--Checkbox de contrato-->
+                <div class="mb-4">
+                    <Checkbox
+                        id="acepto_contrato"
+                        v-model="form.acepto_contrato"
+                        name="acepto_contrato"
+                        value=1
+                        unchecked-value=0
+                    ></Checkbox>
+                    <span>&nbsp&nbsp<ModalContrato /><strong style="visibility:hidden;">{{ form.acepto_contrato }}</strong></span>
+                        
+                    <InputError class="mt-2" :message="form.errors.acepto_contrato" />
+                </div>
             </div>
 
             <!--Button de Registro Acceso-->

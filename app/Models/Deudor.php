@@ -17,6 +17,9 @@ class Deudor extends Model
         'apellidoMaterno',
         'email',
         'telefono',
+        'nacionalidad',
+        'curp',
+        'rfc',
         'monto_a_pagar',
         'monto_pagado',
     ];

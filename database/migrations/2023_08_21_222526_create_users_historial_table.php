@@ -11,21 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('deudores', function (Blueprint $table) {
+        Schema::create('users_historial', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id', 'fk_usuario_deudor')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
             $table->string('nombre', 50);
             $table->string('apellidoPaterno', 50);
             $table->string('apellidoMaterno', 50);
-            $table->string('email')->unique();
             $table->string('telefono', 10);
-            $table->string('curp',18)->nullable();
-            $table->string('rfc',13)->nullable();
+            $table->date('fecha_de_nacimiento');
+            $table->string('email')->unique();
             $table->string('nacionalidad');
-            $table->decimal('monto_a_pagar', $precision = 10, $scale = 2);
-            $table->decimal('monto_pagado', $precision = 10, $scale = 2)->default('0.00');
-            $table->timestamps();
+            $table->date('fecha_baja');
         });
     }
 
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('deudores');
+        Schema::dropIfExists('users_historial');
     }
 };

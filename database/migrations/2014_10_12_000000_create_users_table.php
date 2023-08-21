@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('fecha_de_nacimiento');
             $table->boolean('acepto_contrato');
             $table->string('email')->unique();
+            $table->string('nacionalidad');
             $table->string('password');
             $table->string('profile_image')->nullable();
             $table->timestamp('email_verified_at')->nullable();

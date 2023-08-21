@@ -33,7 +33,8 @@ class NoticiaUserController extends Controller
             'users.apellidoMaterno',
             'users.profile_image',
             'posts.contenido',
-            'posts.created_at'
+            'posts.created_at',
+            'posts.updated_at'
         )
         ->orderBy('posts.created_at', 'desc')
         ->get();

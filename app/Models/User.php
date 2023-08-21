@@ -23,6 +23,7 @@ class User extends Authenticatable
         'apellidoMaterno',
         'telefono',
         'fecha_de_nacimiento',
+        'nacionalidad',
         'acepto_contrato',
         'email',
         'profile_image',

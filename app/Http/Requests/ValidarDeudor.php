@@ -28,6 +28,9 @@ class ValidarDeudor extends FormRequest
             'apellidoMaterno' => ['string', 'max:255'],
             'email' => ['email', 'max:255'],
             'telefono' => ['string', 'max:255'],
+            'nacionalidad' => ['string', 'max:255'],
+            'curp' => ['nullable', 'string', 'max:18'],
+            'rfc' => ['nullable', 'string', 'max:13'],
             'monto_a_pagar' => ['numeric', 'between:0,9999999.99'],
         ];
     }
