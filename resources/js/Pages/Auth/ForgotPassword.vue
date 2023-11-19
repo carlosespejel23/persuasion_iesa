@@ -100,9 +100,7 @@ const submit = () => {
 
                     <div class="flex flex-col mx-auto mt-6 space-y-3 md:space-y-0 md:flex-row">
                         <p class="text-center text-white">
-                            Esta empresa se dedica a brindar un servicio de préstamos a un conjunto de personas que lo solicite, y a su vez
-                            existe una comunidad virtual donde las personas pueden compartir alguna noticia o hacer un comentario donde podran 
-                            interactuar con reacciones.
+                            La empresa Persuasion Financial App es una red de comunicación e interacción social que ofrece a sus usuarios el poder dar de alta a deudores, hacer publicaciones de cualquier índole, así también como una experiencia sin censura y de libre expresión de temas de cualquier tipo siendo una red abierta a todo el público.
                         </p>
                     </div>
                 </div>

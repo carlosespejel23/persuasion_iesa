@@ -199,7 +199,7 @@ const getTelegramLink = (noticia: any) => {
               <h2 class="font-semibold py-2 p-3 text-black leading-tight">Información</h2>
               <h2 class="font-semibold py-2 p-6 text-black leading-tight" :key="id">Correo Electrónico:  {{ user?.email }}</h2>
               <h2 class="font-semibold py-2 p-6 text-black leading-tight" :key="id">Teléfono:  {{ user?.telefono }}</h2>
-              <h2 class="font-semibold py-2 p-6 text-black leading-tight" :key="id">Se Unio:  {{ user?.created_at }}</h2>
+              <!--<h2 class="font-semibold py-2 p-6 text-black leading-tight" :key="id">Se Unio:  {{ user?.created_at }}</h2>-->
             </div>
           </div>
 
